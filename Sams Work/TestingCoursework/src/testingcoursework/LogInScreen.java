@@ -29,21 +29,21 @@ public class LogInScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        lblTitle = new javax.swing.JLabel();
+        lblLogInForm = new javax.swing.JLabel();
         lblUserName = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         cmdLogIn = new javax.swing.JButton();
         cmdNewUser = new javax.swing.JButton();
-        txtPassword = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Log In Form");
+        lblLogInForm.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblLogInForm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogInForm.setText("Log In Form");
 
         lblUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblUserName.setText("User Name:");
@@ -61,6 +61,11 @@ public class LogInScreen extends javax.swing.JFrame {
         });
 
         cmdNewUser.setText("New User");
+        cmdNewUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdNewUserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,7 +73,7 @@ public class LogInScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblLogInForm, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -76,8 +81,8 @@ public class LogInScreen extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtUserName)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                    .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(txtPassword))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cmdNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -88,7 +93,7 @@ public class LogInScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblLogInForm, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -97,14 +102,13 @@ public class LogInScreen extends javax.swing.JFrame {
                     .addComponent(cmdLogIn))
                 .addGap(17, 17, 17)
                 .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmdNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmdNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txtPassword)
+                        .addGap(2, 2, 2)))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -112,12 +116,15 @@ public class LogInScreen extends javax.swing.JFrame {
 
     private void cmdLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogInActionPerformed
         String UserName = txtUserName.getText();
-        char[] Password = txtPassword.getPassword();
-        
-        lblUserName.setText(UserName);
-        //lblPassword.setText(Password);
-        
+        String Password = txtPassword.getText();             
     }//GEN-LAST:event_cmdLogInActionPerformed
+
+    private void cmdNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNewUserActionPerformed
+        //Open new Register User Form
+        new RegisterUser().setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_cmdNewUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,10 +165,10 @@ public class LogInScreen extends javax.swing.JFrame {
     private javax.swing.JButton cmdLogIn;
     private javax.swing.JButton cmdNewUser;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel lblLogInForm;
     private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

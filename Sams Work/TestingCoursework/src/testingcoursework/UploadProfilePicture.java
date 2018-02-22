@@ -16,14 +16,16 @@ import javax.swing.SwingUtilities;
  * @author samal
  */
 public class UploadProfilePicture extends javax.swing.JFrame {
-
+    
+    
+    public String Filepath;
     /**
      * Creates new form UploadProfilePicture
      */
     public UploadProfilePicture() {
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,8 +102,8 @@ public class UploadProfilePicture extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
-        String filename = f.getAbsolutePath();
-        lblPhoto.setIcon(ResizeImage(filename));
+        Filepath = f.getAbsolutePath();
+        lblPhoto.setIcon(ResizeImage(Filepath));
         
         
         
@@ -110,6 +112,8 @@ public class UploadProfilePicture extends javax.swing.JFrame {
     private void cmdDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDoneActionPerformed
         //Close form
         //Pass image back to previous form
+        RegisterUser.SetPhoto(ResizeImage(Filepath));
+        
     }//GEN-LAST:event_cmdDoneActionPerformed
     
     public ImageIcon ResizeImage(String ImagePath)

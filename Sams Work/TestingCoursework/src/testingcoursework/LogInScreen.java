@@ -4,9 +4,19 @@
  * and open the template in the editor.
  */
 package testingcoursework;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.lang.*;
-import javafx.util.Pair;
-
+import java.net.Socket;
+import infopacket.InfoPacket;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author samal
@@ -16,6 +26,9 @@ public class LogInScreen extends javax.swing.JFrame {
     /**
      * Creates new form LogInScreen
      */
+    
+    
+    
     public LogInScreen() {
         initComponents();
     }
@@ -119,13 +132,54 @@ public class LogInScreen extends javax.swing.JFrame {
         String UserName = txtUserName.getText();
         String Password = txtPassword.getText();
         
-        Pair<String, String> UserDetails;
-        //Send to the server
+        InfoPacket NamePass = new InfoPacket();
+        InfoPacket ServerReply = new InfoPacket();
         
-        //recieve boolean value from server
-        //If UserFound = true;
-            //Load main screen with UserName to pull details
+        ArrayList<String> LogInDetails = new ArrayList<>();
+        LogInDetails.add(UserName);
+        LogInDetails.add(Password);
+            
         
+        
+        //DataPacket with Log in details.
+        NamePass.CreateArrayPacket("LGN", LogInDetails );
+        
+        //Syntax to retrieve from aray
+        //System.out.println(NamePass.GetArray().get(1));
+        
+        try {
+            
+            Socket MainServer = new Socket("localhost", 9090);
+            
+            //DataInputStream inFromServer = new DataInputStream(MainServer.getInputStream()); 
+            //DataOutputStream outToServer = new DataOutputStream(MainServer.getOutputStream()); 
+            System.out.println("Making Stream");
+            ObjectOutputStream ToServerStream = new ObjectOutputStream(new BufferedOutputStream(MainServer.getOutputStream()));
+            System.out.println("Made Output Stream");
+            ObjectInputStream FromServerStream = new ObjectInputStream(new BufferedInputStream(MainServer.getInputStream()));
+            System.out.println("Made Input Stream");
+            
+            //outToServer.writeUTF(UserName);
+
+            //String Recieved = inFromServer.readUTF();
+            
+            ToServerStream.writeObject(NamePass);
+            System.out.println("Got Past Sending Object");
+            
+            ServerReply = (InfoPacket) FromServerStream.readObject();
+            System.out.println("Got past recieving objext");
+            
+            
+            //System.out.println("Server Replied: " + Recieved);
+            
+            MainServer.close();
+        }
+        catch (IOException e)
+        {
+            System.err.println("Error - " + e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LogInScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cmdLogInActionPerformed
 
     private void cmdNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNewUserActionPerformed

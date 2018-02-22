@@ -149,15 +149,13 @@ public class LogInScreen extends javax.swing.JFrame {
         
         try {
             
-            Socket MainServer = new Socket("localhost", 9090);
-            
+            Socket MainServer = new Socket("localhost", 9090);            
             //DataInputStream inFromServer = new DataInputStream(MainServer.getInputStream()); 
             //DataOutputStream outToServer = new DataOutputStream(MainServer.getOutputStream()); 
             System.out.println("Making Stream");
             ObjectOutputStream ToServerStream = new ObjectOutputStream(new BufferedOutputStream(MainServer.getOutputStream()));
             System.out.println("Made Output Stream");
-            ObjectInputStream FromServerStream = new ObjectInputStream(new BufferedInputStream(MainServer.getInputStream()));
-            System.out.println("Made Input Stream");
+            
             
             //outToServer.writeUTF(UserName);
 
@@ -165,6 +163,9 @@ public class LogInScreen extends javax.swing.JFrame {
             
             ToServerStream.writeObject(NamePass);
             System.out.println("Got Past Sending Object");
+            
+            ObjectInputStream FromServerStream = new ObjectInputStream(new BufferedInputStream(MainServer.getInputStream()));
+            System.out.println("Made Input Stream");
             
             ServerReply = (InfoPacket) FromServerStream.readObject();
             System.out.println("Got past recieving objext");

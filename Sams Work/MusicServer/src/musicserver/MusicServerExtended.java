@@ -48,7 +48,7 @@ public class MusicServerExtended extends Thread {
     private Connection connect() {
         Connection con = null;
         try {
-            String url = "jdbc:sqlite:C:\\Users\\samal\\Documents\\2nd Year\\Systems Software\\Shitify.db";
+            String url = "jdbc:sqlite:C:../../../Shitify.db";
             con = DriverManager.getConnection(url);
             System.out.println("Connection to Database is established");
         } catch (SQLException ex) {
@@ -105,10 +105,13 @@ public class MusicServerExtended extends Thread {
             //Data to send to client
             //DataOutputStream ToClientStream = new DataOutputStream(client.getOutputStream());
             System.out.println("Making Streams");
-            ObjectOutputStream ToClientStream = new ObjectOutputStream(new BufferedOutputStream(client.getOutputStream()));
-            System.out.println("Made Output Stream");
+            //Create an Input stream to send to user
             ObjectInputStream FromClientStream = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
             System.out.println("Made Input Stream");
+            
+            ObjectOutputStream ToClientStream = new ObjectOutputStream(new BufferedOutputStream(client.getOutputStream()));
+            System.out.println("Made Output Stream");
+            
             
             
             
@@ -121,13 +124,14 @@ public class MusicServerExtended extends Thread {
                             
                 //String UserName = inFromClient.readUTF();
                 //System.out.println("User name: " + UserName);
-                System.out.println("In while");
+                System.out.println("In while loop");
+                
                 InFromClient = (InfoPacket) FromClientStream.readObject();
+                
                 System.out.println("Got Data From Client");
-                String UserName = InFromClient.GetArray().get(1);
-                
-                
-                
+                //Get username
+                String UserName = InFromClient.GetArray().get(0);
+                //Get password from DB searching with username                                
                 String DBPassword = app.SelectLogInDetails(UserName);
                 System.out.println("Got Password from DB");
                 System.out.println(DBPassword);
@@ -147,6 +151,9 @@ public class MusicServerExtended extends Thread {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MusicServerExtended.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(MusicServerExtended.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
     }
    

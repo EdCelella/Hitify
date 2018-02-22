@@ -5,6 +5,7 @@
  */
 package testingcoursework;
 import java.lang.*;
+import javafx.util.Pair;
 
 /**
  *
@@ -116,7 +117,15 @@ public class LogInScreen extends javax.swing.JFrame {
 
     private void cmdLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogInActionPerformed
         String UserName = txtUserName.getText();
-        String Password = txtPassword.getText();             
+        String Password = txtPassword.getText();
+        
+        Pair<String, String> UserDetails;
+        //Send to the server
+        
+        //recieve boolean value from server
+        //If UserFound = true;
+            //Load main screen with UserName to pull details
+        
     }//GEN-LAST:event_cmdLogInActionPerformed
 
     private void cmdNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNewUserActionPerformed

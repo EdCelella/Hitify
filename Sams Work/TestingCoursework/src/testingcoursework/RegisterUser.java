@@ -6,6 +6,8 @@
 package testingcoursework;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,7 +20,7 @@ public class RegisterUser extends javax.swing.JFrame {
      */
     public RegisterUser() {
         initComponents();
-        
+        this.setTitle("Register User");
         this.getContentPane().setBackground(Color.decode("#2B2D42"));
     }
 
@@ -67,6 +69,7 @@ public class RegisterUser extends javax.swing.JFrame {
         cmdCreate = new javax.swing.JButton();
         cmdLogIn = new javax.swing.JButton();
         lblPhoto = new javax.swing.JLabel();
+        cmdTestChat = new javax.swing.JButton();
 
         lblMusicChoice1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblMusicChoice1.setText("Select Music Interests:");
@@ -147,6 +150,14 @@ public class RegisterUser extends javax.swing.JFrame {
             }
         });
 
+        cmdTestChat.setText("Test Chat");
+        cmdTestChat.setToolTipText("");
+        cmdTestChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdTestChatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,64 +165,72 @@ public class RegisterUser extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUserName)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword2)
-                    .addComponent(lblPassword)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFirstName)
-                            .addComponent(lblSecondName)
-                            .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(75, 75, 75)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMusicChoice)
+                            .addComponent(lblUserName)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPassword2)
+                            .addComponent(lblPassword))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                                .addComponent(lblRegisterNewUser)
+                                .addGap(63, 63, 63)
+                                .addComponent(cmdTestChat))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFirstName)
+                                    .addComponent(lblSecondName)
+                                    .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEmail)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(75, 75, 75)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblMusicChoice)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rbFolk)
-                                            .addComponent(rbPop)
-                                            .addComponent(rbEDM))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(rbFolk)
+                                                    .addComponent(rbPop)
+                                                    .addComponent(rbEDM))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(rbRock)
+                                                    .addComponent(rbBlues)
+                                                    .addComponent(rbRapping)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(rbSoul)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(rbReggae)))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rbRock)
-                                            .addComponent(rbBlues)
-                                            .addComponent(rbRapping)))
+                                            .addComponent(rbClassical)
+                                            .addComponent(rbJazz)
+                                            .addComponent(rbTechno)
+                                            .addComponent(rbIndie)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rbSoul)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rbReggae)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rbClassical)
-                                    .addComponent(rbJazz)
-                                    .addComponent(rbTechno)
-                                    .addComponent(rbIndie)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cmdCreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmdLogIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblUploadPicture, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmdPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
-                .addComponent(lblRegisterNewUser)
-                .addGap(155, 155, 155))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(cmdCreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmdLogIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblUploadPicture, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cmdPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblRegisterNewUser)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRegisterNewUser)
+                    .addComponent(cmdTestChat))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFirstName)
@@ -284,10 +303,28 @@ public class RegisterUser extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmdPhotoActionPerformed
 
+    public void SetPhoto(ImageIcon Image)
+    {
+        lblPhoto.setIcon(Image);
+    }
+    
     private void cmdCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCreateActionPerformed
         Boolean isValid;
         isValid = ValidChecks();
         
+        SqLite test = new SqLite();
+        ResultSet set;
+        
+//        try (
+//            set = test.displayUsers();
+//            while(set.next()) {
+//                lblFirstName.setText(set.getString("fname"));
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//        }
         if (isValid == false)
         {
             //Output Error message/
@@ -306,6 +343,15 @@ public class RegisterUser extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_cmdCreateActionPerformed
+
+    private void cmdTestChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdTestChatActionPerformed
+        String UserName = lblUserName.getText();
+        String UserName2 = lblSecondName.getText();
+        
+        new Chatwindow().setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_cmdTestChatActionPerformed
 
     private Boolean ValidChecks() {
         
@@ -371,6 +417,7 @@ public class RegisterUser extends javax.swing.JFrame {
     private javax.swing.JButton cmdCreate;
     private javax.swing.JButton cmdLogIn;
     private javax.swing.JButton cmdPhoto;
+    private javax.swing.JButton cmdTestChat;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblMusicChoice;

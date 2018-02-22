@@ -48,7 +48,11 @@ public class MusicServerExtended extends Thread {
     private Connection connect() {
         Connection con = null;
         try {
+<<<<<<< HEAD
             String url = "jdbc:sqlite:C:../../../Shitify.db";
+=======
+            String url = "jdbc:sqlite:../../../Shitify.db";
+>>>>>>> 030ebd113cd113ca0b7b6ed0c171a35c0447e5a3
             con = DriverManager.getConnection(url);
             System.out.println("Connection to Database is established");
         } catch (SQLException ex) {

@@ -8,17 +8,27 @@ import java.io.Serializable;
 
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class screenMain extends JFrame implements ActionListener{
 
 	//Creates instance of container
 	Container screenContainer;
+
+	//Creates instance of JPanel
+	JPanel menu;
+
 	//Creates instance of JButton
 	JButton logOffBtn, messageBtn, friendBtn;
+	JButton btn1, btn2, btn3;
 	JButton[] friends;
+
+	//Creates instance of JScrollFrame
+	JScrollPane menuScrollPane;
+
 	//Integer to store number of friends
-	int numOfFriends = 6;
+	int numOfFriends = 17;
 	
 	//Creates colour variable
 	Color backgroundColour = Color.decode("#2B2D42"); 
@@ -47,21 +57,12 @@ public class screenMain extends JFrame implements ActionListener{
 		screenContainer.add(friendBtn);
 
 		/*
-		CREATES SCROLLABLE LIST
+		INITIALISES MENU PANEL
 		*/
-
-		/*
-		INITIALISES FRIENDS LIST
-		*/
-		friends = new JButton[numOfFriends];
-		int y = 100;
-		for(int i = 0; i < numOfFriends; i++){
-			friends[i] = makeButton(0,y,300,40,"SLAG");
-			screenContainer.add(friends[i]);
-			y = y + 40;
-		}
-
-
+		menu = new JPanel();
+  		menu.setBounds(0,100,300,500);
+  		menu.add(makeScrollFrame());
+  		screenContainer.add(menu); 
 
 		
 	}
@@ -82,20 +83,75 @@ public class screenMain extends JFrame implements ActionListener{
 		//Passes created button back
 		return button;
 	}
+
+	
+	public JScrollPane makeScrollFrame(){
+
+
+		JPanel test = new JPanel();
+
+		test.setLayout(new BoxLayout(test, BoxLayout.Y_AXIS));
+		test.setPreferredSize(new Dimension(300, 500));
+
+		int listYStart = 100;
+		numOfFriends = 17;
+		friends = new JButton[numOfFriends];
+		for(int i = 0; i < numOfFriends; i++){
+			friends[i] = makeButton(0,listYStart,300,40,"TEST TEST TEST");
+			screenContainer.add(friends[i]);
+			listYStart = listYStart + 40;
+			test.add(friends[i]);
+		}
+
+
+		JScrollPane scrollPane = new JScrollPane(test);
+
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+		return scrollPane;
+
+	}
+	
 	
   	public void actionPerformed(ActionEvent e) {
   		if(e.getSource() == logOffBtn){
   			screenContainer.setBackground(Color.BLUE);
   		}
   		else if(e.getSource() == messageBtn){
-  			screenContainer.setBackground(Color.RED);
+  			//scrollPane = messageList();
+  		}
+  		else if(e.getSource() == friendBtn){
+  			//scrollPane = friendList();
   		}
   		
   	}
 
-  	public void messageList(){}
+  	/*
+  	public void messageList(){
+
+  		int numOfFriends = 4;
+
+  		friends = new JButton[numOfFriends];
+
+  		panel.setLayout(new GridLayout(x, y));
+
+		int listYStart = 100;
+		for(int i = 0; i < numOfFriends; i++){
+			friends[i] = makeButton(0,listYStart,300,40,"SLAG");
+			screenContainer.add(friends[i]);
+			listYStart = listYStart + 40;
+			panel.add(friends[i]);
+		}
+
+		scrollPane = new JScrollPane(panel);
+
+		int numOfFriends = 8;
+
+  	}
+
   	public void friendlist(){}
-  	
+  	*/
     
 }
 

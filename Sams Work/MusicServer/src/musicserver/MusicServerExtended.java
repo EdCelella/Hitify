@@ -105,7 +105,7 @@ public class MusicServerExtended extends Thread {
             //Data to send to client
             //DataOutputStream ToClientStream = new DataOutputStream(client.getOutputStream());
             System.out.println("Making Streams");
-            //ObjectOutputStream ToClientStream = new ObjectOutputStream(new BufferedOutputStream(client.getOutputStream()));
+            ObjectOutputStream ToClientStream = new ObjectOutputStream(new BufferedOutputStream(client.getOutputStream()));
             System.out.println("Made Output Stream");
             ObjectInputStream FromClientStream = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
             System.out.println("Made Input Stream");

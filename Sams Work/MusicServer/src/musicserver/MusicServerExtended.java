@@ -18,6 +18,7 @@ import java.net.Socket;
 import java.sql.*;
 import java.sql.DriverManager;
 import infopacket.InfoPacket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,11 +49,7 @@ public class MusicServerExtended extends Thread {
     private Connection connect() {
         Connection con = null;
         try {
-<<<<<<< HEAD
-            String url = "jdbc:sqlite:C:../../../Shitify.db";
-=======
-            String url = "jdbc:sqlite:../../../Shitify.db";
->>>>>>> 030ebd113cd113ca0b7b6ed0c171a35c0447e5a3
+            String url = "jdbc:sqlite:C:src/musicserver/Shitify.db";
             con = DriverManager.getConnection(url);
             System.out.println("Connection to Database is established");
         } catch (SQLException ex) {
@@ -104,45 +101,49 @@ public class MusicServerExtended extends Thread {
             
             //Stating which client connected to
             System.out.println("Connected to " + client.getInetAddress());
-            //Data from client
-            //DataInputStream FromClientStream = new DataInputStream(client.getInputStream());
-            //Data to send to client
-            //DataOutputStream ToClientStream = new DataOutputStream(client.getOutputStream());
-            System.out.println("Making Streams");
-            //Create an Input stream to send to user
-            ObjectInputStream FromClientStream = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+            
+            //Create an Input stream to send to user        
+            ObjectInputStream FromClientStream = new ObjectInputStream(client.getInputStream());
             System.out.println("Made Input Stream");
             
-            ObjectOutputStream ToClientStream = new ObjectOutputStream(new BufferedOutputStream(client.getOutputStream()));
+            ObjectOutputStream ToClientStream = new ObjectOutputStream(client.getOutputStream());
             System.out.println("Made Output Stream");
             
-            
-            
-            
-            
+            //Loop
             while(true) {
                 //Accessing the DataBase
                 MusicServerExtended app = new MusicServerExtended();
-                
-                //When LGN
                             
-                //String UserName = inFromClient.readUTF();
-                //System.out.println("User name: " + UserName);
-                System.out.println("In while loop");
-                
                 InFromClient = (InfoPacket) FromClientStream.readObject();
+                System.out.println(InFromClient.GetService());
                 
-                System.out.println("Got Data From Client");
-                //Get username
-                String UserName = InFromClient.GetArray().get(0);
-                //Get password from DB searching with username                                
-                String DBPassword = app.SelectLogInDetails(UserName);
-                System.out.println("Got Password from DB");
-                System.out.println(DBPassword);
+                if ("LGN".equals(InFromClient.GetService()))
+                {
+                    String UserName = InFromClient.GetArray().get(0);
+                    String UserPassWord = InFromClient.GetArray().get(1);
+                    //Get password from DB searching with username                                
+                    String DBPassword = app.SelectLogInDetails(UserName);
+                    System.out.println(UserName + " " + UserPassWord + " " + DBPassword);
+                    
+                    if (UserPassWord.equals(DBPassword))
+                    {
+                        System.out.println("Correct");
+                        ToClient.CreateSingleDataPacket("LGN", "CORRECT");
+                    }
+                    else
+                    {
+                        System.out.println("Incorrect");
+                        ToClient.CreateSingleDataPacket("LGN", "INCORRECT");
+                    }
+                    //Send InfoPacket To user
+                    ToClientStream.writeObject(ToClient);
+                }
+                else
+                {
+                    System.out.println("Not a valid command");
+                }
                 
-                //ToClient.CreateSingleDataPacket("Reply", DBPassword);
                 
-                //output.writeObject(outToClient);
 
                 //Retreiving the password from the SQL Database
                 

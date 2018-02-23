@@ -18,16 +18,14 @@ import infopacket.InfoPacket;
  * @author samal
  */
 public class MusicServer {
-
+        private static final int Port = 9090;
         public static void main(String[] args) {
         
         
         try
         {
-            ServerSocket server = new ServerSocket(9090);
+            ServerSocket server = new ServerSocket(Port);
 
-
-            
             while (true) 
                     {  
                         //Always waiting for a client. 

@@ -150,29 +150,33 @@ public class LogInScreen extends javax.swing.JFrame {
         try {
             
             Socket MainServer = new Socket("localhost", 9090);            
-            //DataInputStream inFromServer = new DataInputStream(MainServer.getInputStream()); 
-            //DataOutputStream outToServer = new DataOutputStream(MainServer.getOutputStream()); 
-            System.out.println("Making Stream");
-            ObjectOutputStream ToServerStream = new ObjectOutputStream(new BufferedOutputStream(MainServer.getOutputStream()));
+            
+            //Make Object Streams
+            ObjectOutputStream ToServerStream = new ObjectOutputStream(MainServer.getOutputStream());
             System.out.println("Made Output Stream");
             
-            
-            //outToServer.writeUTF(UserName);
-
-            //String Recieved = inFromServer.readUTF();
-            
+            //Send the NamePass infopacket
             ToServerStream.writeObject(NamePass);
-            System.out.println("Got Past Sending Object");
             
-            ObjectInputStream FromServerStream = new ObjectInputStream(new BufferedInputStream(MainServer.getInputStream()));
-            System.out.println("Made Input Stream");
+            //Set up stream to recieve reply from server
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
             
+            //Get reply 
             ServerReply = (InfoPacket) FromServerStream.readObject();
-            System.out.println("Got past recieving objext");
             
-            
-            //System.out.println("Server Replied: " + Recieved);
-            
+            if ("CORRECT".equals(ServerReply.GetData()))
+            {
+                //Load Main Screen Form and Pass Current User Name that Logged in
+                System.out.println("Log In Granted");
+            }
+            else
+            {
+                System.out.println("Incorrect");
+                txtUserName.setText("");
+                txtPassword.setText("");
+            }
+                                    
+                        
             MainServer.close();
         }
         catch (IOException e)

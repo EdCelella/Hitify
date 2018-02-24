@@ -7,6 +7,8 @@ package testingcoursework;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import infopacket.InfoPacket;
+import java.util.ArrayList;
 
 /**
  *
@@ -293,22 +295,48 @@ public class RegisterUser extends javax.swing.JFrame {
         Boolean isValid;
         isValid = ValidChecks();
         
-        if (isValid == false)
+        if (isValid == true)
         {
-            //Output Error message/
+            String Password = txtPassword.getText();
+            String PasswordConfirm = txtPassword2.getText();
+            //If password is entered correctly twice
+            if (Password.equals(PasswordConfirm))
+            {
+                ArrayList UserRegister = new ArrayList();
+                
+                UserRegister.add(txtUserName.getText());
+                UserRegister.add(txtPassword.getText());
+                UserRegister.add(txtFirstName.getText());
+                UserRegister.add(txtSecondName.getText());
+                UserRegister.add(txtEmail.getText());
+                
+                
+                if (rbFolk.isSelected()) UserRegister.add("Folk");
+                if (rbRock.isSelected()) UserRegister.add("Rock");
+                if (rbTechno.isSelected()) UserRegister.add("Techno");
+                if (rbPop.isSelected()) UserRegister.add("Pop");
+                if (rbBlues.isSelected()) UserRegister.add("Blues");
+                if (rbJazz.isSelected()) UserRegister.add("Jazz");
+                if (rbEDM.isSelected()) UserRegister.add("EDM");
+                if (rbRapping.isSelected()) UserRegister.add("Rapping");
+                if (rbIndie.isSelected()) UserRegister.add("Indie");
+                if (rbSoul.isSelected()) UserRegister.add("Soul");
+                if (rbReggae.isSelected()) UserRegister.add("Reggae");
+                if (rbClassical.isSelected()) UserRegister.add("Classical");
+                
+                
+            }
+            else
+            {
+                //error message
+            }
+        }
+        else
+        {
+            //error message
         }
         
-        String Password = txtPassword.getText();
-        String PasswordConfirm = txtPassword2.getText();
-        //If password is entered correctly twice
-        if (Password == PasswordConfirm)
-        {
-            //Write a function that determines wheether the txt box is empty
-            //Check if valid email
-            //Check no fields are empty
-            
-            //Create new user profile.
-        }
+        
         
     }//GEN-LAST:event_cmdCreateActionPerformed
 
@@ -331,7 +359,12 @@ public class RegisterUser extends javax.swing.JFrame {
         {
             return false;
         }
-        return false;
+        else if (txtUserName.getText().length() < 5)
+        {
+            return false;
+        }
+        
+        return true;
     }
     /**
      * @param args the command line arguments

@@ -8,7 +8,13 @@ package testingcoursework;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import infopacket.InfoPacket;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -323,6 +329,14 @@ public class RegisterUser extends javax.swing.JFrame {
                 if (rbSoul.isSelected()) UserRegister.add("Soul");
                 if (rbReggae.isSelected()) UserRegister.add("Reggae");
                 if (rbClassical.isSelected()) UserRegister.add("Classical");
+                
+                File ImageFile = new File("C:/Users/samal/Pictures/ID Photos/Passport.jpg");
+                try {
+                    BufferedImage image = ImageIO.read(ImageFile);
+                } catch (IOException ex) {
+                    Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 
                 
             }

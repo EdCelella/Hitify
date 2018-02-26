@@ -138,6 +138,11 @@ public class MusicServerExtended extends Thread {
                     //Send InfoPacket To user
                     ToClientStream.writeObject(ToClient);
                 }
+                else if ("CNU".equals(InFromClient.GetService()))
+                {
+                    //Retreive all information about user and add it to the DB
+                    
+                }
                 else
                 {
                     System.out.println("Not a valid command");

@@ -117,6 +117,7 @@ public class MusicServerExtended extends Thread {
         {
             UserPreferences = UserPreferences + UserDetails.get(i) + ",";
         }
+        UserPreferences = UserPreferences.substring(0, UserPreferences.length()-1);
         System.out.println("User Preferences: " + UserPreferences);
         String SQLQuery = "INSERT INTO UserTable VALUES ('" + UserName + "','" + UserPassword
                 + "','" + FirstName + "','" + SecondName + "','" + UserEmail + "','" + UserPreferences + "');";
@@ -188,8 +189,8 @@ public class MusicServerExtended extends Thread {
                     
                     InsertNewRegUser(UsersInfo);
                     
-                    
-                    FileOutputStream FileOut = new FileOutputStream("C:/Users/samal/Pictures/Test/sendpic.png");
+                    String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + InFromClient.GetArray().get(0) + ".png";
+                    FileOutputStream FileOut = new FileOutputStream(WhereToSave);
                     FileOut.write(Image);
                     
                 }

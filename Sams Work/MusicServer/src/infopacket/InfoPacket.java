@@ -17,7 +17,7 @@ public class InfoPacket implements Serializable  {
     private String Service;
     private String SingleData;
     private ArrayList<String> MultipleData; 
-    private byte[] Image;
+    private byte[] ByteArray;
     
     public void CreateArrayPacket (String service, ArrayList<String> data2)
     {
@@ -31,11 +31,11 @@ public class InfoPacket implements Serializable  {
         this.SingleData = data1;
     }
     
-    public void CreateNewUserPacket (String Service, ArrayList<String> UserInfo, byte[] Image)
+    public void CreateArrayBytePacket (String Service, ArrayList<String> UserInfo, byte[] Data)
     {
         this.Service = Service;
         this.MultipleData = UserInfo;
-        this.Image = Image;
+        this.ByteArray = Data;
     }
         
     public String GetService()
@@ -53,9 +53,9 @@ public class InfoPacket implements Serializable  {
         return MultipleData;
     }
     
-    public byte[] GetImage()
+    public byte[] GetByteData()
     {
-        return Image;
+        return ByteArray;
     }
 }
 

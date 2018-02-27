@@ -10,7 +10,11 @@ import javax.swing.ImageIcon;
 import infopacket.InfoPacket;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -330,14 +334,34 @@ public class RegisterUser extends javax.swing.JFrame {
                 if (rbReggae.isSelected()) UserRegister.add("Reggae");
                 if (rbClassical.isSelected()) UserRegister.add("Classical");
                 
-                File ImageFile = new File("C:/Users/samal/Pictures/ID Photos/Passport.jpg");
+                //Get file path from file chooser               
+                String PhotoFile = "C:/Users/samal/Pictures/ID Photos/Driving License Front.jpg";
                 try {
-                    BufferedImage image = ImageIO.read(ImageFile);
+                    FileInputStream UserPicture = new FileInputStream(PhotoFile);
+                    byte [] buffer = new byte[UserPicture.available()];
+                    UserPicture.read(buffer);
+                    
+                    Socket MainServer = new Socket("localhost", 9090);
+                    
+                    ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+                    
+                    InfoPacket UserDetails = new InfoPacket();
+                    
+                    UserDetails.CreateArrayBytePacket("CNU", UserRegister, buffer);
+                    
+                    
+                    OutToServer.writeObject(UserDetails);
+
+                    OutToServer.close();
+
+                    MainServer.close();
+
+                    
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
                 
             }
             else

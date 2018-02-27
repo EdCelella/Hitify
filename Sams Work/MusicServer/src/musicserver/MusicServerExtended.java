@@ -18,6 +18,7 @@ import java.net.Socket;
 import java.sql.*;
 import java.sql.DriverManager;
 import infopacket.InfoPacket;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,6 +95,43 @@ public class MusicServerExtended extends Thread {
         return Password;
     }
 
+    public void InsertNewRegUser(ArrayList<String> UserDetails)
+    {
+        int ArraySize = UserDetails.size();
+        int NumberOfPrefs = ArraySize - 5;
+        
+        //Get all info from Array
+        String UserName = UserDetails.get(0);
+        System.out.println("Username: " + UserName);
+        String UserPassword = UserDetails.get(1);
+        System.out.println("Password: " + UserPassword);
+        String FirstName = UserDetails.get(2);
+        System.out.println("FirstName: " + FirstName );
+        String SecondName = UserDetails.get(3);
+        System.out.println("SecondName: " + SecondName);
+        String UserEmail = UserDetails.get(4);
+        System.out.println("UserEmail: " + UserEmail);
+        String UserPreferences = "";
+        //Make a string list that is seperated with commas full of preferences
+        for (int i = 5; i < ArraySize; i++)
+        {
+            UserPreferences = UserPreferences + UserDetails.get(i) + ",";
+        }
+        System.out.println("User Preferences: " + UserPreferences);
+        String SQLQuery = "INSERT INTO UserTable VALUES ('" + UserName + "','" + UserPassword
+                + "','" + FirstName + "','" + SecondName + "','" + UserEmail + "','" + UserPreferences + "');";
+        try (Connection con = this.connect();
+             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
+                    pstmt.execute();
+                    System.out.println("Execture Statement INSERT");
+            
+            
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        
+    }
+    
     @Override
     public void run()
     {
@@ -117,6 +155,7 @@ public class MusicServerExtended extends Thread {
                 InFromClient = (InfoPacket) FromClientStream.readObject();
                 System.out.println(InFromClient.GetService());
                 
+                //Login attempted
                 if ("LGN".equals(InFromClient.GetService()))
                 {
                     String UserName = InFromClient.GetArray().get(0);
@@ -138,9 +177,20 @@ public class MusicServerExtended extends Thread {
                     //Send InfoPacket To user
                     ToClientStream.writeObject(ToClient);
                 }
+                //Create new user
                 else if ("CNU".equals(InFromClient.GetService()))
                 {
                     //Retreive all information about user and add it to the DB
+                    ArrayList UsersInfo = new ArrayList();
+                    UsersInfo = InFromClient.GetArray();
+                    
+                    byte [] Image = (byte []) InFromClient.GetByteData();
+                    
+                    InsertNewRegUser(UsersInfo);
+                    
+                    
+                    FileOutputStream FileOut = new FileOutputStream("C:/Users/samal/Pictures/Test/sendpic.png");
+                    FileOut.write(Image);
                     
                 }
                 else

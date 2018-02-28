@@ -8,6 +8,7 @@ package testingcoursework;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import infopacket.InfoPacket;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -26,6 +28,8 @@ import javax.imageio.ImageIO;
  */
 public class RegisterUser extends javax.swing.JFrame {
 
+    private String Filepath = "";
+    
     static void SetPhoto(ImageIcon ResizeImage) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -84,6 +88,7 @@ public class RegisterUser extends javax.swing.JFrame {
         cmdCreate = new javax.swing.JButton();
         cmdLogIn = new javax.swing.JButton();
         lblPhoto = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         lblMusicChoice1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblMusicChoice1.setText("Select Music Interests:");
@@ -164,6 +169,15 @@ public class RegisterUser extends javax.swing.JFrame {
             }
         });
 
+        lblPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,56 +185,62 @@ public class RegisterUser extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUserName)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword2)
-                    .addComponent(lblPassword)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFirstName)
-                            .addComponent(lblSecondName)
-                            .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(75, 75, 75)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMusicChoice)
+                            .addComponent(lblUserName)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPassword2)
+                            .addComponent(lblPassword)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rbFolk)
-                                            .addComponent(rbPop)
-                                            .addComponent(rbEDM))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rbRock)
-                                            .addComponent(rbBlues)
-                                            .addComponent(rbRapping)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rbSoul)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rbReggae)))
-                                .addGap(18, 18, 18)
+                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFirstName)
+                                    .addComponent(lblSecondName)
+                                    .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEmail)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(75, 75, 75)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rbClassical)
-                                    .addComponent(rbJazz)
-                                    .addComponent(rbTechno)
-                                    .addComponent(rbIndie)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cmdCreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmdLogIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblUploadPicture, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmdPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblMusicChoice)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(rbFolk)
+                                                    .addComponent(rbPop)
+                                                    .addComponent(rbEDM))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(rbRock)
+                                                    .addComponent(rbBlues)
+                                                    .addComponent(rbRapping)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(rbSoul)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(rbReggae)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rbClassical)
+                                            .addComponent(rbJazz)
+                                            .addComponent(rbTechno)
+                                            .addComponent(rbIndie)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(cmdCreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmdLogIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblUploadPicture, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cmdPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(102, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(21, 21, 21))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
+                .addContainerGap(265, Short.MAX_VALUE)
                 .addComponent(lblRegisterNewUser)
                 .addGap(155, 155, 155))
         );
@@ -258,7 +278,9 @@ public class RegisterUser extends javax.swing.JFrame {
                     .addComponent(rbReggae)
                     .addComponent(rbClassical))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -281,9 +303,11 @@ public class RegisterUser extends javax.swing.JFrame {
                         .addComponent(lblUploadPicture)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmdPhoto)
-                            .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmdPhoto)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lblPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
 
         lblMusicChoice.getAccessibleContext().setAccessibleName("");
@@ -297,7 +321,11 @@ public class RegisterUser extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdLogInActionPerformed
 
     private void cmdPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPhotoActionPerformed
-        new UploadProfilePicture().setVisible(true);
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        Filepath = f.getAbsolutePath();
+        lblPhoto.setIcon(ResizeImage(Filepath));
         
     }//GEN-LAST:event_cmdPhotoActionPerformed
 
@@ -335,9 +363,9 @@ public class RegisterUser extends javax.swing.JFrame {
                 if (rbClassical.isSelected()) UserRegister.add("Classical");
                 
                 //Get file path from file chooser               
-                String PhotoFile = "C:/Users/samal/Pictures/ID Photos/Driving License Front.jpg";
+                
                 try {
-                    FileInputStream UserPicture = new FileInputStream(PhotoFile);
+                    FileInputStream UserPicture = new FileInputStream(Filepath);
                     byte [] buffer = new byte[UserPicture.available()];
                     UserPicture.read(buffer);
                     
@@ -378,6 +406,11 @@ public class RegisterUser extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmdCreateActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new UploadSong("Smilward").setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private Boolean ValidChecks() {
         
         if (txtFirstName.getText().length() < 2 || txtSecondName.getText().length() < 2)
@@ -402,8 +435,46 @@ public class RegisterUser extends javax.swing.JFrame {
             return false;
         }
         
+        int PrefCounter = 0;
+        
+        if (rbFolk.isSelected()) PrefCounter++;
+        if (rbRock.isSelected()) PrefCounter++;
+        if (rbTechno.isSelected()) PrefCounter++;
+        if (rbPop.isSelected()) PrefCounter++;
+        if (rbBlues.isSelected()) PrefCounter++;
+        if (rbJazz.isSelected()) PrefCounter++;
+        if (rbEDM.isSelected()) PrefCounter++;
+        if (rbRapping.isSelected()) PrefCounter++;
+        if (rbIndie.isSelected()) PrefCounter++;
+        if (rbSoul.isSelected()) PrefCounter++;
+        if (rbReggae.isSelected()) PrefCounter++;
+        if (rbClassical.isSelected()) PrefCounter++;
+        
+        if (PrefCounter < 1)
+        {
+            System.out.println("Please select at least one music prefernce");
+            
+            return false;
+        }
+        
+        if ("".equals(Filepath))
+        {
+            System.out.println("Please select a profile picture");
+            return false;
+        }
+        
         return true;
     }
+    
+    public ImageIcon ResizeImage(String ImagePath)
+    {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -447,6 +518,7 @@ public class RegisterUser extends javax.swing.JFrame {
     private javax.swing.JButton cmdCreate;
     private javax.swing.JButton cmdLogIn;
     private javax.swing.JButton cmdPhoto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblMusicChoice;

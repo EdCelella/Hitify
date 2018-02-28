@@ -133,6 +133,37 @@ public class MusicServerExtended extends Thread {
         
     }
     
+    public void InsertPost (ArrayList<String> PostDetails)
+    {
+        String UserName = PostDetails.get(0);
+        //Date is automatically inserted by SQL database
+        String TypeOfPost = PostDetails.get(1);
+        String Message = "", UserMood = "";
+        if ("SongUpload".equals(TypeOfPost))
+        {
+            Message = PostDetails.get(2) + "," + PostDetails.get(3);
+            UserMood = PostDetails.get(4);
+        }
+        else if ("TextUpload".equals(TypeOfPost))
+        {
+            Message = PostDetails.get(2);
+            UserMood = PostDetails.get(3);
+        }
+        
+        String SQLQuery = "INSERT INTO Posts (UserName,TypeOfPost,Message,UserMood) VALUES ('" + UserName + "','" + TypeOfPost
+                + "','" + Message + "','" + UserMood + "');";
+        try (Connection con = this.connect();
+             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
+                    pstmt.execute();
+                    System.out.println("Execture Statement INSERT");
+            
+            
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        
+    }
+    
     @Override
     public void run()
     {
@@ -181,6 +212,7 @@ public class MusicServerExtended extends Thread {
                 //Create new user
                 else if ("CNU".equals(InFromClient.GetService()))
                 {
+                    System.out.println("Creating New User");
                     //Retreive all information about user and add it to the DB
                     ArrayList UsersInfo = new ArrayList();
                     UsersInfo = InFromClient.GetArray();
@@ -192,8 +224,28 @@ public class MusicServerExtended extends Thread {
                     String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + InFromClient.GetArray().get(0) + ".png";
                     FileOutputStream FileOut = new FileOutputStream(WhereToSave);
                     FileOut.write(Image);
-                    
+                    System.out.println("Sucessfull");
                 }
+                
+                else if ("UNS".equals(InFromClient.GetService()))
+                {
+                    System.out.println("Uploading New Song");
+                    
+                    ArrayList SongInformation = new ArrayList();
+                    SongInformation = InFromClient.GetArray();
+                    String FileName = SongInformation.get(2) + "," + SongInformation.get(3);
+                    
+                    byte [] Song = (byte []) InFromClient.GetByteData();
+                    
+                    String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Music/" + FileName + ".mp3";
+                    FileOutputStream FileOut = new FileOutputStream(WhereToSave);
+                    FileOut.write(Song);
+                    
+                    InsertPost(SongInformation);
+                    
+                    System.out.println("Successfull");
+                }
+                
                 else
                 {
                     System.out.println("Not a valid command");

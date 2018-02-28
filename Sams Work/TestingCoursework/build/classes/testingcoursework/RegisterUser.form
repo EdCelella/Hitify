@@ -47,70 +47,79 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblUserName" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtUserName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                  <Component id="lblPassword2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtFirstName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                          <Component id="lblFirstName" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblSecondName" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtSecondName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                          <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtEmail" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                          <Component id="txtPassword" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                          <Component id="txtPassword2" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblMusicChoice" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblUserName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtUserName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                          <Component id="lblPassword2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtFirstName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                                  <Component id="lblFirstName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSecondName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSecondName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                                  <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPassword" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                                  <Component id="txtPassword2" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblMusicChoice" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="rbFolk" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbPop" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbEDM" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rbFolk" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rbPop" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rbEDM" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="rbRock" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rbBlues" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="rbRapping" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="rbSoul" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="rbReggae" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="rbRock" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbBlues" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbRapping" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbClassical" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbJazz" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbTechno" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbIndie" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="rbSoul" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="rbReggae" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="cmdCreate" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cmdLogIn" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblUploadPicture" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cmdPhoto" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="lblPhoto" min="-2" pref="110" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="rbClassical" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rbJazz" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rbTechno" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rbIndie" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="cmdCreate" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cmdLogIn" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblUploadPicture" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cmdPhoto" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="lblPhoto" min="-2" pref="103" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="102" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="txtEmail" min="-2" pref="195" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="175" max="32767" attributes="0"/>
+              <EmptySpace pref="265" max="32767" attributes="0"/>
               <Component id="lblRegisterNewUser" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
           </Group>
@@ -155,7 +164,10 @@
                   <Component id="rbClassical" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -181,12 +193,15 @@
                       <Component id="lblUploadPicture" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmdPhoto" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPhoto" min="-2" pref="106" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="cmdPhoto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="lblPhoto" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -365,6 +380,21 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPhoto">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jButton1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

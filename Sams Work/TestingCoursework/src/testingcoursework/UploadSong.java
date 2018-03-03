@@ -8,6 +8,7 @@ package testingcoursework;
 import java.io.File;
 import javax.swing.JFileChooser;
 import infopacket.InfoPacket;
+import java.awt.Image;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 
 
@@ -25,7 +27,8 @@ import java.util.logging.Logger;
  */
 public class UploadSong extends javax.swing.JFrame {
 
-    private String Filepath;
+    private String MusicFilePath;
+    private String PhotoFilePath;
     private String UserName;
     /**
      * Creates new form UploadSong
@@ -49,6 +52,7 @@ public class UploadSong extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblPhoto = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         lblArtistName = new javax.swing.JLabel();
         lblSongName = new javax.swing.JLabel();
@@ -58,7 +62,11 @@ public class UploadSong extends javax.swing.JFrame {
         lblChosen = new javax.swing.JLabel();
         cmdUploadSong = new javax.swing.JButton();
         lblSongName1 = new javax.swing.JLabel();
-        cbMood = new javax.swing.JComboBox<>();
+        cbGenre = new javax.swing.JComboBox<>();
+        lblCoverPhoto = new javax.swing.JLabel();
+        cmdUploadCoverPhoto = new javax.swing.JButton();
+
+        lblPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,24 +96,23 @@ public class UploadSong extends javax.swing.JFrame {
         });
 
         lblSongName1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblSongName1.setText("Mood");
+        lblSongName1.setText("Genre");
 
-        cbMood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Mood", "Happy", "Sad", "Peaceful", "Loving", "Amused", "Gloomy", "Stressed" }));
+        cbGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Genre", "Folk", "Rock", "Techno", "Pop", "Blues", "Jazz", "EDM", "Rapping", "Indie", "Sould", "Reggae", "Classical" }));
+
+        lblCoverPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        cmdUploadCoverPhoto.setText("Upload Cover Photo");
+        cmdUploadCoverPhoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdUploadCoverPhotoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbMood, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmdUploadSong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblChosen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmdSelectFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtArtistName, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtSongName))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,9 +125,26 @@ public class UploadSong extends javax.swing.JFrame {
                         .addComponent(lblSongName1)
                         .addGap(140, 140, 140))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
-                .addComponent(lblTitle)
-                .addGap(66, 66, 66))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblCoverPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 66, Short.MAX_VALUE)
+                        .addComponent(lblTitle)
+                        .addGap(66, 66, 66))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmdUploadCoverPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbGenre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdUploadSong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblChosen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdSelectFile, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtArtistName)
+                            .addComponent(txtSongName, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,10 +162,14 @@ public class UploadSong extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSongName1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbMood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(cbGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblCoverPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmdUploadCoverPhoto)
+                .addGap(37, 37, 37)
                 .addComponent(cmdSelectFile)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblChosen, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmdUploadSong)
@@ -155,32 +183,38 @@ public class UploadSong extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
-        Filepath = f.getAbsolutePath();
-        lblChosen.setText("You chose: " + Filepath);
+        MusicFilePath = f.getAbsolutePath();
+        lblChosen.setText("You chose: " + MusicFilePath);
         
     }//GEN-LAST:event_cmdSelectFileActionPerformed
 
     private void cmdUploadSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdUploadSongActionPerformed
         InfoPacket UserSongDetails = new InfoPacket();
         ArrayList UserSongArray = new ArrayList();
-        String UserMood = cbMood.getSelectedItem().toString();
-        System.out.println(UserMood);
         UserSongArray.add(UserName);
         //Date and time added by default SQL Table
         UserSongArray.add("SongUpload");
         UserSongArray.add(txtArtistName.getText());
         UserSongArray.add(txtSongName.getText());
-        UserSongArray.add(cbMood.getSelectedItem().toString());
+        UserSongArray.add(cbGenre.getSelectedItem().toString());
         
         //Convert song file to byte
         FileInputStream SongFile;
+        FileInputStream CoverPhotoFile;
         try {
-            SongFile = new FileInputStream(Filepath);
+            SongFile = new FileInputStream(MusicFilePath);
             byte [] buffer = new byte[SongFile.available()];
             SongFile.read(buffer);
             
+            CoverPhotoFile = new FileInputStream(PhotoFilePath);
+            byte [] buffer2 = new byte[CoverPhotoFile.available()];
+            CoverPhotoFile.read(buffer2);
+            
             //UNS - Upload New Song
-            UserSongDetails.CreateArrayBytePacket("UNS", UserSongArray, buffer);
+            UserSongDetails.SetService("UNS");
+            UserSongDetails.SetArray(UserSongArray);
+            UserSongDetails.SetFirstByte(buffer);
+            UserSongDetails.SetSecondByte(buffer2);
             
             Socket MainServer = new Socket("localhost", 9090);
                     
@@ -198,12 +232,25 @@ public class UploadSong extends javax.swing.JFrame {
             System.out.println("Error - " + ex.getMessage());
         }
         
-        
-        
-        
-        
     }//GEN-LAST:event_cmdUploadSongActionPerformed
 
+    private void cmdUploadCoverPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdUploadCoverPhotoActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        PhotoFilePath = f.getAbsolutePath();
+        lblCoverPhoto.setIcon(ResizeImage(PhotoFilePath));
+    }//GEN-LAST:event_cmdUploadCoverPhotoActionPerformed
+
+    public ImageIcon ResizeImage(String ImagePath)
+    {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(lblCoverPhoto.getWidth(), lblCoverPhoto.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -240,11 +287,14 @@ public class UploadSong extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbMood;
+    private javax.swing.JComboBox<String> cbGenre;
     private javax.swing.JButton cmdSelectFile;
+    private javax.swing.JButton cmdUploadCoverPhoto;
     private javax.swing.JButton cmdUploadSong;
     private javax.swing.JLabel lblArtistName;
     private javax.swing.JLabel lblChosen;
+    private javax.swing.JLabel lblCoverPhoto;
+    private javax.swing.JLabel lblPhoto;
     private javax.swing.JLabel lblSongName;
     private javax.swing.JLabel lblSongName1;
     private javax.swing.JLabel lblTitle;

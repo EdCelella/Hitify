@@ -375,8 +375,9 @@ public class RegisterUser extends javax.swing.JFrame {
                     
                     InfoPacket UserDetails = new InfoPacket();
                     
-                    UserDetails.CreateArrayBytePacket("CNU", UserRegister, buffer);
-                    
+                    UserDetails.SetService("CNU");
+                    UserDetails.SetArray(UserRegister);
+                    UserDetails.SetFirstByte(buffer);
                     
                     OutToServer.writeObject(UserDetails);
 

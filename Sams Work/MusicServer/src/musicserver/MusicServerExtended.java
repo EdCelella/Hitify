@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import database.Database;
 
 /**
  *
@@ -46,124 +47,6 @@ public class MusicServerExtended extends Thread {
         MusicServerExtended PassBack = new MusicServerExtended();
         return PassBack;
     }
-    
-    private Connection connect() {
-        Connection con = null;
-        try {
-            String url = "jdbc:sqlite:C:src/musicserver/Shitify.db";
-            con = DriverManager.getConnection(url);
-            System.out.println("Connection to Database is established");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        } 
-    
-        return con;
-    }  
-    
-    public void selectAll(){
-        String sql = "SELECT UserName, Password, Preferences FROM UserTable";
-        
-        try (Connection con = this.connect();
-             Statement stmt  = con.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
-            
-            // loop through the result set
-            while (rs.next()) {
-                System.out.println(rs.getString("UserName") +  "\t" + 
-                                   rs.getString("Password") + "\t" +
-                                   rs.getString("Preferences"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public String SelectLogInDetails(String UserName){
-        String sql = "SELECT Password FROM UserTable WHERE UserName = '" + UserName + "';";
-        String Password = "";
-        try (Connection con = this.connect();
-             Statement stmt  = con.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
-            
-            // loop through the result set
-            
-            Password = rs.getString("Password");
-            
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return Password;
-    }
-
-    public void InsertNewRegUser(ArrayList<String> UserDetails)
-    {
-        int ArraySize = UserDetails.size();
-        int NumberOfPrefs = ArraySize - 5;
-        
-        //Get all info from Array
-        String UserName = UserDetails.get(0);
-        System.out.println("Username: " + UserName);
-        String UserPassword = UserDetails.get(1);
-        System.out.println("Password: " + UserPassword);
-        String FirstName = UserDetails.get(2);
-        System.out.println("FirstName: " + FirstName );
-        String SecondName = UserDetails.get(3);
-        System.out.println("SecondName: " + SecondName);
-        String UserEmail = UserDetails.get(4);
-        System.out.println("UserEmail: " + UserEmail);
-        String UserPreferences = "";
-        //Make a string list that is seperated with commas full of preferences
-        for (int i = 5; i < ArraySize; i++)
-        {
-            UserPreferences = UserPreferences + UserDetails.get(i) + ",";
-        }
-        UserPreferences = UserPreferences.substring(0, UserPreferences.length()-1);
-        System.out.println("User Preferences: " + UserPreferences);
-        String SQLQuery = "INSERT INTO UserTable VALUES ('" + UserName + "','" + UserPassword
-                + "','" + FirstName + "','" + SecondName + "','" + UserEmail + "','" + UserPreferences + "');";
-        try (Connection con = this.connect();
-             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
-                    pstmt.execute();
-                    System.out.println("Execture Statement INSERT");
-            
-            
-                } catch (SQLException e) {
-            System.out.println(e.getMessage());
-                }
-        
-    }
-    
-    public void InsertPost (ArrayList<String> PostDetails)
-    {
-        String UserName = PostDetails.get(0);
-        //Date is automatically inserted by SQL database
-        String TypeOfPost = PostDetails.get(1);
-        String Message = "", UserMood = "";
-        if ("SongUpload".equals(TypeOfPost))
-        {
-            Message = PostDetails.get(2) + "," + PostDetails.get(3);
-            UserMood = PostDetails.get(4);
-        }
-        else if ("TextUpload".equals(TypeOfPost))
-        {
-            Message = PostDetails.get(2);
-            UserMood = PostDetails.get(3);
-        }
-        
-        String SQLQuery = "INSERT INTO Posts (UserName,TypeOfPost,Message,UserMood) VALUES ('" + UserName + "','" + TypeOfPost
-                + "','" + Message + "','" + UserMood + "');";
-        try (Connection con = this.connect();
-             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
-                    pstmt.execute();
-                    System.out.println("Execture Statement INSERT");
-            
-            
-                } catch (SQLException e) {
-            System.out.println(e.getMessage());
-                }
-        
-    }
-    
     @Override
     public void run()
     {
@@ -181,9 +64,9 @@ public class MusicServerExtended extends Thread {
             
             //Loop
             while(true) {
+                Database db = new Database();
                 //Accessing the DataBase
-                MusicServerExtended app = new MusicServerExtended();
-                            
+                        
                 InFromClient = (InfoPacket) FromClientStream.readObject();
                 System.out.println(InFromClient.GetService());
                 
@@ -193,18 +76,17 @@ public class MusicServerExtended extends Thread {
                     String UserName = InFromClient.GetArray().get(0);
                     String UserPassWord = InFromClient.GetArray().get(1);
                     //Get password from DB searching with username                                
-                    String DBPassword = app.SelectLogInDetails(UserName);
+                    String DBPassword = db.SelectLogInDetails(UserName);
                     System.out.println(UserName + " " + UserPassWord + " " + DBPassword);
                     
+                    ToClient.SetService("LGN");
                     if (UserPassWord.equals(DBPassword))
-                    {
-                        System.out.println("Correct");
-                        ToClient.CreateSingleDataPacket("LGN", "CORRECT");
+                    {   
+                        ToClient.SetSingleData("CORRECT");
                     }
                     else
                     {
-                        System.out.println("Incorrect");
-                        ToClient.CreateSingleDataPacket("LGN", "INCORRECT");
+                        ToClient.SetSingleData("INCORRECT");
                     }
                     //Send InfoPacket To user
                     ToClientStream.writeObject(ToClient);
@@ -219,29 +101,36 @@ public class MusicServerExtended extends Thread {
                     
                     byte [] Image = (byte []) InFromClient.GetByteData();
                     
-                    InsertNewRegUser(UsersInfo);
+                    db.InsertNewRegUser(UsersInfo);
                     
-                    String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + InFromClient.GetArray().get(0) + ".png";
+                    String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + InFromClient.GetArray().get(0) + ".png";
                     FileOutputStream FileOut = new FileOutputStream(WhereToSave);
                     FileOut.write(Image);
                     System.out.println("Sucessfull");
                 }
                 
+                //Update new song
                 else if ("UNS".equals(InFromClient.GetService()))
                 {
                     System.out.println("Uploading New Song");
                     
-                    ArrayList SongInformation = new ArrayList();
-                    SongInformation = InFromClient.GetArray();
+                    ArrayList SongInformation = InFromClient.GetArray();
                     String FileName = SongInformation.get(2) + "," + SongInformation.get(3);
                     
                     byte [] Song = (byte []) InFromClient.GetByteData();
+                    String WhereToSaveSong = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Music/" + FileName + ".mp3";
+                    FileOutputStream SongOut = new FileOutputStream(WhereToSaveSong);
+                    SongOut.write(Song);
                     
-                    String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Music/" + FileName + ".mp3";
-                    FileOutputStream FileOut = new FileOutputStream(WhereToSave);
-                    FileOut.write(Song);
+                    byte [] CoverPhoto = (byte []) InFromClient.GetSecondData();
+                    String WhereToSavePhoto= "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + FileName + ".png";
+                    FileOutputStream PhotoOut = new FileOutputStream(WhereToSavePhoto);
+                    PhotoOut.write(CoverPhoto);
                     
-                    InsertPost(SongInformation);
+                    db.InsertSong(SongInformation);
+                    db.InsertPost(SongInformation);
+                    
+                    
                     
                     System.out.println("Successfull");
                 }

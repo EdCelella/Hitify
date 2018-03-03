@@ -35,20 +35,18 @@
               <Component id="lblLogInForm" min="-2" pref="193" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="lblPassword" min="-2" pref="146" max="-2" attributes="0"/>
-                      <Component id="lblUserName" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblUserName" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
                   <Component id="txtUserName" alignment="0" pref="160" max="32767" attributes="0"/>
-                  <Component id="txtPassword" max="32767" attributes="0"/>
+                  <Component id="lblPassword" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                  <Component id="PFPassword" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="51" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="cmdNewUser" max="32767" attributes="0"/>
                   <Component id="cmdLogIn" max="32767" attributes="0"/>
+                  <Component id="cmdNewUser" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
           </Group>
@@ -66,17 +64,14 @@
                   <Component id="txtUserName" min="-2" max="-2" attributes="0"/>
                   <Component id="cmdLogIn" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Component id="lblPassword" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cmdNewUser" pref="28" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="txtPassword" max="32767" attributes="0"/>
-                      <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                  </Group>
+              <Component id="lblPassword" min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cmdNewUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="PFPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,7 +125,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdNewUserActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPassword">
+    <Component class="javax.swing.JPasswordField" name="PFPassword">
     </Component>
   </SubComponents>
 </Form>

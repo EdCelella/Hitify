@@ -157,7 +157,7 @@ public class MusicServerExtended extends Thread {
 
 
                 //System.out.println("Successfull");
-            }
+            } //Get All user friends
             else if ("GMF".equals(InFromClient.GetService()))
             {
                 System.out.println("MusicServer GMF Username: " + InFromClient.GetData());
@@ -168,6 +168,47 @@ public class MusicServerExtended extends Thread {
                 ToClientStream.writeObject(Reply);
                 
             }
+            //Get Active Friends
+            else if ("GAF".equals(InFromClient.GetService()))
+            {
+                
+            }
+            //New Friend Requests
+            else if ("NFR".equals(InFromClient.GetService()))
+            {
+                ArrayList<String> Users = InFromClient.GetArray();
+                db.NewFriendRequest(Users);
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("NFR");
+                Reply.SetSingleData("Send Request");
+                ToClientStream.writeObject(Reply);
+            }
+            else if ("GFR".equals(InFromClient.GetService()))
+            {
+                ArrayList<String> UsersFriendRequests = db.GetUsersFriendRequests(InFromClient.GetData());
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("GFR");
+                Reply.SetArray(UsersFriendRequests);
+                ToClientStream.writeObject(Reply);
+            }
+            //Accept Friend Request
+            else if ("AFR".equals(InFromClient.GetService()))
+            {
+                db.AcceptFriendRequest(InFromClient.GetArray());
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("GFR");
+                Reply.SetSingleData("Accepted");
+                ToClientStream.writeObject(Reply);
+            }
+            else if ("DFR".equals(InFromClient.GetService()))
+            {
+                db.DeclineFriendRequest(InFromClient.GetArray());
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("DFR");
+                Reply.SetSingleData("Declined");
+                ToClientStream.writeObject(Reply);
+            }
+            
             else
             {
                 System.out.println("Not a valid command");

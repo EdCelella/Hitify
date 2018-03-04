@@ -89,7 +89,6 @@ public class RegisterUser extends javax.swing.JFrame {
         cmdCreate = new javax.swing.JButton();
         cmdLogIn = new javax.swing.JButton();
         lblPhoto = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         cmdClear = new javax.swing.JButton();
         PFPassword = new javax.swing.JPasswordField();
         PFPassword2 = new javax.swing.JPasswordField();
@@ -175,13 +174,6 @@ public class RegisterUser extends javax.swing.JFrame {
 
         lblPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         cmdClear.setText("Clear");
         cmdClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,9 +240,7 @@ public class RegisterUser extends javax.swing.JFrame {
                         .addContainerGap(102, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(21, 21, 21))))
+                        .addGap(21, 436, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(265, Short.MAX_VALUE)
                 .addComponent(lblRegisterNewUser)
@@ -290,9 +280,7 @@ public class RegisterUser extends javax.swing.JFrame {
                     .addComponent(rbReggae)
                     .addComponent(rbClassical))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -319,7 +307,7 @@ public class RegisterUser extends javax.swing.JFrame {
                                 .addComponent(cmdCreate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cmdClear)
-                                .addGap(0, 33, Short.MAX_VALUE))
+                                .addGap(0, 36, Short.MAX_VALUE))
                             .addComponent(lblPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -429,11 +417,6 @@ public class RegisterUser extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_cmdCreateActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new UploadSong("Smilward").setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmdClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClearActionPerformed
         ClearForm();
@@ -594,7 +577,6 @@ public class RegisterUser extends javax.swing.JFrame {
     private javax.swing.JButton cmdCreate;
     private javax.swing.JButton cmdLogIn;
     private javax.swing.JButton cmdPhoto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblMusicChoice;

@@ -65,6 +65,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="cmdHome" alignment="0" max="32767" attributes="0"/>
                           <Component id="cmdClear" alignment="0" max="32767" attributes="0"/>
                           <Component id="cmdUploadCoverPhoto" alignment="0" max="32767" attributes="0"/>
                           <Component id="cbGenre" alignment="1" max="32767" attributes="0"/>
@@ -109,7 +110,8 @@
               <Component id="cmdUploadSong" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="cmdClear" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <Component id="cmdHome" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -219,6 +221,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdClearActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="cmdHome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Home"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdHomeActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

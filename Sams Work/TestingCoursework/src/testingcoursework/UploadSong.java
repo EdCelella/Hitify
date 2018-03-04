@@ -66,6 +66,7 @@ public class UploadSong extends javax.swing.JFrame {
         lblCoverPhoto = new javax.swing.JLabel();
         cmdUploadCoverPhoto = new javax.swing.JButton();
         cmdClear = new javax.swing.JButton();
+        cmdHome = new javax.swing.JButton();
 
         lblPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -117,6 +118,13 @@ public class UploadSong extends javax.swing.JFrame {
             }
         });
 
+        cmdHome.setText("Home");
+        cmdHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdHomeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,6 +153,7 @@ public class UploadSong extends javax.swing.JFrame {
                         .addGap(66, 66, 66))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmdHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmdClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmdUploadCoverPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbGenre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,7 +193,8 @@ public class UploadSong extends javax.swing.JFrame {
                 .addComponent(cmdUploadSong)
                 .addGap(18, 18, 18)
                 .addComponent(cmdClear)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(cmdHome))
         );
 
         pack();
@@ -257,6 +267,18 @@ public class UploadSong extends javax.swing.JFrame {
         ClearForm();        // TODO add your handling code here:
     }//GEN-LAST:event_cmdClearActionPerformed
 
+    private void cmdHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdHomeActionPerformed
+        try {
+            new MainScreen(UserName).setVisible(true);
+            this.dispose();    
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_cmdHomeActionPerformed
+
     public ImageIcon ResizeImage(String ImagePath)
     {
         ImageIcon MyImage = new ImageIcon(ImagePath);
@@ -314,6 +336,7 @@ public class UploadSong extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbGenre;
     private javax.swing.JButton cmdClear;
+    private javax.swing.JButton cmdHome;
     private javax.swing.JButton cmdSelectFile;
     private javax.swing.JButton cmdUploadCoverPhoto;
     private javax.swing.JButton cmdUploadSong;

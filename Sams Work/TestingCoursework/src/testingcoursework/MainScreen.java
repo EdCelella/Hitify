@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +35,14 @@ public class MainScreen extends javax.swing.JFrame {
     public MainScreen(String UserName) throws IOException, ClassNotFoundException {
         initComponents();
         this.Username = UserName;
-        
+        RefreshAllFriendsList();
+        RefreshFriendsRequestList();
+               
+        //ListAllFriends.getSelectedValue() to retrieve currently selected item
+    }
+    
+    public void RefreshAllFriendsList() throws IOException, ClassNotFoundException
+    {
         Socket MainServer = new Socket("localhost", 9090);
                     
         ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
@@ -43,7 +51,7 @@ public class MainScreen extends javax.swing.JFrame {
         InfoPacket UserFriends = new InfoPacket();
         //GET MY FRIENDS
         UserFriends.SetService("GMF");
-        UserFriends.SetSingleData(UserName);
+        UserFriends.SetSingleData(Username);
         
         OutToServer.writeObject(UserFriends);
 
@@ -63,8 +71,38 @@ public class MainScreen extends javax.swing.JFrame {
             
         }
         ListAllFriends.setModel(AllFriends);
+    }
+    
+    public void RefreshFriendsRequestList() throws IOException, ClassNotFoundException
+    {
+        Socket MainServer = new Socket("localhost", 9090);
+                    
+        ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+        ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+        InfoPacket UserFriends = new InfoPacket();
+        //GET MY FRIENDS
+        UserFriends.SetService("GFR");
+        UserFriends.SetSingleData(Username);
         
-        //ListAllFriends.getSelectedValue() to retrieve currently selected item
+        OutToServer.writeObject(UserFriends);
+
+        InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+        
+        ArrayList<String> AllUsersFriends = ServerReply.GetArray();
+        
+        OutToServer.close();
+        FromServerStream.close();
+        
+        DefaultListModel AllFriendRequests = new DefaultListModel();
+        
+        
+        for (int i = 0; i < AllUsersFriends.size(); i++)
+        {
+            AllFriendRequests.addElement(AllUsersFriends.get(i));
+            
+        }
+        ListFriendRequests.setModel(AllFriendRequests);
     }
 
     /**
@@ -81,6 +119,18 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ListAllFriends = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ListActiveFriends = new javax.swing.JList<>();
+        lblSendRequest = new javax.swing.JLabel();
+        txtNewFriendRequest = new javax.swing.JTextField();
+        cmdSendFreindRequest = new javax.swing.JButton();
+        cmdUploadSong = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ListFriendRequests = new javax.swing.JList<>();
+        cmdAcceptFriendRequest = new javax.swing.JButton();
+        cmdDeclineFriendRequest = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,41 +150,123 @@ public class MainScreen extends javax.swing.JFrame {
         ListAllFriends.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(ListAllFriends);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Active Friends");
+
+        ListActiveFriends.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(ListActiveFriends);
+
+        lblSendRequest.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblSendRequest.setText("Add a new friend");
+
+        cmdSendFreindRequest.setText("Send Request");
+        cmdSendFreindRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSendFreindRequestActionPerformed(evt);
+            }
+        });
+
+        cmdUploadSong.setText("Upload New Song");
+        cmdUploadSong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdUploadSongActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Friend Requests");
+
+        ListFriendRequests.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane3.setViewportView(ListFriendRequests);
+
+        cmdAcceptFriendRequest.setText("Accept");
+        cmdAcceptFriendRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAcceptFriendRequestActionPerformed(evt);
+            }
+        });
+
+        cmdDeclineFriendRequest.setText("Decline");
+        cmdDeclineFriendRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeclineFriendRequestActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmdLogOut))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmdUploadSong))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(349, 349, 349)
+                        .addComponent(lblTitle))
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSendRequest)
+                            .addComponent(txtNewFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdSendFreindRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(393, 393, 393)
-                                .addComponent(lblTitle))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1)))
-                        .addGap(0, 385, Short.MAX_VALUE)))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmdAcceptFriendRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmdDeclineFriendRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 417, Short.MAX_VALUE)
+                                .addComponent(cmdLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTitle)
-                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblTitle))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(cmdUploadSong)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
-                .addComponent(cmdLogOut)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSendRequest)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmdAcceptFriendRequest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmdLogOut)
+                            .addComponent(cmdDeclineFriendRequest)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNewFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdSendFreindRequest)))
                 .addContainerGap())
         );
 
@@ -164,15 +296,126 @@ public class MainScreen extends javax.swing.JFrame {
             
             
             MainServer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         new LogInScreen().setVisible(true);
         this.dispose();        
     }//GEN-LAST:event_cmdLogOutActionPerformed
+
+    private void cmdUploadSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdUploadSongActionPerformed
+        new UploadSong(Username).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cmdUploadSongActionPerformed
+
+    private void cmdSendFreindRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSendFreindRequestActionPerformed
+        try {
+            
+            InfoPacket FriendRequest = new InfoPacket();
+            //GET MY FRIENDS
+            FriendRequest.SetService("NFR");
+            ArrayList<String> Users = new ArrayList();
+            Users.add(Username);
+            Users.add(txtNewFriendRequest.getText());
+            FriendRequest.SetSingleData(Username);
+            FriendRequest.SetArray(Users);
+        
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+            
+
+            OutToServer.writeObject(FriendRequest);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+
+            ArrayList<String> AllUsersFriends = ServerReply.GetArray();
+
+            OutToServer.close();
+            FromServerStream.close();
+
+            txtNewFriendRequest.setText("");
+            
+            JOptionPane.showMessageDialog(this,
+            "Friend Request Sent",
+            "Success",
+            JOptionPane.PLAIN_MESSAGE);
+            
+            OutToServer.close();
+            FromServerStream.close();
+            
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_cmdSendFreindRequestActionPerformed
+
+    private void cmdAcceptFriendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAcceptFriendRequestActionPerformed
+        String SecondUser = ListFriendRequests.getSelectedValue();
+        ArrayList<String> AcceptRequest = new ArrayList();
+        AcceptRequest.add(Username);
+        AcceptRequest.add(SecondUser);
+        
+        InfoPacket AcceptFriendRequest = new InfoPacket();
+        AcceptFriendRequest.SetService("AFR");
+        AcceptFriendRequest.SetArray(AcceptRequest);
+        try {
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+
+
+            OutToServer.writeObject(AcceptFriendRequest);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+
+            OutToServer.close();
+            FromServerStream.close();
+            RefreshAllFriendsList();
+            RefreshFriendsRequestList();
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+    }//GEN-LAST:event_cmdAcceptFriendRequestActionPerformed
+
+    private void cmdDeclineFriendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeclineFriendRequestActionPerformed
+        String SecondUser = ListFriendRequests.getSelectedValue();
+        ArrayList<String> DeclineRequest = new ArrayList();
+        DeclineRequest.add(Username);
+        DeclineRequest.add(SecondUser);
+        
+        InfoPacket DeclineFriendRequest = new InfoPacket();
+        DeclineFriendRequest.SetService("DFR");
+        DeclineFriendRequest.SetArray(DeclineRequest);
+        try {
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+
+
+            OutToServer.writeObject(DeclineFriendRequest);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+
+            OutToServer.close();
+            FromServerStream.close();
+            RefreshAllFriendsList();
+            RefreshFriendsRequestList();
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_cmdDeclineFriendRequestActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,10 +453,22 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> ListActiveFriends;
     private javax.swing.JList<String> ListAllFriends;
+    private javax.swing.JList<String> ListFriendRequests;
+    private javax.swing.JButton cmdAcceptFriendRequest;
+    private javax.swing.JButton cmdDeclineFriendRequest;
     private javax.swing.JButton cmdLogOut;
+    private javax.swing.JButton cmdSendFreindRequest;
+    private javax.swing.JButton cmdUploadSong;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblSendRequest;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextField txtNewFriendRequest;
     // End of variables declaration//GEN-END:variables
 }

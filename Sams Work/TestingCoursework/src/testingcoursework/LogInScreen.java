@@ -17,6 +17,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author samal
@@ -165,13 +166,20 @@ public class LogInScreen extends javax.swing.JFrame {
             if ("CORRECT".equals(ServerReply.GetData()))
             {
                 //Load Main Screen Form and Pass Current User Name that Logged in
-                System.out.println("Log In Granted");
+                new MainScreen(UserName).setVisible(true);
+                this.dispose();
             }
             else
             {
                 System.out.println("Incorrect");
                 txtUserName.setText("");
                 PFPassword.setText("");
+                
+                JOptionPane.showMessageDialog(this,
+                "Your account details do not match any records on the system. Please retry and enter them again",
+                "Incorrect Details",
+                JOptionPane.PLAIN_MESSAGE);
+                
             }
                                     
                         

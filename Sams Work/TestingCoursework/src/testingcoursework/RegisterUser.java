@@ -17,10 +17,13 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -67,9 +70,7 @@ public class RegisterUser extends javax.swing.JFrame {
         lblUserName = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         lblPassword2 = new javax.swing.JLabel();
-        txtPassword2 = new javax.swing.JTextField();
         lblMusicChoice = new javax.swing.JLabel();
         rbFolk = new javax.swing.JRadioButton();
         rbRock = new javax.swing.JRadioButton();
@@ -89,6 +90,9 @@ public class RegisterUser extends javax.swing.JFrame {
         cmdLogIn = new javax.swing.JButton();
         lblPhoto = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        cmdClear = new javax.swing.JButton();
+        PFPassword = new javax.swing.JPasswordField();
+        PFPassword2 = new javax.swing.JPasswordField();
 
         lblMusicChoice1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblMusicChoice1.setText("Select Music Interests:");
@@ -178,6 +182,13 @@ public class RegisterUser extends javax.swing.JFrame {
             }
         });
 
+        cmdClear.setText("Clear");
+        cmdClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,14 +203,14 @@ public class RegisterUser extends javax.swing.JFrame {
                             .addComponent(lblPassword2)
                             .addComponent(lblPassword)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                                     .addComponent(lblFirstName)
                                     .addComponent(lblSecondName)
-                                    .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                                     .addComponent(lblEmail)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(PFPassword)
+                                    .addComponent(PFPassword2))
                                 .addGap(75, 75, 75)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblMusicChoice)
@@ -230,7 +241,8 @@ public class RegisterUser extends javax.swing.JFrame {
                                             .addComponent(cmdCreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(cmdLogIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(lblUploadPicture, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmdPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(cmdPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cmdClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap(102, Short.MAX_VALUE))
@@ -290,22 +302,24 @@ public class RegisterUser extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPassword)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmdCreate))
+                        .addComponent(PFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPassword2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmdLogIn)))
+                            .addComponent(cmdLogIn)
+                            .addComponent(PFPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(lblUploadPicture)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cmdPhoto)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmdCreate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmdClear)
+                                .addGap(0, 33, Short.MAX_VALUE))
                             .addComponent(lblPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -335,15 +349,15 @@ public class RegisterUser extends javax.swing.JFrame {
         
         if (isValid == true)
         {
-            String Password = txtPassword.getText();
-            String PasswordConfirm = txtPassword2.getText();
+            String Password = new String (PFPassword.getPassword());
+            String PasswordConfirm = new String (PFPassword2.getPassword());
             //If password is entered correctly twice
             if (Password.equals(PasswordConfirm))
             {
                 ArrayList UserRegister = new ArrayList();
                 
                 UserRegister.add(txtUserName.getText());
-                UserRegister.add(txtPassword.getText());
+                UserRegister.add(Password);
                 UserRegister.add(txtFirstName.getText());
                 UserRegister.add(txtSecondName.getText());
                 UserRegister.add(txtEmail.getText());
@@ -384,6 +398,16 @@ public class RegisterUser extends javax.swing.JFrame {
                     OutToServer.close();
 
                     MainServer.close();
+                    
+                    ClearForm();
+                    
+                    JOptionPane.showMessageDialog(this,
+                    "Your new account has been created, log in to use Shitify",
+                    "Success",
+                    JOptionPane.PLAIN_MESSAGE);
+                    
+                    new LogInScreen().setVisible(true);
+                    this.dispose();
 
                     
                 } catch (FileNotFoundException ex) {
@@ -395,12 +419,11 @@ public class RegisterUser extends javax.swing.JFrame {
             }
             else
             {
-                //error message
+                JOptionPane.showMessageDialog(this,
+                "Your passwords do not match.",
+                "Error",
+            JOptionPane.PLAIN_MESSAGE);
             }
-        }
-        else
-        {
-            //error message
         }
         
         
@@ -412,29 +435,47 @@ public class RegisterUser extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cmdClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClearActionPerformed
+        ClearForm();
+    }//GEN-LAST:event_cmdClearActionPerformed
+
     private Boolean ValidChecks() {
         
         if (txtFirstName.getText().length() < 2 || txtSecondName.getText().length() < 2)
         {
+            JOptionPane.showMessageDialog(this,
+            "Names need to be at least two characters in length.",
+            "Error",
+            JOptionPane.PLAIN_MESSAGE);
+            
             return false;
         }
         else if(txtEmail.getText().length() < 5 || txtUserName.getText().length() < 5)
         {
+            JOptionPane.showMessageDialog(this,
+            "Email and Usernames need to be a minimum of five characters long.",
+            "Error",
+            JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        else if (txtPassword.getText().length() < 3)
+        else if (PFPassword.getPassword().toString().length() < 6)
         {
+            JOptionPane.showMessageDialog(this,
+            "Passwords should be a minimum of six characters in length.",
+            "Error",
+            JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         //if email does not contain a "@" or "."
         else if (txtEmail.getText().contains("@") == false || txtEmail.getText().contains(".") == false)
         {
+            JOptionPane.showMessageDialog(this,
+            "Invalid email format.",
+            "Error",
+            JOptionPane.PLAIN_MESSAGE);
             return false;
         }
-        else if (txtUserName.getText().length() < 5)
-        {
-            return false;
-        }
+        
         
         int PrefCounter = 0;
         
@@ -453,14 +494,20 @@ public class RegisterUser extends javax.swing.JFrame {
         
         if (PrefCounter < 1)
         {
-            System.out.println("Please select at least one music prefernce");
+            JOptionPane.showMessageDialog(this,
+            "You need to select at least one Genre.",
+            "Error",
+            JOptionPane.PLAIN_MESSAGE);
             
             return false;
         }
         
         if ("".equals(Filepath))
         {
-            System.out.println("Please select a profile picture");
+            JOptionPane.showMessageDialog(this,
+            "You need to select a photo.",
+            "Error",
+            JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         
@@ -474,6 +521,31 @@ public class RegisterUser extends javax.swing.JFrame {
         Image newImg = img.getScaledInstance(lblPhoto.getWidth(), lblPhoto.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon image = new ImageIcon(newImg);
         return image;
+    }
+    
+    public void ClearForm()
+    {
+        txtFirstName.setText("");
+        txtSecondName.setText("");
+        txtUserName.setText("");
+        txtEmail.setText("");
+        PFPassword.setText("");
+        PFPassword2.setText("");
+        
+        rbFolk.setSelected(false);
+        rbRock.setSelected(false);
+        rbTechno.setSelected(false);
+        rbPop.setSelected(false);
+        rbBlues.setSelected(false);
+        rbJazz.setSelected(false);
+        rbEDM.setSelected(false);
+        rbRapping.setSelected(false);
+        rbIndie.setSelected(false);
+        rbSoul.setSelected(false);
+        rbReggae.setSelected(false);
+        rbClassical.setSelected(false);
+        
+        lblPhoto.setIcon(ResizeImage(""));
     }
     
     /**
@@ -512,10 +584,13 @@ public class RegisterUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField PFPassword;
+    private javax.swing.JPasswordField PFPassword2;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JButton cmdClear;
     private javax.swing.JButton cmdCreate;
     private javax.swing.JButton cmdLogIn;
     private javax.swing.JButton cmdPhoto;
@@ -545,8 +620,6 @@ public class RegisterUser extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbTechno;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
-    private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtPassword2;
     private javax.swing.JTextField txtSecondName;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables

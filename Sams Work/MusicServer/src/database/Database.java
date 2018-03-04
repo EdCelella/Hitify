@@ -142,4 +142,102 @@ public class Database {
         
     }
     
+    public void InsertActiveMember (String Username, String IP)
+    {
+        String SQLQuery = "INSERT INTO ActiveMembers VALUES ('" + Username + "','" + IP + "');";
+        try (Connection con = this.connect();
+             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
+                    pstmt.execute();
+                    System.out.println("Execture Statement INSERT Active Member");
+            
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        
+    }
+    
+    public void RemoveActiveMember (String Username)
+    {
+        String SQLQuery = "DELETE FROM ActiveMembers WHERE Username = '" + Username + "';";
+        try (Connection con = this.connect();
+             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
+                    pstmt.execute();
+                    System.out.println("Execture Statement INSERT Active Member");
+            
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        
+    }
+    
+    public ArrayList<String> GetUserSongFileName(String Username)
+    {
+        String SQLQuery = "SELECT FROM Songs WHERE Username = '" + Username + "';";
+        ArrayList<String> UserSongs = null;
+        try (Connection con = this.connect();
+             Statement stmt  = con.createStatement()) {
+                    ResultSet rs = stmt.executeQuery(SQLQuery);
+                    System.out.println("Execture Statement INSERT Active Member");
+                    
+                    while (rs.next())
+                    {
+                        UserSongs.add(rs.getString("FileName"));
+                    }
+                    
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        return UserSongs;
+    }
+    
+    public ArrayList<String> GetUsersFriends(String Username)
+    {
+        System.out.println("GetUserFriends: " + Username);
+        ArrayList<String> FriendsList = new ArrayList();
+        
+        String SQLQuery = "SELECT SecondUserName FROM Friends WHERE FirstUserName = '" + Username + "'"
+                + " AND Status = 'Accepted';";
+        
+        try (Connection con = this.connect();
+             Statement stmt  = con.createStatement()) 
+                {
+                    ResultSet rs = stmt.executeQuery(SQLQuery);
+                    
+                    System.out.println("Statement has been executed GetUserFriends");
+                    while (rs.next())
+                    {
+                        FriendsList.add(rs.getString("SecondUserName"));
+                    }
+                    
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        
+        String SQLQuery2 = "SELECT FirstUserName FROM Friends WHERE SecondUserName = '" + Username + "'"
+                + " AND Status = 'Accepted';";
+        
+        try (Connection con = this.connect();
+             Statement stmt  = con.createStatement()) 
+                {
+                    ResultSet rs = stmt.executeQuery(SQLQuery2);
+                    
+                    
+                    while (rs.next())
+                    {
+                        FriendsList.add(rs.getString("FirstUserName"));
+                    }
+                    
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        
+        
+        return FriendsList;
+    }
+    
 }

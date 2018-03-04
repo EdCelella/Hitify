@@ -65,6 +65,7 @@ public class UploadSong extends javax.swing.JFrame {
         cbGenre = new javax.swing.JComboBox<>();
         lblCoverPhoto = new javax.swing.JLabel();
         cmdUploadCoverPhoto = new javax.swing.JButton();
+        cmdClear = new javax.swing.JButton();
 
         lblPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -109,6 +110,13 @@ public class UploadSong extends javax.swing.JFrame {
             }
         });
 
+        cmdClear.setText("Clear");
+        cmdClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,6 +145,7 @@ public class UploadSong extends javax.swing.JFrame {
                         .addGap(66, 66, 66))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmdClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmdUploadCoverPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cbGenre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmdUploadSong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -165,15 +174,17 @@ public class UploadSong extends javax.swing.JFrame {
                 .addComponent(cbGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblCoverPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmdUploadCoverPhoto)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(cmdSelectFile)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblChosen, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(cmdUploadSong)
-                .addGap(13, 13, 13))
+                .addGap(18, 18, 18)
+                .addComponent(cmdClear)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,7 +236,7 @@ public class UploadSong extends javax.swing.JFrame {
             OutToServer.close();
 
             MainServer.close();
-            
+            ClearForm();
         } catch (FileNotFoundException ex) {
             System.out.println("Error - " + ex.getMessage());
         } catch (IOException ex) {
@@ -242,6 +253,10 @@ public class UploadSong extends javax.swing.JFrame {
         lblCoverPhoto.setIcon(ResizeImage(PhotoFilePath));
     }//GEN-LAST:event_cmdUploadCoverPhotoActionPerformed
 
+    private void cmdClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClearActionPerformed
+        ClearForm();        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdClearActionPerformed
+
     public ImageIcon ResizeImage(String ImagePath)
     {
         ImageIcon MyImage = new ImageIcon(ImagePath);
@@ -254,6 +269,16 @@ public class UploadSong extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    public void ClearForm()
+    {
+        txtArtistName.setText("");
+        txtSongName.setText("");
+        cbGenre.setSelectedIndex(0);
+        lblCoverPhoto.setIcon(ResizeImage(""));
+        lblChosen.setText("");
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -288,6 +313,7 @@ public class UploadSong extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbGenre;
+    private javax.swing.JButton cmdClear;
     private javax.swing.JButton cmdSelectFile;
     private javax.swing.JButton cmdUploadCoverPhoto;
     private javax.swing.JButton cmdUploadSong;

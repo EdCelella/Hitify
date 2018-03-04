@@ -54,14 +54,14 @@
                           <Component id="lblPassword2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtFirstName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtFirstName" pref="195" max="32767" attributes="0"/>
                                   <Component id="lblFirstName" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblSecondName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtSecondName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                                  <Component id="txtSecondName" pref="195" max="32767" attributes="0"/>
                                   <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtPassword" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                                  <Component id="txtPassword2" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                                  <Component id="PFPassword" max="32767" attributes="0"/>
+                                  <Component id="PFPassword2" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -101,6 +101,7 @@
                                           <Component id="cmdLogIn" alignment="0" max="32767" attributes="0"/>
                                           <Component id="lblUploadPicture" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="cmdPhoto" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cmdClear" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="lblPhoto" min="-2" pref="110" max="-2" attributes="0"/>
@@ -177,16 +178,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblPassword" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmdCreate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="PFPassword" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblPassword2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtPassword2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmdLogIn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="PFPassword2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -195,7 +193,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="cmdPhoto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cmdCreate" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="cmdClear" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
                           </Group>
                           <Component id="lblPhoto" max="32767" attributes="0"/>
                       </Group>
@@ -263,8 +265,6 @@
         <Property name="text" type="java.lang.String" value="Password:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPassword">
-    </Component>
     <Component class="javax.swing.JLabel" name="lblPassword2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -272,8 +272,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Confirm Password:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPassword2">
     </Component>
     <Component class="javax.swing.JLabel" name="lblMusicChoice">
       <Properties>
@@ -395,6 +393,18 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="cmdClear">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Clear"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdClearActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="PFPassword">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="PFPassword2">
     </Component>
   </SubComponents>
 </Form>

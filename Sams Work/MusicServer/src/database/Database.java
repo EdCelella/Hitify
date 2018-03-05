@@ -177,8 +177,8 @@ public class Database {
     
     public ArrayList<String> GetUserSongFileName(String Username)
     {
-        String SQLQuery = "SELECT FROM Songs WHERE Username = '" + Username + "';";
-        ArrayList<String> UserSongs = null;
+        String SQLQuery = "SELECT FileName FROM Songs WHERE Username = '" + Username + "';";
+        ArrayList<String> UserSongs = new ArrayList();
         try (Connection con = this.connect();
              Statement stmt  = con.createStatement()) {
                     ResultSet rs = stmt.executeQuery(SQLQuery);

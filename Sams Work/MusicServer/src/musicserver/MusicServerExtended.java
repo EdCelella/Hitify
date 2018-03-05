@@ -87,7 +87,7 @@ public class MusicServerExtended extends Thread {
                     ToClient.SetSingleData("CORRECT");
 
                     //Get IP Address
-                    String ip = (((InetSocketAddress) client.getRemoteSocketAddress()).getAddress()).toString().replace("/","");
+                    String ip = client.getInetAddress().toString().replace("/","");
                     System.out.println(ip);
                     db.InsertActiveMember(UserName, ip);
                     //Insert username and IP address into Active Members
@@ -112,9 +112,6 @@ public class MusicServerExtended extends Thread {
                 Reply.SetSingleData("Logout");
                 ToClientStream.writeObject(Reply);
             }
-
-
-
             //Create new user
             else if ("CNU".equals(InFromClient.GetService()))
             {
@@ -158,7 +155,7 @@ public class MusicServerExtended extends Thread {
 
                 //System.out.println("Successfull");
             } 
-            //Get All user friends
+            //Upload new post
             else if ("UNP".equals(InFromClient.GetService()))
             {
                 db.InsertPost(InFromClient.GetArray());
@@ -167,6 +164,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetSingleData("Added Post");
                 ToClientStream.writeObject(Reply);
             }
+            //Get My Friends
             else if ("GMF".equals(InFromClient.GetService()))
             {
                 System.out.println("MusicServer GMF Username: " + InFromClient.GetData());
@@ -182,7 +180,7 @@ public class MusicServerExtended extends Thread {
             {
                 
             }
-            //New Friend Requests
+            //New Friend Request
             else if ("NFR".equals(InFromClient.GetService()))
             {
                 ArrayList<String> Users = InFromClient.GetArray();
@@ -192,6 +190,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetSingleData("Send Request");
                 ToClientStream.writeObject(Reply);
             }
+            //Get Friend Requests
             else if ("GFR".equals(InFromClient.GetService()))
             {
                 ArrayList<String> UsersFriendRequests = db.GetUsersFriendRequests(InFromClient.GetData());
@@ -209,12 +208,22 @@ public class MusicServerExtended extends Thread {
                 Reply.SetSingleData("Accepted");
                 ToClientStream.writeObject(Reply);
             }
+            //Decline Friend Request
             else if ("DFR".equals(InFromClient.GetService()))
             {
                 db.DeclineFriendRequest(InFromClient.GetArray());
                 InfoPacket Reply = new InfoPacket();
                 Reply.SetService("DFR");
                 Reply.SetSingleData("Declined");
+                ToClientStream.writeObject(Reply);
+            }
+            //Get My Songs
+            else if ("GMS".equals(InFromClient.GetService()))
+            {
+                ArrayList<String> MySongs = db.GetUserSongFileName(InFromClient.GetData());
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("GMS");
+                Reply.SetArray(MySongs);
                 ToClientStream.writeObject(Reply);
             }
             

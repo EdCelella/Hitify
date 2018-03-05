@@ -37,6 +37,7 @@ public class MainScreen extends javax.swing.JFrame {
         this.Username = UserName;
         RefreshAllFriendsList();
         RefreshFriendsRequestList();
+        RefreshMySongs();
                
         //ListAllFriends.getSelectedValue() to retrieve currently selected item
     }
@@ -105,6 +106,37 @@ public class MainScreen extends javax.swing.JFrame {
         ListFriendRequests.setModel(AllFriendRequests);
     }
 
+    public void RefreshMySongs() throws IOException, ClassNotFoundException
+    {
+        Socket MainServer = new Socket("localhost", 9090);
+                    
+        ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+        ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+        InfoPacket UserFriends = new InfoPacket();
+        //GET MY FRIENDS
+        UserFriends.SetService("GMS");
+        UserFriends.SetSingleData(Username);
+        
+        OutToServer.writeObject(UserFriends);
+
+        InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+        
+        ArrayList<String> MySongs = ServerReply.GetArray();
+        
+        OutToServer.close();
+        FromServerStream.close();
+        
+        DefaultListModel MyUserSongs = new DefaultListModel();
+        
+        
+        for (int i = 0; i < MySongs.size(); i++)
+        {
+            MyUserSongs.addElement(MySongs.get(i));
+            
+        }
+        ListMySongs.setModel(MyUserSongs);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,7 +183,7 @@ public class MainScreen extends javax.swing.JFrame {
         cmdPlayUsersSongs = new javax.swing.JButton();
         lblOwnSongs = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        ListMySongs = new javax.swing.JList<>();
         cbUserMood = new javax.swing.JComboBox<>();
         cmdClearPost = new javax.swing.JButton();
 
@@ -241,6 +273,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Users Songs");
 
+        listSelectedUsersSongs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(listSelectedUsersSongs);
 
         cmdChat.setText("Chat");
@@ -254,7 +287,8 @@ public class MainScreen extends javax.swing.JFrame {
         lblOwnSongs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblOwnSongs.setText("Your Songs");
 
-        jScrollPane6.setViewportView(jList1);
+        ListMySongs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane6.setViewportView(ListMySongs);
 
         cbUserMood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Mood:", "Happy", "Sad", "Miserable", "Stressed", "Relieved", "Excited", "Angry" }));
 
@@ -652,6 +686,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JList<String> ListActiveFriends;
     private javax.swing.JList<String> ListAllFriends;
     private javax.swing.JList<String> ListFriendRequests;
+    private javax.swing.JList<String> ListMySongs;
     private javax.swing.JTextPane TxtPanePost;
     private javax.swing.JComboBox<String> cbUserMood;
     private javax.swing.JButton cmdAcceptFriendRequest;
@@ -669,7 +704,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

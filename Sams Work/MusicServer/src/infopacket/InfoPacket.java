@@ -12,11 +12,13 @@ import java.util.ArrayList;
  *
  * @author samal
  */
+
 public class InfoPacket implements Serializable  {
 
     private String Service;
     private String SingleData;
-    private ArrayList<String> MultipleData; 
+    private ArrayList MultipleData;
+    private ArrayList<ArrayList<String>> MultipleArrayData;
     private byte[] FirstByteArray;
     private byte[] SecondByteArray;
     
@@ -33,6 +35,11 @@ public class InfoPacket implements Serializable  {
     public void SetArray(ArrayList<String> MultiData)
     {
         this.MultipleData = MultiData;
+    }
+    
+    public void SetMultipleArray (ArrayList<ArrayList<String>> MultipleArrayData)
+    {
+        this.MultipleArrayData = MultipleArrayData;
     }
     
     public void SetFirstByte (byte [] FirstByte)
@@ -58,6 +65,11 @@ public class InfoPacket implements Serializable  {
     public ArrayList<String> GetArray()
     {
         return MultipleData;
+    }
+    
+    public ArrayList<ArrayList<String>> GetMultipleArray()
+    {
+        return MultipleArrayData;
     }
     
     public byte[] GetByteData()

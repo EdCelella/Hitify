@@ -6,6 +6,8 @@
 package testingcoursework;
 
 import infopacket.InfoPacket;
+import java.awt.Image;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -186,6 +189,7 @@ public class MainScreen extends javax.swing.JFrame {
         ListMySongs = new javax.swing.JList<>();
         cbUserMood = new javax.swing.JComboBox<>();
         cmdClearPost = new javax.swing.JButton();
+        cmdFindUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -299,6 +303,13 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        cmdFindUser.setText("Find User");
+        cmdFindUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdFindUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -332,12 +343,14 @@ public class MainScreen extends javax.swing.JFrame {
                                     .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblPreferences, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(cmdChat, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmdDeleteFriend, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(cmdFindUser, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(cmdChat, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cmdDeleteFriend, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(cbUserMood, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -398,11 +411,11 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cmdDeleteFriend)
                                     .addComponent(cmdPlaySelectedSong)
-                                    .addComponent(cmdPlayUsersSongs)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblProfilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmdChat))))
+                                    .addComponent(cmdPlayUsersSongs)
+                                    .addComponent(cmdChat)
+                                    .addComponent(cmdFindUser)))
+                            .addComponent(lblProfilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -641,10 +654,75 @@ public class MainScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmdPostActionPerformed
 
+    private void cmdFindUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdFindUserActionPerformed
+        String UsernameToFind = ListAllFriends.getSelectedValue();
+        InfoPacket FindUserDetails = new InfoPacket();
+        FindUserDetails.SetService("GUD");
+        FindUserDetails.SetSingleData(UsernameToFind);
+        
+        try {
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+            OutToServer.writeObject(FindUserDetails);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+
+            OutToServer.close();
+            FromServerStream.close();
+            
+            ArrayList<ArrayList<String>> UserInformation = ServerReply.GetMultipleArray();
+            
+            byte [] ProfileImage = (byte []) ServerReply.GetByteData();
+            String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + UsernameToFind + ".png";
+            FileOutputStream FileOut = new FileOutputStream(WhereToSave);
+            FileOut.write(ProfileImage);
+            
+            lblProfilePicture.setIcon(ResizeImage(WhereToSave));
+            lblUsername.setText("Username: " + UsernameToFind);     
+            lblFirstName.setText("First Name: " + UserInformation.get(0).get(0));
+            lblSecondName.setText("Second Name: " + UserInformation.get(0).get(1));
+            lblEmail.setText("Email: " + UserInformation.get(0).get(2));
+            lblPreferences.setText("Preferences: " + UserInformation.get(0).get(3));
+            
+            
+            RefreshUserSongs(UserInformation.get(1));
+            
+            
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_cmdFindUserActionPerformed
+
+    public void RefreshUserSongs(ArrayList<String> Songs) throws IOException, ClassNotFoundException
+    {              
+        DefaultListModel UserSongs = new DefaultListModel();
+        
+        
+        for (int i = 0; i < Songs.size(); i++)
+        {
+            UserSongs.addElement(Songs.get(i));
+            
+        }
+        listSelectedUsersSongs.setModel(UserSongs);
+    }
+    
     public void ClearPost()
     {
         txtNewPost.setText("");
         cbUserMood.setSelectedIndex(0);
+    }
+    
+    public ImageIcon ResizeImage(String ImagePath)
+    {
+        ImageIcon MyImage = new ImageIcon(ImagePath);
+        Image img = MyImage.getImage();
+        Image newImg = img.getScaledInstance(lblProfilePicture.getWidth(), lblProfilePicture.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
     }
     
     /**
@@ -694,6 +772,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton cmdClearPost;
     private javax.swing.JButton cmdDeclineFriendRequest;
     private javax.swing.JButton cmdDeleteFriend;
+    private javax.swing.JButton cmdFindUser;
     private javax.swing.JButton cmdLogOut;
     private javax.swing.JButton cmdPlaySelectedSong;
     private javax.swing.JButton cmdPlayUsersSongs;

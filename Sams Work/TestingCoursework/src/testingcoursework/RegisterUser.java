@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -374,7 +375,7 @@ public class RegisterUser extends javax.swing.JFrame {
                     Socket MainServer = new Socket("localhost", 9090);
                     
                     ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
-                    
+                    ObjectInputStream InFromServer = new ObjectInputStream(MainServer.getInputStream());
                     InfoPacket UserDetails = new InfoPacket();
                     
                     UserDetails.SetService("CNU");
@@ -382,8 +383,10 @@ public class RegisterUser extends javax.swing.JFrame {
                     UserDetails.SetFirstByte(buffer);
                     
                     OutToServer.writeObject(UserDetails);
-
+                    
+                    InfoPacket Reply = (InfoPacket) InFromServer.readObject();
                     OutToServer.close();
+                    InFromServer.close();
 
                     MainServer.close();
                     
@@ -401,6 +404,8 @@ public class RegisterUser extends javax.swing.JFrame {
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
+                    Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
                     Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 

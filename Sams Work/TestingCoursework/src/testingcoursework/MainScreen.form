@@ -57,13 +57,15 @@
                                   <Component id="lblPreferences" alignment="0" min="-2" pref="256" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cmdChat" min="-2" pref="162" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="cmdDeleteFriend" min="-2" pref="160" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="cmdFindUser" min="-2" pref="121" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="cmdChat" min="-2" pref="128" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cmdDeleteFriend" min="-2" pref="119" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane4" alignment="0" min="-2" pref="412" max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" min="-2" pref="412" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
@@ -141,14 +143,13 @@
                                   <Component id="cmdDeleteFriend" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cmdPlaySelectedSong" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cmdPlayUsersSongs" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmdChat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmdFindUser" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblProfilePicture" min="-2" pref="130" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="cmdChat" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblProfilePicture" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -515,6 +516,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdClearPostActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="cmdFindUser">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Find User"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdFindUserActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

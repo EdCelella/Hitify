@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import database.Database;
+import java.io.FileInputStream;
 import java.net.InetSocketAddress;
 
 /**
@@ -117,16 +118,19 @@ public class MusicServerExtended extends Thread {
             {
                 System.out.println("Creating New User");
                 //Retreive all information about user and add it to the DB
-                ArrayList UsersInfo = new ArrayList();
-                UsersInfo = InFromClient.GetArray();
-
-                byte [] Image = (byte []) InFromClient.GetByteData();
-
+                ArrayList UsersInfo = InFromClient.GetArray();
                 db.InsertNewRegUser(UsersInfo);
+                byte [] Image = (byte []) InFromClient.GetByteData();
 
                 String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + InFromClient.GetArray().get(0) + ".png";
                 FileOutputStream FileOut = new FileOutputStream(WhereToSave);
                 FileOut.write(Image);
+                
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("LGO");
+                Reply.SetSingleData("Logout");
+                ToClientStream.writeObject(Reply);
+                
                 System.out.println("Sucessfull");
             }
 
@@ -225,6 +229,34 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("GMS");
                 Reply.SetArray(MySongs);
                 ToClientStream.writeObject(Reply);
+            }
+            //Get user details
+            else if ("GUD".equals(InFromClient.GetService()))
+            {
+                String Username = InFromClient.GetData();
+                InfoPacket UserInformation = new InfoPacket();
+                
+                ArrayList<String> UsersDetails = db.GetUsersDetails(Username);
+                ArrayList<String> UserSongs = db.GetUserSongFileName(Username);
+               
+                ArrayList<ArrayList<String>> UsersInfo = new ArrayList();
+                
+                UsersInfo.add(UsersDetails);
+                UsersInfo.add(UserSongs);
+                
+                UserInformation.SetService("GUD");
+                UserInformation.SetMultipleArray(UsersInfo);
+                
+                String PhotoFilePath = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + Username + ".png";
+                FileInputStream UserPicture = new FileInputStream(PhotoFilePath);
+                byte [] buffer = new byte[UserPicture.available()];
+                UserPicture.read(buffer);
+                
+                UserInformation.SetFirstByte(buffer);
+                
+                
+                
+                ToClientStream.writeObject(UserInformation);
             }
             
             else

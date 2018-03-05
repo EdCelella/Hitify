@@ -52,8 +52,8 @@ public class Database {
 
     public void InsertNewRegUser(ArrayList<String> UserDetails)
     {
-        int ArraySize = UserDetails.size();
-        int NumberOfPrefs = ArraySize - 5;
+        
+        
         
         //Get all info from Array
         String UserName = UserDetails.get(0);
@@ -68,7 +68,7 @@ public class Database {
         System.out.println("UserEmail: " + UserEmail);
         String UserPreferences = "";
         //Make a string list that is seperated with commas full of preferences
-        for (int i = 5; i < ArraySize; i++)
+        for (int i = 5; i < UserDetails.size(); i++)
         {
             UserPreferences = UserPreferences + UserDetails.get(i) + ",";
         }
@@ -86,6 +86,31 @@ public class Database {
             System.out.println(e.getMessage());
                 }
         
+    }
+    
+    public ArrayList<String> GetUsersDetails(String Username)
+    {
+        ArrayList<String> UserDetails = new ArrayList();
+        
+        String SQLQuery = "SELECT FirstName, SecondName, Email, Preferences FROM UserTable WHERE Username = '" + Username + "';";
+        try (Connection con = this.connect();
+             Statement stmt  = con.createStatement()) {
+                    ResultSet rs = stmt.executeQuery(SQLQuery);
+                    System.out.println("Execture Statement INSERT Active Member");
+                    
+                                      
+                    UserDetails.add(rs.getString("FirstName"));
+                    UserDetails.add(rs.getString("SecondName"));
+                    UserDetails.add(rs.getString("Email"));
+                    UserDetails.add(rs.getString("Preferences"));
+                    
+                    
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+                
+        return UserDetails;
     }
     
     public void InsertPost (ArrayList<String> PostDetails)

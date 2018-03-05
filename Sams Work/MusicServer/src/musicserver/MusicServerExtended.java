@@ -133,7 +133,7 @@ public class MusicServerExtended extends Thread {
                 System.out.println("Sucessfull");
             }
 
-            //Update new song
+            //Upload new song
             else if ("UNS".equals(InFromClient.GetService()))
             {
                 System.out.println("Uploading New Song");
@@ -154,10 +154,19 @@ public class MusicServerExtended extends Thread {
                 db.InsertSong(SongInformation);
                 db.InsertPost(SongInformation);
 
-
+            
 
                 //System.out.println("Successfull");
-            } //Get All user friends
+            } 
+            //Get All user friends
+            else if ("UNP".equals(InFromClient.GetService()))
+            {
+                db.InsertPost(InFromClient.GetArray());
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("GMF");
+                Reply.SetSingleData("Added Post");
+                ToClientStream.writeObject(Reply);
+            }
             else if ("GMF".equals(InFromClient.GetService()))
             {
                 System.out.println("MusicServer GMF Username: " + InFromClient.GetData());

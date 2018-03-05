@@ -100,7 +100,7 @@ public class Database {
             SQLQuery = "INSERT INTO Posts (UserName,TypeOfPost,MessageOrFilename) VALUES ('" + UserName + "','" + TypeOfPost
             + "','" + Message + "');";
         }
-        else if ("TextUpload".equals(TypeOfPost))
+        else if ("TextPost".equals(TypeOfPost))
         {
             Message = PostDetails.get(2);
             UserMood = PostDetails.get(3);
@@ -141,6 +141,9 @@ public class Database {
                 }
         
     }
+    
+      
+    
     
     public void InsertActiveMember (String Username, String IP)
     {

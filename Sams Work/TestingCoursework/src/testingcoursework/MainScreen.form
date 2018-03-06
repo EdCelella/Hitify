@@ -442,11 +442,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Chat"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdChatActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cmdDeleteFriend">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete Friend"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdDeleteFriendActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cmdPlaySelectedSong">
       <Properties>

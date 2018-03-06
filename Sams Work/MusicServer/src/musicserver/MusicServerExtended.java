@@ -230,6 +230,15 @@ public class MusicServerExtended extends Thread {
                 Reply.SetArray(MySongs);
                 ToClientStream.writeObject(Reply);
             }
+            //Delete FRiend
+            else if ("DFS".equals(InFromClient.GetService()))
+            {
+                db.DeleteFriend(InFromClient.GetArray());
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("DFS");
+                Reply.SetSingleData("Removed");
+                ToClientStream.writeObject(Reply);
+            }
             //Get user details
             else if ("GUD".equals(InFromClient.GetService()))
             {

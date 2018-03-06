@@ -42,6 +42,12 @@ public class MainScreen extends javax.swing.JFrame {
         RefreshFriendsRequestList();
         RefreshMySongs();
         RefreshPosts();
+        
+        //Thread timer to refresh
+//        TimerThread C = new TimerThread();  
+//        C.SetForm(this);
+//        Thread t1 = new Thread(C);
+//        t1.start(); 
                
         //ListAllFriends.getSelectedValue() to retrieve currently selected item
     }
@@ -145,7 +151,7 @@ public class MainScreen extends javax.swing.JFrame {
     
     public void RefreshPosts() throws IOException, ClassNotFoundException
     {
-        txtPostArea.setText("");
+        
         Socket MainServer = new Socket("localhost", 9090);
                     
         ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
@@ -161,7 +167,7 @@ public class MainScreen extends javax.swing.JFrame {
         InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
         
         ArrayList<ArrayList<String>> FriendsPosts = ServerReply.GetMultipleArray();
-        
+        txtPostArea.setText("");
         for (int i = 0 ; i < FriendsPosts.size(); i++)
         {
             String PostFormat = "";
@@ -227,7 +233,6 @@ public class MainScreen extends javax.swing.JFrame {
         cmdFindUser = new javax.swing.JButton();
         txtPosts = new javax.swing.JScrollPane();
         txtPostArea = new javax.swing.JTextArea();
-        txtPostArea.setEditable(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -317,8 +322,18 @@ public class MainScreen extends javax.swing.JFrame {
         jScrollPane5.setViewportView(listSelectedUsersSongs);
 
         cmdChat.setText("Chat");
+        cmdChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdChatActionPerformed(evt);
+            }
+        });
 
         cmdDeleteFriend.setText("Delete Friend");
+        cmdDeleteFriend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdDeleteFriendActionPerformed(evt);
+            }
+        });
 
         cmdPlaySelectedSong.setText("Play Selected Song");
 
@@ -741,6 +756,45 @@ public class MainScreen extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_cmdFindUserActionPerformed
+
+    private void cmdChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdChatActionPerformed
+        String UsernameToChat = ListAllFriends.getSelectedValue();
+        new ChatWindow(UsernameToChat).setVisible(true);
+        
+    }//GEN-LAST:event_cmdChatActionPerformed
+
+    private void cmdDeleteFriendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteFriendActionPerformed
+        String usernameToDelete = ListAllFriends.getSelectedValue();
+        InfoPacket DeleteUser = new InfoPacket();
+        DeleteUser.SetService("DFS");
+        ArrayList<String> UsersToRemove = new ArrayList();
+        UsersToRemove.add(Username);
+        UsersToRemove.add(usernameToDelete);
+        DeleteUser.SetArray(UsersToRemove);
+        
+        try {
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+            OutToServer.writeObject(DeleteUser);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+
+            OutToServer.close();
+            FromServerStream.close();
+            
+            
+            RefreshAllFriendsList();
+            
+            
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+    }//GEN-LAST:event_cmdDeleteFriendActionPerformed
 
     public void RefreshUserSongs(ArrayList<String> Songs) throws IOException, ClassNotFoundException
     {              

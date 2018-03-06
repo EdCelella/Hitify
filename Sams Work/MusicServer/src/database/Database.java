@@ -268,6 +268,31 @@ public class Database {
         
     }
     
+    public void DeleteFriend(ArrayList<String> Users)
+    {
+        String Username = Users.get(0);
+        String Username2 = Users.get(1);
+        String SQLQuery = "DELETE FROM Friends WHERE FirstUserName = '" + Username + "' AND SecondUserName = '" + Username2 + "';";
+        try (Connection con = this.connect();
+             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
+                    pstmt.execute();
+            
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        
+        String SQLQuery2 = "DELETE FROM Friends WHERE FirstUserName = '" + Username2 + "' AND SecondUserName = '" + Username + "';";
+        try (Connection con = this.connect();
+             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
+                    pstmt.execute();
+            
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+    }
+    
     public ArrayList<String> GetUserSongFileName(String Username)
     {
         String SQLQuery = "SELECT FileName FROM Songs WHERE Username = '" + Username + "';";

@@ -50,6 +50,74 @@ public class Database {
         return Password;
     }
 
+    public ArrayList<ArrayList<String>> GetFriendsPosts(ArrayList<String> Friends)
+    {
+        String SQLCreateView = "CREATE TABLE TempPosts (DateTimePosted VARCHAR(30), Username VARCHAR(20), MessageOrFilename VARCHAR(256), UserMood VARCHAR(20));";
+        
+        
+        //"CREATE TABLE TempPosts (DateTimePosted, Username, MessageOrFilename, UserMood) AS SELECT DateTimePosted,Username,"
+        //        + "MessageOrFilename, UserMood FROM Posts WHERE Username = '" + Friends.get(0) + "' AND TypeOfPost = 'TextPost';";
+        
+        try (Connection con = this.connect();
+                PreparedStatement pstmt = con.prepareStatement(SQLCreateView)) {
+                pstmt.execute();                              
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        
+        
+        
+        for (int i = 0; i < Friends.size(); i++)
+        {
+            String SQLInsertView = "INSERT INTO TempPosts SELECT DateTimePosted,Username,MessageOrFilename,UserMood FROM Posts WHERE Username = '"+Friends.get(i)+"' AND TypeOfPost = 'TextPost';";
+            try (Connection con = this.connect();
+                PreparedStatement pstmt = con.prepareStatement(SQLInsertView)) {
+                pstmt.execute();                              
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        String sqlSelectFromView = "SELECT DateTimePosted, Username, MessageOrFilename, UserMood FROM TempPosts ORDER BY DateTimePosted;";
+        
+        ArrayList<ArrayList<String>> FriendsPosts = new ArrayList();
+        
+        try (Connection con = this.connect();
+            Statement stmt  = con.createStatement();
+            ResultSet rs    = stmt.executeQuery(sqlSelectFromView)){
+            
+            while (rs.next())
+            {
+                ArrayList<String> Posts = new ArrayList();
+                Posts.add(rs.getString("DateTimePosted"));
+                Posts.add(rs.getString("Username"));
+                Posts.add(rs.getString("MessageOrFilename"));
+                Posts.add(rs.getString("UserMood"));
+                FriendsPosts.add(Posts);
+            } 
+            
+            // rs.getString("DateTimePosted");
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        String SQLDropView = "DROP TABLE TempPosts";
+        
+                
+        try (Connection con = this.connect();
+                PreparedStatement pstmt = con.prepareStatement(SQLDropView)) {
+                pstmt.execute();                              
+                con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        
+        return FriendsPosts;
+    }
+    
     public void InsertNewRegUser(ArrayList<String> UserDetails)
     {
         

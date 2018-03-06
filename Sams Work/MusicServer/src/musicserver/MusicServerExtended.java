@@ -258,7 +258,18 @@ public class MusicServerExtended extends Thread {
                 
                 ToClientStream.writeObject(UserInformation);
             }
-            
+            else if ("GFP".equals(InFromClient.GetService()))
+            {
+                String Username = InFromClient.GetData();
+                ArrayList<String> Friends = db.GetUsersFriends(Username);
+                //Add own username to retrieve own posts
+                Friends.add(InFromClient.GetData());
+                ArrayList<ArrayList<String>> UserPosts = db.GetFriendsPosts(Friends);
+                InfoPacket FriendsPosts = new InfoPacket();
+                FriendsPosts.SetService("GFP");
+                FriendsPosts.SetMultipleArray(UserPosts);
+                ToClientStream.writeObject(FriendsPosts);
+            }
             else
             {
                 System.out.println("Not a valid command");

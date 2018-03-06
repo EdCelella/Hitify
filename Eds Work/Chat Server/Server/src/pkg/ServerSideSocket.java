@@ -3,6 +3,8 @@ package pkg;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.sql.*;
+import java.sql.DriverManager;
 
 public class ServerSideSocket{
 
@@ -10,27 +12,27 @@ public class ServerSideSocket{
 
 		try{
 
-			//Sets a port number for the server socket
+			// Sets a port number for the server socket
 			ServerSocket server = new ServerSocket(9090);
 
 			while(true){
 
 				System.out.println("Waiting for client connection...");
 
-				//Creats socket to listen for requests
+				// Creats socket to listen for requests
 				Socket client = server.accept();
 
 				System.out.println("Connected to: " + client.getInetAddress());
 
-				//Creates and runs new thread
+				// Creates and runs new thread
 		   		Thread th = new Thread(new ServerHandler(client));
 		   		th.start();
 
 			}	
 		}
 		catch(IOException e){
-			//Prints error message
+			// Prints error message
 			System.out.println(e.getMessage());
 		}
-	}  
+	}
 }

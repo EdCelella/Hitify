@@ -227,6 +227,7 @@ public class MainScreen extends javax.swing.JFrame {
         cmdFindUser = new javax.swing.JButton();
         txtPosts = new javax.swing.JScrollPane();
         txtPostArea = new javax.swing.JTextArea();
+        txtPostArea.setEditable(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

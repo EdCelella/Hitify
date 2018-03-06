@@ -28,14 +28,16 @@ public class ClientSocket {
 		    //Sends args[0] string to server
 		    outToServer.writeUTF(message);
 
-		    //Recieves string from server
-		    String text = inFromServer.readUTF();
+		    while(true){
+			    //Recieves string from server
+			    String text = inFromServer.readUTF();
 
-		    //Prints message from server
-		    System.out.println("Message: " + text);
+			    //Prints message from server
+			    System.out.println(text);
+			}
 
 		    //Closes server socket.
-		    server.close();
+		    //server.close();
 		}
 		catch(IOException e){
 			//lol

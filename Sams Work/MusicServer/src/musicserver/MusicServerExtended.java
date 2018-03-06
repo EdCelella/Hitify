@@ -182,7 +182,12 @@ public class MusicServerExtended extends Thread {
             //Get Active Friends
             else if ("GAF".equals(InFromClient.GetService()))
             {
-                
+                ArrayList<String> Friends = db.GetUsersFriends(InFromClient.GetData());
+                ArrayList<String> ActiveFriends = db.GetActiveFriends(Friends);
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("GAF");
+                Reply.SetArray(ActiveFriends);
+                ToClientStream.writeObject(Reply);
             }
             //New Friend Request
             else if ("NFR".equals(InFromClient.GetService()))
@@ -267,6 +272,7 @@ public class MusicServerExtended extends Thread {
                 
                 ToClientStream.writeObject(UserInformation);
             }
+            //Get Friends Posts
             else if ("GFP".equals(InFromClient.GetService()))
             {
                 String Username = InFromClient.GetData();

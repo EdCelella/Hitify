@@ -361,6 +361,58 @@ public class Database {
         return FriendsList;
     }
     
+    public ArrayList<String> GetActiveFriends(ArrayList<String> Friends)
+    {
+        
+        ArrayList<String> ActiveFriends = new ArrayList();
+        String CurrentFriend = "";
+        
+        for (int i = 0; i < Friends.size(); i++)
+        {
+            CurrentFriend = Friends.get(i);
+            String SQLQuery = "SELECT Username FROM ActiveMembers WHERE Username = '" + CurrentFriend + "';";
+
+            try (Connection con = this.connect();
+                 Statement stmt  = con.createStatement()) 
+                    {
+                        ResultSet rs = stmt.executeQuery(SQLQuery);
+
+
+                        while (rs.next())
+                        {
+                            ActiveFriends.add(rs.getString("Username"));
+                        }
+
+                        con.close();
+                    } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                    }
+        }
+        
+        
+//        String SQLQuery2 = "SELECT FirstUserName FROM Friends WHERE SecondUserName = '" + Username + "'"
+//                + " AND Status = 'Accepted';";
+//        
+//        try (Connection con = this.connect();
+//             Statement stmt  = con.createStatement()) 
+//                {
+//                    ResultSet rs = stmt.executeQuery(SQLQuery2);
+//                    
+//                    
+//                    while (rs.next())
+//                    {
+//                        FriendsList.add(rs.getString("FirstUserName"));
+//                    }
+//                    
+//                    con.close();
+//                } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//                }
+        
+        
+        return ActiveFriends;
+    }
+    
     public ArrayList<String> GetUsersFriendRequests(String Username)
     {
         

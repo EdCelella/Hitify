@@ -32,10 +32,8 @@ public class TimerThread extends Thread{
         while(true)
         {
             try {
-                  form.RefreshPosts();
-                  form.RefreshAllFriendsList();
-                  form.RefreshFriendsRequestList();
-                  System.out.println("Printing");
+                  form.RefreshActiveFriendsList();
+                  
                   Thread.sleep(2000);
             } catch (IOException | ClassNotFoundException | InterruptedException ex) {
                   Logger.getLogger(TimerThread.class.getName()).log(Level.SEVERE, null, ex);

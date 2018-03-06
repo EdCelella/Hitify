@@ -33,6 +33,7 @@ public class MainScreen extends javax.swing.JFrame {
     public MainScreen() {
         initComponents();
         
+        
     }
     
     public MainScreen(String UserName) throws IOException, ClassNotFoundException {
@@ -42,12 +43,12 @@ public class MainScreen extends javax.swing.JFrame {
         RefreshFriendsRequestList();
         RefreshMySongs();
         RefreshPosts();
-        
+        RefreshActiveFriendsList();
         //Thread timer to refresh
-//        TimerThread C = new TimerThread();  
-//        C.SetForm(this);
-//        Thread t1 = new Thread(C);
-//        t1.start(); 
+        TimerThread C = new TimerThread();  
+        C.SetForm(this);
+        Thread t1 = new Thread(C);
+        t1.start(); 
                
         //ListAllFriends.getSelectedValue() to retrieve currently selected item
     }
@@ -82,6 +83,37 @@ public class MainScreen extends javax.swing.JFrame {
             
         }
         ListAllFriends.setModel(AllFriends);
+    }
+    
+    public void RefreshActiveFriendsList() throws IOException, ClassNotFoundException
+    {
+        Socket MainServer = new Socket("localhost", 9090);
+                    
+        ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+        ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+        InfoPacket UserFriends = new InfoPacket();
+        //GET MY FRIENDS
+        UserFriends.SetService("GAF");
+        UserFriends.SetSingleData(Username);
+        
+        OutToServer.writeObject(UserFriends);
+
+        InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+        
+        ArrayList<String> ActiveFriends = ServerReply.GetArray();
+        
+        OutToServer.close();
+        FromServerStream.close();
+        
+        DefaultListModel MyActiveFriends = new DefaultListModel();
+        
+        for (int i = 0; i < ActiveFriends.size(); i++)
+        {
+            MyActiveFriends.addElement(ActiveFriends.get(i));
+            
+        }
+        ListActiveFriends.setModel(MyActiveFriends);
     }
     
     public void RefreshFriendsRequestList() throws IOException, ClassNotFoundException

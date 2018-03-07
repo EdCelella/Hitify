@@ -44,11 +44,16 @@ public class MainScreen extends javax.swing.JFrame {
         RefreshMySongs();
         RefreshPosts();
         RefreshActiveFriendsList();
-        //Thread timer to refresh
+        //Thread timer to refresh Active Friend lists and Friend Requests every 2 seconds
         TimerThread C = new TimerThread();  
         C.SetForm(this);
         Thread t1 = new Thread(C);
         t1.start(); 
+        //Thread timer to refresh Posts and All Friends every 60 seconds
+        TimerThread2 D = new TimerThread2();  
+        D.SetForm(this);
+        Thread t2 = new Thread(D);
+        t2.start();
                
         //ListAllFriends.getSelectedValue() to retrieve currently selected item
     }
@@ -255,8 +260,7 @@ public class MainScreen extends javax.swing.JFrame {
         listSelectedUsersSongs = new javax.swing.JList<>();
         cmdChat = new javax.swing.JButton();
         cmdDeleteFriend = new javax.swing.JButton();
-        cmdPlaySelectedSong = new javax.swing.JButton();
-        cmdPlayUsersSongs = new javax.swing.JButton();
+        cmdPlayUsersSong = new javax.swing.JButton();
         lblOwnSongs = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         ListMySongs = new javax.swing.JList<>();
@@ -265,6 +269,7 @@ public class MainScreen extends javax.swing.JFrame {
         cmdFindUser = new javax.swing.JButton();
         txtPosts = new javax.swing.JScrollPane();
         txtPostArea = new javax.swing.JTextArea();
+        cmdPlayYourSong = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -367,9 +372,12 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
-        cmdPlaySelectedSong.setText("Play Selected Song");
-
-        cmdPlayUsersSongs.setText("Play Users Songs");
+        cmdPlayUsersSong.setText("Play Users Song");
+        cmdPlayUsersSong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdPlayUsersSongActionPerformed(evt);
+            }
+        });
 
         lblOwnSongs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblOwnSongs.setText("Your Songs");
@@ -397,6 +405,13 @@ public class MainScreen extends javax.swing.JFrame {
         txtPostArea.setRows(5);
         txtPosts.setViewportView(txtPostArea);
 
+        cmdPlayYourSong.setText("Play Your Song");
+        cmdPlayYourSong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdPlayYourSongActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -406,8 +421,9 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(349, 349, 349)
-                        .addComponent(lblTitle))
+                        .addGap(286, 286, 286)
+                        .addComponent(lblTitle)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSendRequest)
@@ -465,12 +481,12 @@ public class MainScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
                             .addComponent(jScrollPane5)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cmdPlaySelectedSong, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmdPlayUsersSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblOwnSongs)
-                            .addComponent(jScrollPane6))))
+                            .addComponent(jScrollPane6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmdPlayUsersSong, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmdPlayYourSong, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -501,10 +517,10 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cmdDeleteFriend)
-                                    .addComponent(cmdPlaySelectedSong)
-                                    .addComponent(cmdPlayUsersSongs)
+                                    .addComponent(cmdPlayUsersSong)
                                     .addComponent(cmdChat)
-                                    .addComponent(cmdFindUser)))
+                                    .addComponent(cmdFindUser)
+                                    .addComponent(cmdPlayYourSong)))
                             .addComponent(lblProfilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(1, 1, 1))
                     .addGroup(layout.createSequentialGroup()
@@ -828,6 +844,81 @@ public class MainScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmdDeleteFriendActionPerformed
 
+    private void cmdPlayUsersSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPlayUsersSongActionPerformed
+        String FileName = listSelectedUsersSongs.getSelectedValue();
+        InfoPacket SelectedSong = new InfoPacket();
+        SelectedSong.SetService("DWS");
+        SelectedSong.SetSingleData(FileName);
+        
+        try {
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+            OutToServer.writeObject(SelectedSong);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+            
+            byte [] Song = (byte []) ServerReply.GetByteData();
+            String WhereToSaveSong = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Music/" + FileName + ".mp3";
+            FileOutputStream SongOut = new FileOutputStream(WhereToSaveSong);
+            SongOut.write(Song);
+
+            byte [] CoverPhoto = (byte []) ServerReply.GetSecondData();
+            String WhereToSavePhoto= "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + FileName + ".png";
+            FileOutputStream PhotoOut = new FileOutputStream(WhereToSavePhoto);
+            PhotoOut.write(CoverPhoto);
+            
+            OutToServer.close();
+            FromServerStream.close();
+            
+            
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+    }//GEN-LAST:event_cmdPlayUsersSongActionPerformed
+
+    private void cmdPlayYourSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPlayYourSongActionPerformed
+        
+        String FileName = ListMySongs.getSelectedValue();
+        InfoPacket SelectedSong = new InfoPacket();
+        SelectedSong.SetService("DWS");
+        SelectedSong.SetSingleData(FileName);
+        
+        try {
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+            OutToServer.writeObject(SelectedSong);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+            
+            byte [] Song = (byte []) ServerReply.GetByteData();
+            String WhereToSaveSong = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Music/" + FileName + ".mp3";
+            FileOutputStream SongOut = new FileOutputStream(WhereToSaveSong);
+            SongOut.write(Song);
+
+            byte [] CoverPhoto = (byte []) ServerReply.GetSecondData();
+            String WhereToSavePhoto= "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + FileName + ".png";
+            FileOutputStream PhotoOut = new FileOutputStream(WhereToSavePhoto);
+            PhotoOut.write(CoverPhoto);
+            
+            OutToServer.close();
+            FromServerStream.close();
+            
+            
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+    }//GEN-LAST:event_cmdPlayYourSongActionPerformed
+
     public void RefreshUserSongs(ArrayList<String> Songs) throws IOException, ClassNotFoundException
     {              
         DefaultListModel UserSongs = new DefaultListModel();
@@ -904,8 +995,8 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton cmdDeleteFriend;
     private javax.swing.JButton cmdFindUser;
     private javax.swing.JButton cmdLogOut;
-    private javax.swing.JButton cmdPlaySelectedSong;
-    private javax.swing.JButton cmdPlayUsersSongs;
+    private javax.swing.JButton cmdPlayUsersSong;
+    private javax.swing.JButton cmdPlayYourSong;
     private javax.swing.JButton cmdPost;
     private javax.swing.JButton cmdSendFreindRequest;
     private javax.swing.JButton cmdUploadSong;

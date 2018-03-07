@@ -285,6 +285,30 @@ public class MusicServerExtended extends Thread {
                 FriendsPosts.SetMultipleArray(UserPosts);
                 ToClientStream.writeObject(FriendsPosts);
             }
+            else if ("DWS".equals(InFromClient.GetService()))
+            {
+                String SongFileName = InFromClient.GetData() + ".mp3";
+                String PhotoFileName = InFromClient.GetData() + ".png";
+                
+                InfoPacket SongData = new InfoPacket();
+                
+                String SongPath = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Music/" + SongFileName;
+                FileInputStream SongFile = new FileInputStream(SongPath);
+                byte [] buffer = new byte[SongFile.available()];
+                SongFile.read(buffer);
+                
+                String PhotoPath = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + PhotoFileName;
+                FileInputStream PhotoFile = new FileInputStream(PhotoPath);
+                byte [] buffer2 = new byte[PhotoFile.available()];
+                PhotoFile.read(buffer2);
+                
+                SongData.SetService("DWS");
+                SongData.SetFirstByte(buffer);
+                SongData.SetSecondByte(buffer2);
+                
+                ToClientStream.writeObject(SongData);
+                
+            }
             else
             {
                 System.out.println("Not a valid command");

@@ -30,15 +30,16 @@ public class LogInScreen extends javax.swing.JFrame {
      * Creates new form LogInScreen
      */
     
-    //CB9CF2
-    //78CDD7
+    //#2B2D42
     // Sets colours to be used in design
     Color foreground = Color.decode("#FDFFFC");
-    Color background = Color.decode("#2B2D42");
-    //Color highlight = Color.decode("#BC9EC1");
+    Color background = Color.decode("#2E2F2F");
+    Color highlight = Color.decode("#5DFDCB");
     
     public LogInScreen() {
         initComponents();
+        
+        int buttonBorder = 4;
         
         //Sets frame background colour
         getContentPane().setBackground(background);
@@ -47,12 +48,12 @@ public class LogInScreen extends javax.swing.JFrame {
         //Sets background, text and border colours for buttons
         cmdNewUser.setContentAreaFilled(false);
         cmdNewUser.setBackground(background);
-        cmdNewUser.setBorder(new LineBorder(foreground, 4));
+        cmdNewUser.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdNewUser.setForeground(foreground);
         
         cmdLogIn.setContentAreaFilled(false);
         cmdLogIn.setBackground(background);
-        cmdLogIn.setBorder(new LineBorder(foreground, 4));
+        cmdLogIn.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdLogIn.setForeground(foreground);
     }
 
@@ -255,7 +256,7 @@ public class LogInScreen extends javax.swing.JFrame {
         // Changes colour of button when hovered over
         cmdNewUser.setContentAreaFilled(true);
         cmdNewUser.setBackground(foreground);
-        cmdNewUser.setForeground(background);
+        cmdNewUser.setForeground(highlight);
     }//GEN-LAST:event_cmdNewUserMouseEntered
 
     private void cmdNewUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdNewUserMouseExited
@@ -268,7 +269,7 @@ public class LogInScreen extends javax.swing.JFrame {
         // Changes colour of button when hovered over
         cmdLogIn.setContentAreaFilled(true);
         cmdLogIn.setBackground(foreground);
-        cmdLogIn.setForeground(background);
+        cmdLogIn.setForeground(highlight);
     }//GEN-LAST:event_cmdLogInMouseEntered
 
     private void cmdLogInMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdLogInMouseExited

@@ -122,7 +122,7 @@ public class MusicServerExtended extends Thread {
                 db.InsertNewRegUser(UsersInfo);
                 byte [] Image = (byte []) InFromClient.GetByteData();
 
-                String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + InFromClient.GetArray().get(0) + ".png";
+                String WhereToSave = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + InFromClient.GetArray().get(0) + ".png";
                 FileOutputStream FileOut = new FileOutputStream(WhereToSave);
                 FileOut.write(Image);
                 
@@ -143,12 +143,12 @@ public class MusicServerExtended extends Thread {
                 String FileName = SongInformation.get(2) + "," + SongInformation.get(3);
 
                 byte [] Song = (byte []) InFromClient.GetByteData();
-                String WhereToSaveSong = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Music/" + FileName + ".mp3";
+                String WhereToSaveSong = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/MusicServer/res/Music/" + FileName + ".mp3";
                 FileOutputStream SongOut = new FileOutputStream(WhereToSaveSong);
                 SongOut.write(Song);
 
                 byte [] CoverPhoto = (byte []) InFromClient.GetSecondData();
-                String WhereToSavePhoto= "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + FileName + ".png";
+                String WhereToSavePhoto= "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + FileName + ".png";
                 FileOutputStream PhotoOut = new FileOutputStream(WhereToSavePhoto);
                 PhotoOut.write(CoverPhoto);
 
@@ -261,7 +261,7 @@ public class MusicServerExtended extends Thread {
                 UserInformation.SetService("GUD");
                 UserInformation.SetMultipleArray(UsersInfo);
                 
-                String PhotoFilePath = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + Username + ".png";
+                String PhotoFilePath = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + Username + ".png";
                 FileInputStream UserPicture = new FileInputStream(PhotoFilePath);
                 byte [] buffer = new byte[UserPicture.available()];
                 UserPicture.read(buffer);

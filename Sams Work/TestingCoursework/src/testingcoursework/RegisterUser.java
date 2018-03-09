@@ -37,7 +37,9 @@ public class RegisterUser extends javax.swing.JFrame {
     
     // Sets colours to be used in design
     Color foreground = Color.decode("#FDFFFC");
-    Color background = Color.decode("#2B2D42");
+    Color background = Color.decode("#2E2F2F");
+    Color highlight = Color.decode("#5DFDCB");
+    Color warning = Color.decode("#FF3366");
     
     static void SetPhoto(ImageIcon ResizeImage) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -49,27 +51,29 @@ public class RegisterUser extends javax.swing.JFrame {
     public RegisterUser() {
         initComponents();
         
+        int buttonBorder = 4;
+        
         this.getContentPane().setBackground(background);
         
         //Sets background, text and border colours for buttons
         cmdPhoto.setContentAreaFilled(false);
         cmdPhoto.setBackground(background);
-        cmdPhoto.setBorder(new LineBorder(foreground, 4));
+        cmdPhoto.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdPhoto.setForeground(foreground);
         
         cmdLogIn.setContentAreaFilled(false);
         cmdLogIn.setBackground(background);
-        cmdLogIn.setBorder(new LineBorder(foreground, 4));
+        cmdLogIn.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdLogIn.setForeground(foreground);
         
         cmdClear.setContentAreaFilled(false);
         cmdClear.setBackground(background);
-        cmdClear.setBorder(new LineBorder(foreground, 4));
+        cmdClear.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdClear.setForeground(foreground);
         
         cmdCreate.setContentAreaFilled(false);
         cmdCreate.setBackground(background);
-        cmdCreate.setBorder(new LineBorder(foreground, 4));
+        cmdCreate.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdCreate.setForeground(foreground);
         
     }
@@ -128,7 +132,7 @@ public class RegisterUser extends javax.swing.JFrame {
         setBackground(new java.awt.Color(43, 45, 66));
 
         lblRegisterNewUser.setFont(new java.awt.Font("Futura", 1, 48)); // NOI18N
-        lblRegisterNewUser.setForeground(new java.awt.Color(253, 255, 252));
+        lblRegisterNewUser.setForeground(new java.awt.Color(93, 253, 203));
         lblRegisterNewUser.setText("REGISTER");
 
         lblFirstName.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
@@ -568,7 +572,7 @@ public class RegisterUser extends javax.swing.JFrame {
         // Changes colour of button when hovered over
         cmdLogIn.setContentAreaFilled(true);
         cmdLogIn.setBackground(foreground);
-        cmdLogIn.setForeground(background);
+        cmdLogIn.setForeground(highlight);
     }//GEN-LAST:event_cmdLogInMouseEntered
 
     private void cmdLogInMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdLogInMouseExited
@@ -581,7 +585,7 @@ public class RegisterUser extends javax.swing.JFrame {
         // Changes colour of button when hovered over
         cmdClear.setContentAreaFilled(true);
         cmdClear.setBackground(foreground);
-        cmdClear.setForeground(background);
+        cmdClear.setForeground(warning);
     }//GEN-LAST:event_cmdClearMouseEntered
 
     private void cmdClearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdClearMouseExited
@@ -594,7 +598,7 @@ public class RegisterUser extends javax.swing.JFrame {
         // Changes colour of button when hovered over
         cmdCreate.setContentAreaFilled(true);
         cmdCreate.setBackground(foreground);
-        cmdCreate.setForeground(background);
+        cmdCreate.setForeground(highlight);
     }//GEN-LAST:event_cmdCreateMouseEntered
 
     private void cmdCreateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdCreateMouseExited

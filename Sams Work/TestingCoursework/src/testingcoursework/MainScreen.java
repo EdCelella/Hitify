@@ -6,6 +6,7 @@
 package testingcoursework;
 
 import infopacket.InfoPacket;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -30,6 +32,16 @@ public class MainScreen extends javax.swing.JFrame {
      */
     private String Username;
     
+    // Sets colours to be used in design
+    Color foreground = Color.decode("#FDFFFC");
+    Color background = Color.decode("#2E2F2F");
+    Color highlight = Color.decode("#5DFDCB");
+    Color warning = Color.decode("#FF3366");
+    
+    // Used for border thickness
+    int buttonBorder = 4;
+    int listBorder = 4;
+    
     public MainScreen() {
         initComponents();
         
@@ -38,6 +50,107 @@ public class MainScreen extends javax.swing.JFrame {
     
     public MainScreen(String UserName) throws IOException, ClassNotFoundException {
         initComponents();
+        
+        //Sets frame background colour
+        getContentPane().setBackground(background);
+        
+        //Sets background, text and border colours for buttons
+        cmdAcceptFriendRequest.setContentAreaFilled(false);
+        cmdAcceptFriendRequest.setBackground(background);
+        cmdAcceptFriendRequest.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdAcceptFriendRequest.setForeground(foreground);
+        
+        cmdChat.setContentAreaFilled(false);
+        cmdChat.setBackground(background);
+        cmdChat.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdChat.setForeground(foreground);
+        
+        cmdClearPost.setContentAreaFilled(false);
+        cmdClearPost.setBackground(background);
+        cmdClearPost.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdClearPost.setForeground(foreground);
+        
+        cmdDeclineFriendRequest.setContentAreaFilled(false);
+        cmdDeclineFriendRequest.setBackground(background);
+        cmdDeclineFriendRequest.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdDeclineFriendRequest.setForeground(foreground);
+        
+        cmdDeleteFriend.setContentAreaFilled(false);
+        cmdDeleteFriend.setBackground(background);
+        cmdDeleteFriend.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdDeleteFriend.setForeground(foreground);
+        
+        cmdFindUser.setContentAreaFilled(false);
+        cmdFindUser.setBackground(background);
+        cmdFindUser.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdFindUser.setForeground(foreground);
+        
+        cmdLogOut.setContentAreaFilled(false);
+        cmdLogOut.setBackground(background);
+        cmdLogOut.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdLogOut.setForeground(foreground);
+        
+        cmdPlaySelectedSong.setContentAreaFilled(false);
+        cmdPlaySelectedSong.setBackground(background);
+        cmdPlaySelectedSong.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdPlaySelectedSong.setForeground(foreground);
+        
+        cmdPlayUsersSongs.setContentAreaFilled(false);
+        cmdPlayUsersSongs.setBackground(background);
+        cmdPlayUsersSongs.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdPlayUsersSongs.setForeground(foreground);
+        
+        cmdPost.setContentAreaFilled(false);
+        cmdPost.setBackground(background);
+        cmdPost.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdPost.setForeground(foreground);
+        
+        cmdSendFreindRequest.setContentAreaFilled(false);
+        cmdSendFreindRequest.setBackground(background);
+        cmdSendFreindRequest.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdSendFreindRequest.setForeground(foreground);
+        
+        cmdUploadSong.setContentAreaFilled(false);
+        cmdUploadSong.setBackground(background);
+        cmdUploadSong.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdUploadSong.setForeground(foreground);
+        
+        ListMySongs.setBackground(background);
+        ListMySongs.setForeground(foreground);
+        jScrollPane6.setBorder(null);
+        
+        ListActiveFriends.setBackground(background);
+        ListActiveFriends.setForeground(foreground);
+        jScrollPane2.setBorder(null);
+        
+        
+        ListAllFriends.setBackground(background);
+        ListAllFriends.setForeground(foreground);
+        jScrollPane1.setBorder(null);
+        
+        ListFriendRequests.setBackground(background);
+        ListFriendRequests.setForeground(foreground);
+        jScrollPane3.setBorder(null);
+        
+        listSelectedUsersSongs.setBackground(background);
+        listSelectedUsersSongs.setForeground(foreground);
+        jScrollPane5.setBorder(null);
+        
+        txtPostArea.setBackground(background);
+        txtPostArea.setForeground(foreground);
+        txtPosts.setBorder(null);
+        
+        lblProfilePicture.setBorder(new LineBorder(foreground, 2));
+        
+        jLabel4.setBorder(new LineBorder(foreground, 5));
+        jLabel7.setBorder(new LineBorder(foreground, 4));
+        jLabel8.setBorder(new LineBorder(foreground, 4));
+        jLabel9.setBorder(new LineBorder(foreground, 4));
+        jLabel10.setBorder(new LineBorder(foreground, 4));
+        jLabel11.setBorder(new LineBorder(foreground, 5));
+        jLabel12.setBorder(new LineBorder(foreground, 4));
+        
+        
         this.Username = UserName;
         RefreshAllFriendsList();
         RefreshFriendsRequestList();
@@ -232,7 +345,6 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ListActiveFriends = new javax.swing.JList<>();
-        lblSendRequest = new javax.swing.JLabel();
         txtNewFriendRequest = new javax.swing.JTextField();
         cmdSendFreindRequest = new javax.swing.JButton();
         cmdUploadSong = new javax.swing.JButton();
@@ -249,8 +361,6 @@ public class MainScreen extends javax.swing.JFrame {
         lblPreferences = new javax.swing.JLabel();
         txtNewPost = new javax.swing.JTextField();
         cmdPost = new javax.swing.JButton();
-        lblPosts = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         listSelectedUsersSongs = new javax.swing.JList<>();
         cmdChat = new javax.swing.JButton();
@@ -265,102 +375,198 @@ public class MainScreen extends javax.swing.JFrame {
         cmdFindUser = new javax.swing.JButton();
         txtPosts = new javax.swing.JScrollPane();
         txtPostArea = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(43, 45, 66));
 
-        cmdLogOut.setText("Log Out");
+        cmdLogOut.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdLogOut.setText("LOG OUT");
+        cmdLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdLogOutMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdLogOutMouseEntered(evt);
+            }
+        });
         cmdLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLogOutActionPerformed(evt);
             }
         });
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblTitle.setText("Main Screen");
+        lblTitle.setFont(new java.awt.Font("Futura", 1, 70)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(93, 253, 203));
+        lblTitle.setText("SHITIFY");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(93, 253, 203));
         jLabel1.setText("Friends List");
 
+        ListAllFriends.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ListAllFriends.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(ListAllFriends);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(93, 253, 203));
         jLabel2.setText("Active Friends");
 
+        ListActiveFriends.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ListActiveFriends.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(ListActiveFriends);
 
-        lblSendRequest.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblSendRequest.setText("Add a new friend");
-
-        cmdSendFreindRequest.setText("Send Request");
+        cmdSendFreindRequest.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdSendFreindRequest.setText("SEND REQUEST");
+        cmdSendFreindRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdSendFreindRequestMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdSendFreindRequestMouseEntered(evt);
+            }
+        });
         cmdSendFreindRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdSendFreindRequestActionPerformed(evt);
             }
         });
 
-        cmdUploadSong.setText("Upload New Song");
+        cmdUploadSong.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdUploadSong.setText("UPLOAD SONG");
+        cmdUploadSong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdUploadSongMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdUploadSongMouseEntered(evt);
+            }
+        });
         cmdUploadSong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdUploadSongActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(93, 253, 203));
         jLabel3.setText("Friend Requests");
 
+        ListFriendRequests.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ListFriendRequests.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(ListFriendRequests);
 
-        cmdAcceptFriendRequest.setText("Accept");
+        cmdAcceptFriendRequest.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdAcceptFriendRequest.setText("ACCEPT");
+        cmdAcceptFriendRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdAcceptFriendRequestMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdAcceptFriendRequestMouseEntered(evt);
+            }
+        });
         cmdAcceptFriendRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAcceptFriendRequestActionPerformed(evt);
             }
         });
 
-        cmdDeclineFriendRequest.setText("Decline");
+        cmdDeclineFriendRequest.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdDeclineFriendRequest.setText("DECLINE");
+        cmdDeclineFriendRequest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdDeclineFriendRequestMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdDeclineFriendRequestMouseEntered(evt);
+            }
+        });
         cmdDeclineFriendRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdDeclineFriendRequestActionPerformed(evt);
             }
         });
 
+        lblUsername.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        lblUsername.setForeground(new java.awt.Color(253, 255, 252));
         lblUsername.setText("Username:");
 
+        lblFirstName.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        lblFirstName.setForeground(new java.awt.Color(253, 255, 252));
         lblFirstName.setText("First Name:");
 
+        lblSecondName.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        lblSecondName.setForeground(new java.awt.Color(253, 255, 252));
         lblSecondName.setText("Second Name:");
 
+        lblEmail.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(253, 255, 252));
         lblEmail.setText("Email: ");
 
+        lblPreferences.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        lblPreferences.setForeground(new java.awt.Color(253, 255, 252));
         lblPreferences.setText("Prefences: ");
 
-        cmdPost.setText("Post");
+        txtNewPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewPostActionPerformed(evt);
+            }
+        });
+
+        cmdPost.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdPost.setText("POST");
+        cmdPost.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdPostMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdPostMouseEntered(evt);
+            }
+        });
         cmdPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdPostActionPerformed(evt);
             }
         });
 
-        lblPosts.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblPosts.setText("Friends Posts");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Users Songs");
-
         listSelectedUsersSongs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(listSelectedUsersSongs);
 
-        cmdChat.setText("Chat");
+        cmdChat.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdChat.setText("CHAT");
+        cmdChat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdChatMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdChatMouseEntered(evt);
+            }
+        });
         cmdChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdChatActionPerformed(evt);
             }
         });
 
-        cmdDeleteFriend.setText("Delete Friend");
+        cmdDeleteFriend.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdDeleteFriend.setText("REMOVE");
+        cmdDeleteFriend.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdDeleteFriendMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdDeleteFriendMouseEntered(evt);
+            }
+        });
         cmdDeleteFriend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdDeleteFriendActionPerformed(evt);
@@ -371,22 +577,42 @@ public class MainScreen extends javax.swing.JFrame {
 
         cmdPlayUsersSongs.setText("Play Users Songs");
 
-        lblOwnSongs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblOwnSongs.setText("Your Songs");
+        lblOwnSongs.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        lblOwnSongs.setForeground(new java.awt.Color(93, 253, 203));
+        lblOwnSongs.setText("Your Music");
 
+        ListMySongs.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ListMySongs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane6.setViewportView(ListMySongs);
 
         cbUserMood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Mood:", "Happy", "Sad", "Miserable", "Stressed", "Relieved", "Excited", "Angry" }));
 
-        cmdClearPost.setText("Clear Post");
+        cmdClearPost.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        cmdClearPost.setText("CLEAR");
+        cmdClearPost.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdClearPostMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdClearPostMouseEntered(evt);
+            }
+        });
         cmdClearPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdClearPostActionPerformed(evt);
             }
         });
 
-        cmdFindUser.setText("Find User");
+        cmdFindUser.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        cmdFindUser.setText("PROFILE");
+        cmdFindUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdFindUserMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdFindUserMouseEntered(evt);
+            }
+        });
         cmdFindUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdFindUserActionPerformed(evt);
@@ -394,164 +620,223 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         txtPostArea.setColumns(20);
+        txtPostArea.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         txtPostArea.setRows(5);
         txtPosts.setViewportView(txtPostArea);
+
+        jLabel5.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(93, 253, 203));
+        jLabel5.setText("News Feed");
+
+        jLabel6.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(93, 253, 203));
+        jLabel6.setText("Friend Profile");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(349, 349, 349)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSendRequest)
-                            .addComponent(txtNewFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmdSendFreindRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 21, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPosts)
-                                    .addComponent(jLabel3)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblProfilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblPreferences, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cmdFindUser, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(cmdChat, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cmdDeleteFriend, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(cbUserMood, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(cmdClearPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, Short.MAX_VALUE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(cmdAcceptFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(cmdDeclineFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(cmdUploadSong, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(cmdLogOut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(txtNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(cmdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPosts, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane5)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cmdPlaySelectedSong, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmdPlayUsersSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblOwnSongs)
-                            .addComponent(jScrollPane6))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                            .addComponent(cmdUploadSong, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmdLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(cbUserMood, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(cmdClearPost, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtNewPost))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(txtPosts, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(cmdChat, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cmdFindUser, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmdDeleteFriend, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(1, 1, 1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cmdPlayUsersSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(150, 150, 150)
+                                        .addComponent(cmdPlaySelectedSong, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(lblProfilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                            .addComponent(lblSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(lblFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                            .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(lblPreferences, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jLabel6))
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                                                    .addComponent(txtNewFriendRequest))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(cmdDeclineFriendRequest, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(cmdAcceptFriendRequest, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(cmdSendFreindRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)))
+                                            .addComponent(jLabel3))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitle)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 11, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmdLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
+                                .addGap(0, 8, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel8)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblOwnSongs)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(cmdUploadSong, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(txtNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(cmdClearPost)
+                                                        .addComponent(cbUserMood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(cmdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtPosts, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2)
+                                                .addComponent(jLabel1))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(jScrollPane1)
+                                                    .addGap(42, 42, 42))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(cmdChat, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(cmdFindUser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(cmdDeleteFriend, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel3))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(7, 7, 7)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(lblUsername)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(lblFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(lblSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(lblProfilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(10, 10, 10)
+                                                .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblPreferences, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(4, 4, 4)
+                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(24, 24, 24))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(36, 36, 36)
+                                        .addComponent(cmdAcceptFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmdDeclineFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtNewFriendRequest)
+                                            .addComponent(cmdSendFreindRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPreferences, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cmdDeleteFriend)
-                                    .addComponent(cmdPlaySelectedSong)
-                                    .addComponent(cmdPlayUsersSongs)
-                                    .addComponent(cmdChat)
-                                    .addComponent(cmdFindUser)))
-                            .addComponent(lblProfilePicture, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(30, 30, 30)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel12)
+                                .addGap(21, 21, 21)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblPosts)
-                        .addComponent(lblOwnSongs)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                            .addComponent(txtPosts))
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbUserMood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmdClearPost, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSendRequest)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(34, 34, 34)
+                        .addComponent(cmdPlayUsersSongs))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmdAcceptFriendRequest)
-                            .addComponent(cmdUploadSong))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmdDeclineFriendRequest)
-                            .addComponent(cmdLogOut)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtNewFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdSendFreindRequest)))
+                        .addGap(7, 7, 7)
+                        .addComponent(cmdPlaySelectedSong)))
                 .addContainerGap())
         );
 
@@ -828,6 +1113,140 @@ public class MainScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmdDeleteFriendActionPerformed
 
+    private void txtNewPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNewPostActionPerformed
+
+    private void cmdUploadSongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdUploadSongMouseEntered
+        // Changes colour of button when hovered over
+        cmdUploadSong.setContentAreaFilled(true);
+        cmdUploadSong.setBackground(foreground);
+        cmdUploadSong.setForeground(highlight);
+    }//GEN-LAST:event_cmdUploadSongMouseEntered
+
+    private void cmdUploadSongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdUploadSongMouseExited
+         // Changes colour of button when mouse isn't hovering
+        cmdUploadSong.setContentAreaFilled(false);
+        cmdUploadSong.setForeground(foreground);
+    }//GEN-LAST:event_cmdUploadSongMouseExited
+
+    private void cmdLogOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdLogOutMouseEntered
+        // Changes colour of button when hovered over
+        cmdLogOut.setContentAreaFilled(true);
+        cmdLogOut.setBackground(foreground);
+        cmdLogOut.setForeground(warning);
+    }//GEN-LAST:event_cmdLogOutMouseEntered
+
+    private void cmdLogOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdLogOutMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdLogOut.setContentAreaFilled(false);
+        cmdLogOut.setForeground(foreground);
+    }//GEN-LAST:event_cmdLogOutMouseExited
+
+    private void cmdPostMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPostMouseEntered
+        // Changes colour of button when hovered over
+        cmdPost.setContentAreaFilled(true);
+        cmdPost.setBackground(foreground);
+        cmdPost.setForeground(highlight);
+    }//GEN-LAST:event_cmdPostMouseEntered
+
+    private void cmdPostMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPostMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdPost.setContentAreaFilled(false);
+        cmdPost.setForeground(foreground);
+    }//GEN-LAST:event_cmdPostMouseExited
+
+    private void cmdClearPostMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdClearPostMouseEntered
+        // Changes colour of button when hovered over
+        cmdClearPost.setContentAreaFilled(true);
+        cmdClearPost.setBackground(foreground);
+        cmdClearPost.setForeground(warning);
+    }//GEN-LAST:event_cmdClearPostMouseEntered
+
+    private void cmdClearPostMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdClearPostMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdClearPost.setContentAreaFilled(false);
+        cmdClearPost.setForeground(foreground);
+    }//GEN-LAST:event_cmdClearPostMouseExited
+
+    private void cmdChatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdChatMouseEntered
+        // Changes colour of button when hovered over
+        cmdChat.setContentAreaFilled(true);
+        cmdChat.setBackground(foreground);
+        cmdChat.setForeground(highlight);
+    }//GEN-LAST:event_cmdChatMouseEntered
+
+    private void cmdChatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdChatMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdChat.setContentAreaFilled(false);
+        cmdChat.setForeground(foreground);
+    }//GEN-LAST:event_cmdChatMouseExited
+
+    private void cmdFindUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdFindUserMouseEntered
+        // Changes colour of button when hovered over
+        cmdFindUser.setContentAreaFilled(true);
+        cmdFindUser.setBackground(foreground);
+        cmdFindUser.setForeground(highlight);
+    }//GEN-LAST:event_cmdFindUserMouseEntered
+
+    private void cmdFindUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdFindUserMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdFindUser.setContentAreaFilled(false);
+        cmdFindUser.setForeground(foreground);
+    }//GEN-LAST:event_cmdFindUserMouseExited
+
+    private void cmdDeleteFriendMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdDeleteFriendMouseEntered
+        // Changes colour of button when hovered over
+        cmdDeleteFriend.setContentAreaFilled(true);
+        cmdDeleteFriend.setBackground(foreground);
+        cmdDeleteFriend.setForeground(warning);
+    }//GEN-LAST:event_cmdDeleteFriendMouseEntered
+
+    private void cmdDeleteFriendMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdDeleteFriendMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdDeleteFriend.setContentAreaFilled(false);
+        cmdDeleteFriend.setForeground(foreground);
+    }//GEN-LAST:event_cmdDeleteFriendMouseExited
+
+    private void cmdAcceptFriendRequestMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdAcceptFriendRequestMouseEntered
+        // Changes colour of button when hovered over
+        cmdAcceptFriendRequest.setContentAreaFilled(true);
+        cmdAcceptFriendRequest.setBackground(foreground);
+        cmdAcceptFriendRequest.setForeground(highlight);
+    }//GEN-LAST:event_cmdAcceptFriendRequestMouseEntered
+
+    private void cmdAcceptFriendRequestMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdAcceptFriendRequestMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdAcceptFriendRequest.setContentAreaFilled(false);
+        cmdAcceptFriendRequest.setForeground(foreground);
+    }//GEN-LAST:event_cmdAcceptFriendRequestMouseExited
+
+    private void cmdDeclineFriendRequestMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdDeclineFriendRequestMouseEntered
+        // Changes colour of button when hovered over
+        cmdDeclineFriendRequest.setContentAreaFilled(true);
+        cmdDeclineFriendRequest.setBackground(foreground);
+        cmdDeclineFriendRequest.setForeground(warning);
+    }//GEN-LAST:event_cmdDeclineFriendRequestMouseEntered
+
+    private void cmdDeclineFriendRequestMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdDeclineFriendRequestMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdDeclineFriendRequest.setContentAreaFilled(false);
+        cmdDeclineFriendRequest.setForeground(foreground);
+    }//GEN-LAST:event_cmdDeclineFriendRequestMouseExited
+
+    private void cmdSendFreindRequestMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdSendFreindRequestMouseEntered
+        // Changes colour of button when hovered over
+        cmdSendFreindRequest.setContentAreaFilled(true);
+        cmdSendFreindRequest.setBackground(foreground);
+        cmdSendFreindRequest.setForeground(highlight);
+    }//GEN-LAST:event_cmdSendFreindRequestMouseEntered
+
+    private void cmdSendFreindRequestMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdSendFreindRequestMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdSendFreindRequest.setContentAreaFilled(false);
+        cmdSendFreindRequest.setForeground(foreground);
+    }//GEN-LAST:event_cmdSendFreindRequestMouseExited
+
     public void RefreshUserSongs(ArrayList<String> Songs) throws IOException, ClassNotFoundException
     {              
         DefaultListModel UserSongs = new DefaultListModel();
@@ -910,9 +1329,17 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton cmdSendFreindRequest;
     private javax.swing.JButton cmdUploadSong;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -921,11 +1348,9 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblOwnSongs;
-    private javax.swing.JLabel lblPosts;
     private javax.swing.JLabel lblPreferences;
     private javax.swing.JLabel lblProfilePicture;
     private javax.swing.JLabel lblSecondName;
-    private javax.swing.JLabel lblSendRequest;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JList<String> listSelectedUsersSongs;

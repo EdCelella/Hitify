@@ -873,7 +873,7 @@ public class MainScreen extends javax.swing.JFrame {
             OutToServer.close();
             FromServerStream.close();
             
-            
+            //Pass song name to music player form    
         } catch (IOException | ClassNotFoundException e)
         {
             System.out.println(e.getMessage());
@@ -910,7 +910,7 @@ public class MainScreen extends javax.swing.JFrame {
             
             OutToServer.close();
             FromServerStream.close();
-            
+            //Pass song name to music player form
             
         } catch (IOException | ClassNotFoundException e)
         {

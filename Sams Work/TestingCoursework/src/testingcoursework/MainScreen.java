@@ -212,11 +212,18 @@ public class MainScreen extends javax.swing.JFrame {
         for (int i = 0 ; i < FriendsPosts.size(); i++)
         {
             String PostFormat = "";
-            if ("Select Mood:".equals(FriendsPosts.get(i).get(3))) {
-                PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + ": " + FriendsPosts.get(i).get(2) +"\n";
+            if ("TextPost".equals(FriendsPosts.get(i).get(4)))
+            {
+                if ("Select Mood:".equals(FriendsPosts.get(i).get(3))) {
+                    PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + ": " + FriendsPosts.get(i).get(2) +"\n";
+                }
+                else {
+                    PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + ": " + FriendsPosts.get(i).get(2) + " - Feeling " + FriendsPosts.get(i).get(3)+"\n";
+                }
             }
-            else {
-                PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + ": " + FriendsPosts.get(i).get(2) + " - Feeling " + FriendsPosts.get(i).get(3)+"\n";
+            else if ("SongUpload".equals(FriendsPosts.get(i).get(4)))
+            {
+                PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + " uploaded a new song: " + FriendsPosts.get(i).get(2) +"\n";
             }
             txtPostArea.append(PostFormat);
 

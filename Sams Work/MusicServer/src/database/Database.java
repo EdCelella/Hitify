@@ -52,7 +52,7 @@ public class Database {
 
     public ArrayList<ArrayList<String>> GetFriendsPosts(ArrayList<String> Friends)
     {
-        String SQLCreateView = "CREATE TABLE TempPosts (DateTimePosted VARCHAR(30), Username VARCHAR(20), MessageOrFilename VARCHAR(256), UserMood VARCHAR(20));";
+        String SQLCreateView = "CREATE TABLE TempPosts (DateTimePosted VARCHAR(30), Username VARCHAR(20), MessageOrFilename VARCHAR(256), UserMood VARCHAR(20), TypeOfPost VARCHAR(20));";
         
         
         //"CREATE TABLE TempPosts (DateTimePosted, Username, MessageOrFilename, UserMood) AS SELECT DateTimePosted,Username,"
@@ -70,7 +70,7 @@ public class Database {
         
         for (int i = 0; i < Friends.size(); i++)
         {
-            String SQLInsertView = "INSERT INTO TempPosts SELECT DateTimePosted,Username,MessageOrFilename,UserMood FROM Posts WHERE Username = '"+Friends.get(i)+"' AND TypeOfPost = 'TextPost';";
+            String SQLInsertView = "INSERT INTO TempPosts SELECT DateTimePosted,Username,MessageOrFilename,UserMood,TypeOfPost FROM Posts WHERE Username = '"+Friends.get(i)+"';";
             try (Connection con = this.connect();
                 PreparedStatement pstmt = con.prepareStatement(SQLInsertView)) {
                 pstmt.execute();                              
@@ -80,7 +80,7 @@ public class Database {
             }
         }
         
-        String sqlSelectFromView = "SELECT DateTimePosted, Username, MessageOrFilename, UserMood FROM TempPosts ORDER BY DateTimePosted;";
+        String sqlSelectFromView = "SELECT DateTimePosted, Username, MessageOrFilename, UserMood, TypeOfPost FROM TempPosts ORDER BY DateTimePosted;";
         
         ArrayList<ArrayList<String>> FriendsPosts = new ArrayList();
         
@@ -95,6 +95,7 @@ public class Database {
                 Posts.add(rs.getString("Username"));
                 Posts.add(rs.getString("MessageOrFilename"));
                 Posts.add(rs.getString("UserMood"));
+                Posts.add(rs.getString("TypeOfPost"));
                 FriendsPosts.add(Posts);
             } 
             

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import database.Database;
+import java.io.File;
 import java.io.FileInputStream;
 import java.net.InetSocketAddress;
 
@@ -121,9 +122,10 @@ public class MusicServerExtended extends Thread {
                 ArrayList UsersInfo = InFromClient.GetArray();
                 db.InsertNewRegUser(UsersInfo);
                 byte [] Image = (byte []) InFromClient.GetByteData();
-
-                String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + InFromClient.GetArray().get(0) + ".png";
-                FileOutputStream FileOut = new FileOutputStream(WhereToSave);
+                
+                
+                File PhotoDirectory = new File("res/Photos/" + InFromClient.GetArray().get(0) + ".png");
+                FileOutputStream FileOut = new FileOutputStream(PhotoDirectory);
                 FileOut.write(Image);
                 
                 InfoPacket Reply = new InfoPacket();
@@ -141,15 +143,16 @@ public class MusicServerExtended extends Thread {
 
                 ArrayList SongInformation = InFromClient.GetArray();
                 String FileName = SongInformation.get(2) + "," + SongInformation.get(3);
+                
+                File MusicDirectory = new File("res/Music/" + FileName + ".mp3");
+                File PhotoDirectory = new File("res/Photos/" + FileName + ".png");
 
                 byte [] Song = (byte []) InFromClient.GetByteData();
-                String WhereToSaveSong = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Music/" + FileName + ".mp3";
-                FileOutputStream SongOut = new FileOutputStream(WhereToSaveSong);
+                FileOutputStream SongOut = new FileOutputStream(MusicDirectory);
                 SongOut.write(Song);
 
                 byte [] CoverPhoto = (byte []) InFromClient.GetSecondData();
-                String WhereToSavePhoto= "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + FileName + ".png";
-                FileOutputStream PhotoOut = new FileOutputStream(WhereToSavePhoto);
+                FileOutputStream PhotoOut = new FileOutputStream(PhotoDirectory);
                 PhotoOut.write(CoverPhoto);
 
                 db.InsertSong(SongInformation);
@@ -261,8 +264,10 @@ public class MusicServerExtended extends Thread {
                 UserInformation.SetService("GUD");
                 UserInformation.SetMultipleArray(UsersInfo);
                 
-                String PhotoFilePath = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + Username + ".png";
-                FileInputStream UserPicture = new FileInputStream(PhotoFilePath);
+                
+                File PhotoDirectory = new File("res/Photos/" + Username + ".png");
+                
+                FileInputStream UserPicture = new FileInputStream(PhotoDirectory);
                 byte [] buffer = new byte[UserPicture.available()];
                 UserPicture.read(buffer);
                 
@@ -285,20 +290,20 @@ public class MusicServerExtended extends Thread {
                 FriendsPosts.SetMultipleArray(UserPosts);
                 ToClientStream.writeObject(FriendsPosts);
             }
+            //DoWnload Song
             else if ("DWS".equals(InFromClient.GetService()))
             {
-                String SongFileName = InFromClient.GetData() + ".mp3";
-                String PhotoFileName = InFromClient.GetData() + ".png";
-                
+                               
                 InfoPacket SongData = new InfoPacket();
                 
-                String SongPath = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Music/" + SongFileName;
-                FileInputStream SongFile = new FileInputStream(SongPath);
+                File MusicDirectory = new File("res/Music/" + InFromClient.GetData() + ".mp3");
+                File PhotoDirectory = new File("res/Photos/" + InFromClient.GetData() + ".png");
+                
+                FileInputStream SongFile = new FileInputStream(MusicDirectory);
                 byte [] buffer = new byte[SongFile.available()];
                 SongFile.read(buffer);
                 
-                String PhotoPath = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/MusicServer/res/Photos/" + PhotoFileName;
-                FileInputStream PhotoFile = new FileInputStream(PhotoPath);
+                FileInputStream PhotoFile = new FileInputStream(PhotoDirectory);
                 byte [] buffer2 = new byte[PhotoFile.available()];
                 PhotoFile.read(buffer2);
                 

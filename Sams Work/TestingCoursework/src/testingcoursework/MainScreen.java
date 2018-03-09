@@ -7,6 +7,7 @@ package testingcoursework;
 
 import infopacket.InfoPacket;
 import java.awt.Image;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -54,6 +55,9 @@ public class MainScreen extends javax.swing.JFrame {
         D.SetForm(this);
         Thread t2 = new Thread(D);
         t2.start();
+        
+        
+        
                
         //ListAllFriends.getSelectedValue() to retrieve currently selected item
     }
@@ -582,9 +586,19 @@ public class MainScreen extends javax.swing.JFrame {
         LoggingOff.SetService("LGO");
         LoggingOff.SetSingleData(Username);
         
+        File Pdir = new File("res/Photos"); 
+        File Mdir = new File("res/Music"); 
             
         try {
             //Send the NamePass infopacket
+            //Remove Files in Music and Photo Folders
+            for(File file: Pdir.listFiles()) 
+                if (!file.isDirectory()) 
+                    file.delete();
+            for(File file: Mdir.listFiles()) 
+                if (!file.isDirectory()) 
+                    file.delete();
+            
             Socket MainServer = new Socket("localhost", 9090);
             ObjectOutputStream ToServerStream = new ObjectOutputStream(MainServer.getOutputStream());
             System.out.println("Made Output Stream");
@@ -597,6 +611,10 @@ public class MainScreen extends javax.swing.JFrame {
             
             
             MainServer.close();
+            
+            
+            
+            
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -783,12 +801,16 @@ public class MainScreen extends javax.swing.JFrame {
             
             ArrayList<ArrayList<String>> UserInformation = ServerReply.GetMultipleArray();
             
+            
+            File PhotoDirectory = new File("res/Photos/" + UsernameToFind + ".png");
+            
             byte [] ProfileImage = (byte []) ServerReply.GetByteData();
-            String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + UsernameToFind + ".png";
-            FileOutputStream FileOut = new FileOutputStream(WhereToSave);
+            FileOutputStream FileOut = new FileOutputStream(PhotoDirectory);
             FileOut.write(ProfileImage);
             
-            lblProfilePicture.setIcon(ResizeImage(WhereToSave));
+            
+            
+            lblProfilePicture.setIcon(ResizeImage(PhotoDirectory.getPath()));
             lblUsername.setText("Username: " + UsernameToFind);     
             lblFirstName.setText("First Name: " + UserInformation.get(0).get(0));
             lblSecondName.setText("Second Name: " + UserInformation.get(0).get(1));
@@ -860,14 +882,15 @@ public class MainScreen extends javax.swing.JFrame {
 
             InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
             
+            File MusicDirectory = new File("res/Music/" + FileName + ".mp3");
+            File PhotoDirectory = new File("res/Photos/" + FileName + ".png");
+            
             byte [] Song = (byte []) ServerReply.GetByteData();
-            String WhereToSaveSong = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Music/" + FileName + ".mp3";
-            FileOutputStream SongOut = new FileOutputStream(WhereToSaveSong);
+            FileOutputStream SongOut = new FileOutputStream(MusicDirectory);
             SongOut.write(Song);
 
             byte [] CoverPhoto = (byte []) ServerReply.GetSecondData();
-            String WhereToSavePhoto= "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + FileName + ".png";
-            FileOutputStream PhotoOut = new FileOutputStream(WhereToSavePhoto);
+            FileOutputStream PhotoOut = new FileOutputStream(PhotoDirectory);
             PhotoOut.write(CoverPhoto);
             
             OutToServer.close();
@@ -898,14 +921,16 @@ public class MainScreen extends javax.swing.JFrame {
 
             InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
             
+            File MusicDirectory = new File("res/Music/" + FileName + ".mp3");
+            File PhotoDirectory = new File("res/Photos/" + FileName + ".png");
+            
+            
             byte [] Song = (byte []) ServerReply.GetByteData();
-            String WhereToSaveSong = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Music/" + FileName + ".mp3";
-            FileOutputStream SongOut = new FileOutputStream(WhereToSaveSong);
+            FileOutputStream SongOut = new FileOutputStream(MusicDirectory);
             SongOut.write(Song);
 
             byte [] CoverPhoto = (byte []) ServerReply.GetSecondData();
-            String WhereToSavePhoto= "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + FileName + ".png";
-            FileOutputStream PhotoOut = new FileOutputStream(WhereToSavePhoto);
+            FileOutputStream PhotoOut = new FileOutputStream(PhotoDirectory);
             PhotoOut.write(CoverPhoto);
             
             OutToServer.close();

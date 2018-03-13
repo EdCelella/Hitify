@@ -1,19 +1,29 @@
-import java.io.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import java.util.concurrent.TimeUnit;
 
-public class musicPlayer extends Application{
+public class musicPlayer{
 
-    @Override
-    public void start(Stage primaryStage) {
-        String bip = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Eds Work/Music Player/music/Ed Sheeran,Dive.mp3";
-        Media hit = new Media(new File(bip).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
-    }
     
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws Exception{
+    // open the sound file as a Java input stream
+    String musicFile = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Eds Work/Music Player/music/test.wav";
+    InputStream in = new FileInputStream(musicFile);
+
+    // create an audiostream from the inputstream
+    AudioStream audioStream = new AudioStream(in);
+
+    // play the audio clip with the audioplayer class
+    AudioPlayer.player.start(audioStream);
+
+    TimeUnit.SECONDS.sleep(10);
+
+    AudioPlayer.player.stop(audioStream);
+
+    
+
     }
     
 }

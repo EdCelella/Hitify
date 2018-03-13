@@ -55,6 +55,9 @@ public class LogInScreen extends javax.swing.JFrame {
         cmdLogIn.setBackground(background);
         cmdLogIn.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdLogIn.setForeground(foreground);
+        
+        txtUserName.setBorder(new LineBorder(foreground, 4));
+        PFPassword.setBorder(new LineBorder(foreground, 4));
     }
 
     /**
@@ -82,7 +85,7 @@ public class LogInScreen extends javax.swing.JFrame {
         setForeground(new java.awt.Color(43, 45, 66));
 
         lblLogInForm.setFont(new java.awt.Font("Futura", 1, 48)); // NOI18N
-        lblLogInForm.setForeground(new java.awt.Color(253, 255, 252));
+        lblLogInForm.setForeground(new java.awt.Color(93, 253, 203));
         lblLogInForm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogInForm.setText("LOG IN");
 
@@ -94,7 +97,7 @@ public class LogInScreen extends javax.swing.JFrame {
         lblPassword.setForeground(new java.awt.Color(253, 255, 252));
         lblPassword.setText("Password:");
 
-        txtUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUserName.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
 
         cmdLogIn.setFont(new java.awt.Font("Futura", 1, 18)); // NOI18N
         cmdLogIn.setText("LOG IN");
@@ -128,6 +131,8 @@ public class LogInScreen extends javax.swing.JFrame {
             }
         });
 
+        PFPassword.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,7 +164,7 @@ public class LogInScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblLogInForm, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

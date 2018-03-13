@@ -76,6 +76,43 @@ public class RegisterUser extends javax.swing.JFrame {
         cmdCreate.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdCreate.setForeground(foreground);
         
+        lblPhoto.setBorder(new LineBorder(foreground, 2));
+        
+        txtFirstName.setBorder(new LineBorder(foreground, 4));
+        txtSecondName.setBorder(new LineBorder(foreground, 4));
+        txtEmail.setBorder(new LineBorder(foreground, 4));
+        txtUserName.setBorder(new LineBorder(foreground, 4));
+        PFPassword.setBorder(new LineBorder(foreground, 4));
+        PFPassword2.setBorder(new LineBorder(foreground, 4));
+        
+        ImageIcon RadioOff = new ImageIcon("/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/RadioBtnOff.png");
+        ImageIcon RadioOn = new ImageIcon("/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/RadioBtnOn.png");
+        
+        rbFolk.setIcon(RadioOff);
+        rbFolk.setSelectedIcon(RadioOn);
+        rbPop.setIcon(RadioOff);
+        rbPop.setSelectedIcon(RadioOn);
+        rbRock.setIcon(RadioOff);
+        rbRock.setSelectedIcon(RadioOn);
+        rbBlues.setIcon(RadioOff);
+        rbBlues.setSelectedIcon(RadioOn);
+        rbTechno.setIcon(RadioOff);
+        rbTechno.setSelectedIcon(RadioOn);
+        rbJazz.setIcon(RadioOff);
+        rbJazz.setSelectedIcon(RadioOn);
+        rbEDM.setIcon(RadioOff);
+        rbEDM.setSelectedIcon(RadioOn);
+        rbSoul.setIcon(RadioOff);
+        rbSoul.setSelectedIcon(RadioOn);
+        rbRapping.setIcon(RadioOff);
+        rbRapping.setSelectedIcon(RadioOn);
+        rbReggae.setIcon(RadioOff);
+        rbReggae.setSelectedIcon(RadioOn);
+        rbIndie.setIcon(RadioOff);
+        rbIndie.setSelectedIcon(RadioOn);
+        rbClassical.setIcon(RadioOff);
+        rbClassical.setSelectedIcon(RadioOn);
+        
     }
 
     /**
@@ -139,17 +176,25 @@ public class RegisterUser extends javax.swing.JFrame {
         lblFirstName.setForeground(new java.awt.Color(253, 255, 252));
         lblFirstName.setText("First Name:");
 
+        txtFirstName.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
         lblSecondName.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
         lblSecondName.setForeground(new java.awt.Color(253, 255, 252));
         lblSecondName.setText("Second Name:");
+
+        txtSecondName.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
 
         lblEmail.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(253, 255, 252));
         lblEmail.setText("Email Address:");
 
+        txtEmail.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
         lblUserName.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
         lblUserName.setForeground(new java.awt.Color(253, 255, 252));
         lblUserName.setText("Username:");
+
+        txtUserName.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
 
         lblPassword.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(253, 255, 252));
@@ -292,6 +337,10 @@ public class RegisterUser extends javax.swing.JFrame {
             }
         });
 
+        PFPassword.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
+        PFPassword2.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -364,9 +413,7 @@ public class RegisterUser extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lblPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cmdPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(12, 12, 12)
-                                    .addComponent(lblUploadPicture))))))
+                                .addComponent(lblUploadPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -386,7 +433,7 @@ public class RegisterUser extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSecondName)
                             .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 21, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEmail)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -427,9 +474,9 @@ public class RegisterUser extends javax.swing.JFrame {
                     .addComponent(rbClassical))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmdClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(cmdLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -559,7 +606,7 @@ public class RegisterUser extends javax.swing.JFrame {
         // Changes colour of button when hovered over
         cmdPhoto.setContentAreaFilled(true);
         cmdPhoto.setBackground(foreground);
-        cmdPhoto.setForeground(background);
+        cmdPhoto.setForeground(highlight);
     }//GEN-LAST:event_cmdPhotoMouseEntered
 
     private void cmdPhotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPhotoMouseExited

@@ -21,10 +21,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
-/**
- *
- * @author samal
- */
 public class MainScreen extends javax.swing.JFrame {
 
     /**
@@ -41,14 +37,13 @@ public class MainScreen extends javax.swing.JFrame {
     // Used for border thickness
     int buttonBorder = 4;
     int listBorder = 4;
-    
+  
     public MainScreen() {
         initComponents();
-        
-        
     }
     
     public MainScreen(String UserName) throws IOException, ClassNotFoundException {
+        
         initComponents();
         
         //Sets frame background colour
@@ -115,6 +110,8 @@ public class MainScreen extends javax.swing.JFrame {
         cmdUploadSong.setBorder(new LineBorder(foreground, buttonBorder));
 	cmdUploadSong.setForeground(foreground);
         
+        // Sets background and foreground colours for lists and removes the 
+        // scroll pane border
         ListMySongs.setBackground(background);
         ListMySongs.setForeground(foreground);
         jScrollPane6.setBorder(null);
@@ -140,8 +137,10 @@ public class MainScreen extends javax.swing.JFrame {
         txtPostArea.setForeground(foreground);
         txtPosts.setBorder(null);
         
+        // Adds border for profile picture label
         lblProfilePicture.setBorder(new LineBorder(foreground, 2));
         
+        // Uses Label borders as white lines
         jLabel4.setBorder(new LineBorder(foreground, 5));
         jLabel7.setBorder(new LineBorder(foreground, 4));
         jLabel8.setBorder(new LineBorder(foreground, 4));
@@ -150,6 +149,36 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel11.setBorder(new LineBorder(foreground, 5));
         jLabel12.setBorder(new LineBorder(foreground, 4));
         
+        // Sets Logo
+        jLabel13.setIcon(ResizeImage("/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/logo.png"));
+        
+        // Styles drop down menu
+        cbUserMood.setBackground(foreground);
+        cbUserMood.setBorder(new LineBorder(foreground, 4));
+        
+        // Styles textboxs on pages
+        txtNewPost.setBorder(new LineBorder(foreground, 4));
+        txtNewFriendRequest.setBorder(new LineBorder(foreground, 4));
+        
+        
+        // Turns vertical scroll bars on permenatly and sets the style
+        txtPosts.setVerticalScrollBarPolicy(txtPosts.VERTICAL_SCROLLBAR_ALWAYS);
+        txtPosts.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        
+        jScrollPane1.setVerticalScrollBarPolicy(jScrollPane1.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        
+        jScrollPane2.setVerticalScrollBarPolicy(jScrollPane2.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        
+        jScrollPane3.setVerticalScrollBarPolicy(jScrollPane3.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane3.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        
+        jScrollPane5.setVerticalScrollBarPolicy(jScrollPane5.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane5.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        
+        jScrollPane6.setVerticalScrollBarPolicy(jScrollPane6.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane6.getVerticalScrollBar().setUI(new CustomScrollBarUI());
         
         this.Username = UserName;
         RefreshAllFriendsList();
@@ -384,6 +413,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(43, 45, 66));
@@ -410,19 +440,32 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(93, 253, 203));
-        jLabel1.setText("Friends List");
+        jLabel1.setText("FRIENDS LIST");
 
         ListAllFriends.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ListAllFriends.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ListAllFriends.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListAllFriendsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(ListAllFriends);
 
         jLabel2.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(93, 253, 203));
-        jLabel2.setText("Active Friends");
+        jLabel2.setText("ACTIVE FRIENDS");
 
         ListActiveFriends.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ListActiveFriends.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ListActiveFriends.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListActiveFriendsMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(ListActiveFriends);
+
+        txtNewFriendRequest.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        txtNewFriendRequest.setForeground(new java.awt.Color(46, 47, 47));
 
         cmdSendFreindRequest.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
         cmdSendFreindRequest.setText("SEND REQUEST");
@@ -458,10 +501,15 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(93, 253, 203));
-        jLabel3.setText("Friend Requests");
+        jLabel3.setText("FRIEND REQUESTS");
 
         ListFriendRequests.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ListFriendRequests.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ListFriendRequests.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListFriendRequestsMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(ListFriendRequests);
 
         cmdAcceptFriendRequest.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
@@ -516,6 +564,8 @@ public class MainScreen extends javax.swing.JFrame {
         lblPreferences.setForeground(new java.awt.Color(253, 255, 252));
         lblPreferences.setText("Prefences: ");
 
+        txtNewPost.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        txtNewPost.setForeground(new java.awt.Color(46, 47, 47));
         txtNewPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNewPostActionPerformed(evt);
@@ -539,11 +589,19 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         listSelectedUsersSongs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listSelectedUsersSongs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listSelectedUsersSongsMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(listSelectedUsersSongs);
 
         cmdChat.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
         cmdChat.setText("CHAT");
         cmdChat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cmdChatMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cmdChatMouseExited(evt);
             }
@@ -579,12 +637,19 @@ public class MainScreen extends javax.swing.JFrame {
 
         lblOwnSongs.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
         lblOwnSongs.setForeground(new java.awt.Color(93, 253, 203));
-        lblOwnSongs.setText("Your Music");
+        lblOwnSongs.setText("YOUR MUSIC");
 
         ListMySongs.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         ListMySongs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        ListMySongs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ListMySongsMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(ListMySongs);
 
+        cbUserMood.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
+        cbUserMood.setForeground(new java.awt.Color(46, 47, 47));
         cbUserMood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Mood:", "Happy", "Sad", "Miserable", "Stressed", "Relieved", "Excited", "Angry" }));
 
         cmdClearPost.setFont(new java.awt.Font("Futura", 0, 13)); // NOI18N
@@ -619,18 +684,22 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        txtPosts.setBackground(new java.awt.Color(46, 47, 47));
+        txtPosts.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         txtPostArea.setColumns(20);
         txtPostArea.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         txtPostArea.setRows(5);
+        txtPostArea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtPosts.setViewportView(txtPostArea);
 
         jLabel5.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(93, 253, 203));
-        jLabel5.setText("News Feed");
+        jLabel5.setText("NEWS FEED");
 
         jLabel6.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(93, 253, 203));
-        jLabel6.setText("Friend Profile");
+        jLabel6.setText("FRIENDS PROFILE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -641,11 +710,17 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblOwnSongs)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmdUploadSong, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblOwnSongs)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(59, 59, 59)
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -691,8 +766,9 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(94, 94, 94)
                                         .addComponent(cmdPlayUsersSongs, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(150, 150, 150)
+                                        .addGap(56, 56, 56)
                                         .addComponent(cmdPlaySelectedSong, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -745,7 +821,8 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addGap(0, 8, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel8)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -763,20 +840,20 @@ public class MainScreen extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel5)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addComponent(txtNewPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(cmdClearPost)
                                                         .addComponent(cbUserMood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addComponent(cmdPost, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(cmdPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(txtPosts, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel2)
-                                                .addComponent(jLabel1))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -832,12 +909,12 @@ public class MainScreen extends javax.swing.JFrame {
                                 .addGap(21, 21, 21)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(cmdPlayUsersSongs))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(cmdPlaySelectedSong)))
-                .addContainerGap())
+                        .addComponent(cmdPlaySelectedSong)
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cmdPlayUsersSongs)
+                        .addGap(25, 25, 25))))
         );
 
         pack();
@@ -1053,7 +1130,7 @@ public class MainScreen extends javax.swing.JFrame {
             ArrayList<ArrayList<String>> UserInformation = ServerReply.GetMultipleArray();
             
             byte [] ProfileImage = (byte []) ServerReply.GetByteData();
-            String WhereToSave = "C:/Users/samal/Documents/2nd Year/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/" + UsernameToFind + ".png";
+            String WhereToSave = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/MusicServer/res/Photos" + UsernameToFind + ".png";
             FileOutputStream FileOut = new FileOutputStream(WhereToSave);
             FileOut.write(ProfileImage);
             
@@ -1075,8 +1152,11 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdFindUserActionPerformed
 
     private void cmdChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdChatActionPerformed
-        String UsernameToChat = ListAllFriends.getSelectedValue();
-        new ChatWindow(UsernameToChat).setVisible(true);
+        if(ListAllFriends.getSelectedValue() != null){
+            new ChatWindow(ListAllFriends.getSelectedValue()).setVisible(true);
+        }else if(ListActiveFriends.getSelectedValue() != null){
+            new ChatWindow(ListActiveFriends.getSelectedValue()).setVisible(true);
+        }
         
     }//GEN-LAST:event_cmdChatActionPerformed
 
@@ -1247,6 +1327,50 @@ public class MainScreen extends javax.swing.JFrame {
         cmdSendFreindRequest.setForeground(foreground);
     }//GEN-LAST:event_cmdSendFreindRequestMouseExited
 
+    private void ListMySongsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListMySongsMouseClicked
+        // Clears selections on other lists when mouse is clicked in list area
+        ListActiveFriends.clearSelection();
+        ListAllFriends.clearSelection();
+        listSelectedUsersSongs.clearSelection();
+        ListFriendRequests.clearSelection();
+    }//GEN-LAST:event_ListMySongsMouseClicked
+
+    private void ListActiveFriendsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListActiveFriendsMouseClicked
+       // Clears selections on other lists when mouse is clicked in list area
+        ListMySongs.clearSelection();
+        ListAllFriends.clearSelection();
+        listSelectedUsersSongs.clearSelection();
+        ListFriendRequests.clearSelection();
+    }//GEN-LAST:event_ListActiveFriendsMouseClicked
+
+    private void ListAllFriendsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListAllFriendsMouseClicked
+        // Clears selections on other lists when mouse is clicked in list area
+        ListMySongs.clearSelection();
+        ListActiveFriends.clearSelection();
+        listSelectedUsersSongs.clearSelection();
+        ListFriendRequests.clearSelection();
+    }//GEN-LAST:event_ListAllFriendsMouseClicked
+
+    private void listSelectedUsersSongsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSelectedUsersSongsMouseClicked
+        // Clears selections on other lists when mouse is clicked in list area
+        ListMySongs.clearSelection();
+        ListActiveFriends.clearSelection();
+        ListAllFriends.clearSelection();
+        ListFriendRequests.clearSelection();
+    }//GEN-LAST:event_listSelectedUsersSongsMouseClicked
+
+    private void ListFriendRequestsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ListFriendRequestsMouseClicked
+        // Clears selections on other lists when mouse is clicked in list area
+        ListMySongs.clearSelection();
+        ListActiveFriends.clearSelection();
+        ListAllFriends.clearSelection();
+        listSelectedUsersSongs.clearSelection();
+    }//GEN-LAST:event_ListFriendRequestsMouseClicked
+
+    private void cmdChatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdChatMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdChatMouseClicked
+
     public void RefreshUserSongs(ArrayList<String> Songs) throws IOException, ClassNotFoundException
     {              
         DefaultListModel UserSongs = new DefaultListModel();
@@ -1332,6 +1456,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

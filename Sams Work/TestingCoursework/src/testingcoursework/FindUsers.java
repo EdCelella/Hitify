@@ -115,7 +115,7 @@ public class FindUsers extends javax.swing.JFrame {
                 .addComponent(cmdAddFriend)
                 .addGap(18, 18, 18)
                 .addComponent(cmdBackToMain)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,15 +157,33 @@ public class FindUsers extends javax.swing.JFrame {
 
             InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
 
-            ArrayList<String> AllUsersFriends = ServerReply.GetArray();
+            String State = ServerReply.GetData();
 
             OutToServer.close();
             FromServerStream.close();
             
-            JOptionPane.showMessageDialog(this,
-            "Friend Request Sent",
-            "Success",
-            JOptionPane.PLAIN_MESSAGE);
+            
+            if ("Exists".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "Request has been sent to " + ListUsers.getSelectedValue(),
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
+            else if ("Doesnt".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "Declined, this username does not exist on Hitify",
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
+            else if ("AlreadyFriends".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "You are already friends with this user, or they have sent you a friend request",
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
             
             OutToServer.close();
             FromServerStream.close();

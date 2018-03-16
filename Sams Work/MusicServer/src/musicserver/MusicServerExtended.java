@@ -120,20 +120,31 @@ public class MusicServerExtended extends Thread {
                 System.out.println("Creating New User");
                 //Retreive all information about user and add it to the DB
                 ArrayList UsersInfo = InFromClient.GetArray();
-                db.InsertNewRegUser(UsersInfo);
-                byte [] Image = (byte []) InFromClient.GetByteData();
                 
-                
-                File PhotoDirectory = new File("res/Photos/" + InFromClient.GetArray().get(0) + ".png");
-                FileOutputStream FileOut = new FileOutputStream(PhotoDirectory);
-                FileOut.write(Image);
-                
+                boolean AlreadyExists = db.DoesUsernameExist(UsersInfo.get(0).toString());
                 InfoPacket Reply = new InfoPacket();
-                Reply.SetService("LGO");
-                Reply.SetSingleData("Logout");
+                Reply.SetService("CNU");
+                if (AlreadyExists == false)
+                {
+                    db.InsertNewRegUser(UsersInfo);
+                    byte [] Image = (byte []) InFromClient.GetByteData();
+
+
+                    File PhotoDirectory = new File("res/Photos/" + InFromClient.GetArray().get(0) + ".png");
+                    FileOutputStream FileOut = new FileOutputStream(PhotoDirectory);
+                    FileOut.write(Image);
+
+                    
+                    Reply.SetSingleData("Registered");
+                    
+                }
+                else
+                {
+                    Reply.SetSingleData("UsernameExists");
+                }
+                
                 ToClientStream.writeObject(Reply);
                 
-                System.out.println("Sucessfull");
             }
 
             //Upload new song
@@ -205,10 +216,27 @@ public class MusicServerExtended extends Thread {
             else if ("NFR".equals(InFromClient.GetService()))
             {
                 ArrayList<String> Users = InFromClient.GetArray();
-                db.NewFriendRequest(Users);
+                boolean UsernameExists = db.DoesUsernameExist(Users.get(1));
                 InfoPacket Reply = new InfoPacket();
                 Reply.SetService("NFR");
-                Reply.SetSingleData("Send Request");
+                if (UsernameExists == true)
+                {
+                    boolean AlreadyFriends = db.AlreadyFriends(Users);
+                    if (AlreadyFriends == false)
+                    {
+                        Reply.SetSingleData("Exists");
+                        db.NewFriendRequest(Users);
+                    }
+                    else
+                    {
+                        Reply.SetSingleData("AlreadyFriends");
+                    }
+                }
+                else
+                {
+                    Reply.SetSingleData("Doesnt");
+                }
+                             
                 ToClientStream.writeObject(Reply);
             }
             //Get Friend Requests

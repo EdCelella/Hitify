@@ -47,75 +47,68 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblUserName" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUserName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
+                  <Component id="lblPassword2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtFirstName" pref="195" max="32767" attributes="0"/>
+                          <Component id="lblFirstName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblSecondName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSecondName" pref="195" max="32767" attributes="0"/>
+                          <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="PFPassword" max="32767" attributes="0"/>
+                          <Component id="PFPassword2" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblUserName" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtUserName" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
-                          <Component id="lblPassword2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPassword" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMusicChoice" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtFirstName" pref="195" max="32767" attributes="0"/>
-                                  <Component id="lblFirstName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblSecondName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtSecondName" pref="195" max="32767" attributes="0"/>
-                                  <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="PFPassword" max="32767" attributes="0"/>
-                                  <Component id="PFPassword2" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblMusicChoice" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="rbFolk" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="rbPop" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="rbEDM" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="rbRock" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="rbBlues" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="rbRapping" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="rbSoul" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="rbReggae" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="rbFolk" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbPop" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbEDM" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="rbClassical" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbJazz" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbTechno" min="-2" max="-2" attributes="0"/>
-                                          <Component id="rbIndie" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbRock" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbBlues" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rbRapping" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="cmdCreate" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="cmdLogIn" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblUploadPicture" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cmdPhoto" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="cmdClear" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lblPhoto" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="rbSoul" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="rbReggae" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="rbClassical" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbJazz" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbTechno" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rbIndie" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="cmdCreate" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cmdLogIn" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lblUploadPicture" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmdPhoto" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cmdClear" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lblPhoto" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="102" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtEmail" min="-2" pref="195" max="-2" attributes="0"/>
-                      <EmptySpace min="21" pref="436" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="txtEmail" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="265" max="32767" attributes="0"/>

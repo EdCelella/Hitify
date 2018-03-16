@@ -389,28 +389,7 @@ public class Database {
                 System.out.println(e.getMessage());
                     }
         }
-        
-        
-//        String SQLQuery2 = "SELECT FirstUserName FROM Friends WHERE SecondUserName = '" + Username + "'"
-//                + " AND Status = 'Accepted';";
-//        
-//        try (Connection con = this.connect();
-//             Statement stmt  = con.createStatement()) 
-//                {
-//                    ResultSet rs = stmt.executeQuery(SQLQuery2);
-//                    
-//                    
-//                    while (rs.next())
-//                    {
-//                        FriendsList.add(rs.getString("FirstUserName"));
-//                    }
-//                    
-//                    con.close();
-//                } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//                }
-        
-        
+                
         return ActiveFriends;
     }
     
@@ -562,5 +541,51 @@ public class Database {
         
         return AllUsers;
     }
+    
+    public boolean DoesUsernameExist(String Username)
+    {
+        boolean Exists = false;
+        ArrayList<String> Users = GetUsernamesOnPreferences("All");
+
+        for (int i = 0; i < Users.size(); i++)
+        {
+            if (Username.equals(Users.get(i)))
+            {
+                Exists = true;
+            }
+        }
+        return Exists;
+    }
+    
+    public boolean AlreadyFriends (ArrayList<String> Users)
+    {
+        boolean AlreadyFriends = false;
+        //User[0] to retrieve friends for
+        //if User[1] is in the ArrayList then they are already friends
+        ArrayList<String> AllFriends = GetUsersFriends(Users.get(0));
+        
+        
+        for (int i = 0; i < AllFriends.size(); i++)
+        {
+           if (Users.get(1).equals(AllFriends.get(i)))
+           {
+               AlreadyFriends = true;
+           }
+        }
+        
+        ArrayList<String> FriendRequests = GetUsersFriendRequests(Users.get(0));
+        
+        for (int i = 0; i < FriendRequests.size(); i++)
+        {
+           if (Users.get(1).equals(FriendRequests.get(i)))
+           {
+               AlreadyFriends = true;
+           }
+        }
+        
+        return AlreadyFriends;
+    }
+    
+    
     
 }

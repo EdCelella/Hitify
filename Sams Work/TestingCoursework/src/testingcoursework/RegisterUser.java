@@ -390,15 +390,26 @@ public class RegisterUser extends javax.swing.JFrame {
 
                     MainServer.close();
                     
-                    ClearForm();
+                    if ("Registered".equals(Reply.GetData()))
+                    {
+                        ClearForm();
                     
-                    JOptionPane.showMessageDialog(this,
-                    "Your new account has been created, log in to use Shitify",
-                    "Success",
-                    JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(this,
+                        "Your new account has been created, log in to use Shitify",
+                        "Registering",
+                        JOptionPane.PLAIN_MESSAGE);
+
+                        new LogInScreen().setVisible(true);
+                        this.dispose();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(this,
+                        "This username belongs to another profile. Please choose another username.",
+                        "Registering",
+                        JOptionPane.PLAIN_MESSAGE);
+                    }
                     
-                    new LogInScreen().setVisible(true);
-                    this.dispose();
 
                     
                 } catch (FileNotFoundException ex) {

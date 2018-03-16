@@ -670,24 +670,41 @@ public class MainScreen extends javax.swing.JFrame {
 
             InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
 
-            ArrayList<String> AllUsersFriends = ServerReply.GetArray();
+            String State = ServerReply.GetData();
 
             OutToServer.close();
             FromServerStream.close();
 
+            
+            
+            if ("Exists".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "Request has been sent to " + txtNewFriendRequest.getText(),
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
+            else if ("Doesnt".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "Declined, this username does not exist on Hitify",
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
+            else if ("AlreadyFriends".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "You are already friends with this user, or they have sent you a friend request",
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
+            
             txtNewFriendRequest.setText("");
             
-            JOptionPane.showMessageDialog(this,
-            "Friend Request Sent",
-            "Success",
-            JOptionPane.PLAIN_MESSAGE);
-            
             OutToServer.close();
             FromServerStream.close();
             
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_cmdSendFreindRequestActionPerformed

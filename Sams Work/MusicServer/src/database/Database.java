@@ -419,32 +419,13 @@ public class Database {
         
         ArrayList<String> FriendsRequestList = new ArrayList();
         
-        String SQLQuery = "SELECT SecondUserName FROM Friends WHERE FirstUserName = '" + Username + "'"
+        String SQLQuery = "SELECT FirstUserName FROM Friends WHERE SecondUserName = '" + Username + "'"
                 + " AND Status = 'Pending';";
         
         try (Connection con = this.connect();
              Statement stmt  = con.createStatement()) 
                 {
                     ResultSet rs = stmt.executeQuery(SQLQuery);
-                    
-                    
-                    while (rs.next())
-                    {
-                        FriendsRequestList.add(rs.getString("SecondUserName"));
-                    }
-                    
-                    con.close();
-                } catch (SQLException e) {
-            System.out.println(e.getMessage());
-                }
-        
-        String SQLQuery2 = "SELECT FirstUserName FROM Friends WHERE SecondUserName = '" + Username + "'"
-                + " AND Status = 'Pending';";
-        
-        try (Connection con = this.connect();
-             Statement stmt  = con.createStatement()) 
-                {
-                    ResultSet rs = stmt.executeQuery(SQLQuery2);
                     
                     
                     while (rs.next())
@@ -485,7 +466,7 @@ public class Database {
         String FirstUser = Users.get(0);
         String SecondUser = Users.get(1);
         
-        String SQLQuery = "UPDATE Friends SET Status = 'Accepted' WHERE FirstUserName = '" + FirstUser + "' AND SecondUserName = '" + SecondUser + "';";
+        String SQLQuery = "UPDATE Friends SET Status = 'Accepted' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
         
         
         try (Connection con = this.connect();
@@ -498,17 +479,17 @@ public class Database {
             System.out.println(e.getMessage());
                 }
         
-        String SQLQuery2 = "UPDATE Friends SET Status = 'Accepted' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
-        
-        try (Connection con = this.connect();
-             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
-                    pstmt.execute();
-                    System.out.println("INSERTED NEW FRIENDSHIP PENDING");
-            
-                    con.close();
-                } catch (SQLException e) {
-            System.out.println(e.getMessage());
-                }
+//        String SQLQuery2 = "UPDATE Friends SET Status = 'Accepted' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
+//        
+//        try (Connection con = this.connect();
+//             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
+//                    pstmt.execute();
+//                    System.out.println("INSERTED NEW FRIENDSHIP PENDING");
+//            
+//                    con.close();
+//                } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//                }
     }
     
     
@@ -517,11 +498,12 @@ public class Database {
         String FirstUser = Users.get(0);
         String SecondUser = Users.get(1);
         
-        String SQLQuery = "UPDATE Friends SET Status = 'Declined' WHERE FirstUserName = '" + FirstUser + "' AND SecondUserName = '" + SecondUser + "';";
+        //String SQLQuery = "UPDATE Friends SET Status = 'Declined' WHERE FirstUserName = '" + FirstUser + "' AND SecondUserName = '" + SecondUser + "';";
+        String SQLQuery3 = "DELETE FROM Friends WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
         
         
         try (Connection con = this.connect();
-             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
+             PreparedStatement pstmt  = con.prepareStatement(SQLQuery3)) {
                     pstmt.execute();
                     System.out.println("INSERTED NEW FRIENDSHIP Declined");
             
@@ -530,17 +512,55 @@ public class Database {
             System.out.println(e.getMessage());
                 }
         
-        String SQLQuery2 = "UPDATE Friends SET Status = 'Declined' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
+//        String SQLQuery2 = "UPDATE Friends SET Status = 'Declined' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
+//        
+//        try (Connection con = this.connect();
+//             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
+//                    pstmt.execute();
+//                    System.out.println("INSERTED NEW FRIENDSHIP Declined");
+//            
+//                    con.close();
+//                } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//                }
+    }
+    
+    public ArrayList<String> GetUsernamesOnPreferences(String MusicPref)
+    {
+        ArrayList<String> AllUsers = new ArrayList();
+        
+        String SQLQuery = "SELECT UserName, Preferences FROM UserTable";
+        
         
         try (Connection con = this.connect();
-             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
-                    pstmt.execute();
-                    System.out.println("INSERTED NEW FRIENDSHIP Declined");
-            
+             Statement stmt  = con.createStatement()) 
+                {
+                    ResultSet rs = stmt.executeQuery(SQLQuery);
+                    
+                    
+                    while (rs.next())
+                    {
+                        String Username = rs.getString("UserName");
+                        String Preferences = rs.getString("Preferences");
+                        
+                        if ("All".equals(MusicPref))
+                            {
+                                AllUsers.add(Username);
+                            }
+                        else {
+                            if (Preferences.contains(MusicPref))
+                            {
+                                AllUsers.add(Username);
+                            }
+                        }
+                    }
+                    
                     con.close();
                 } catch (SQLException e) {
             System.out.println(e.getMessage());
                 }
+        
+        return AllUsers;
     }
     
 }

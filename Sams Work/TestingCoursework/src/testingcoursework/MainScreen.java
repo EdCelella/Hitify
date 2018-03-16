@@ -281,6 +281,7 @@ public class MainScreen extends javax.swing.JFrame {
         txtPosts = new javax.swing.JScrollPane();
         txtPostArea = new javax.swing.JTextArea();
         cmdPlayYourSong = new javax.swing.JButton();
+        cmdFindUsers = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -423,6 +424,13 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        cmdFindUsers.setText("Find Users");
+        cmdFindUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdFindUsersActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -497,7 +505,10 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cmdPlayUsersSong, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmdPlayYourSong, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cmdPlayYourSong, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(cmdFindUsers)))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -573,7 +584,8 @@ public class MainScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmdDeclineFriendRequest)
-                            .addComponent(cmdLogOut)))
+                            .addComponent(cmdLogOut)
+                            .addComponent(cmdFindUsers)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtNewFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -644,7 +656,7 @@ public class MainScreen extends javax.swing.JFrame {
             ArrayList<String> Users = new ArrayList();
             Users.add(Username);
             Users.add(txtNewFriendRequest.getText());
-            FriendRequest.SetSingleData(Username);
+            //FriendRequest.SetSingleData(Username);
             FriendRequest.SetArray(Users);
         
             Socket MainServer = new Socket("localhost", 9090);
@@ -951,6 +963,11 @@ public class MainScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmdPlayYourSongActionPerformed
 
+    private void cmdFindUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdFindUsersActionPerformed
+        new FindUsers(Username).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cmdFindUsersActionPerformed
+
     public void RefreshUserSongs(ArrayList<String> Songs) throws IOException, ClassNotFoundException
     {              
         DefaultListModel UserSongs = new DefaultListModel();
@@ -1026,6 +1043,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton cmdDeclineFriendRequest;
     private javax.swing.JButton cmdDeleteFriend;
     private javax.swing.JButton cmdFindUser;
+    private javax.swing.JButton cmdFindUsers;
     private javax.swing.JButton cmdLogOut;
     private javax.swing.JButton cmdPlayUsersSong;
     private javax.swing.JButton cmdPlayYourSong;

@@ -182,6 +182,15 @@ public class MusicServerExtended extends Thread {
                 ToClientStream.writeObject(Reply);
                 
             }
+            //Get Users based on Prefernces
+            else if ("GUP".equals(InFromClient.GetService()))
+            {
+                ArrayList<String> Users = db.GetUsernamesOnPreferences(InFromClient.GetData());
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("GUP");
+                Reply.SetArray(Users);
+                ToClientStream.writeObject(Reply);
+            }
             //Get Active Friends
             else if ("GAF".equals(InFromClient.GetService()))
             {

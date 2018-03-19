@@ -11,7 +11,7 @@ public class ServerSideSocket{
 		try{
 
 			// Sets a port number for the server socket
-			ServerSocket server = new ServerSocket(9090);
+			ServerSocket server = new ServerSocket(9091);
 
 			while(true){
 

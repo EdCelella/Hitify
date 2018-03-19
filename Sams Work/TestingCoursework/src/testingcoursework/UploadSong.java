@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 
 
 
@@ -84,11 +85,15 @@ public class UploadSong extends javax.swing.JFrame {
         cbGenre.setBackground(foreground);
         cbGenre.setBorder(new LineBorder(foreground, 4));
         
+        
+        
+        
         lblCoverPhoto.setBorder(new LineBorder(foreground, 2));
         
         taFilePath.setBackground(background);
         taFilePath.setLineWrap(true);
         taFilePath.setBorder(null);
+        taFilePath.setEditable(false);
     }
 
     /**
@@ -395,6 +400,7 @@ public class UploadSong extends javax.swing.JFrame {
     private void cmdClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClearActionPerformed
         ClearForm();
         lblChosen.setText("Selected File: ");
+        taFilePath.setText("");
     }//GEN-LAST:event_cmdClearActionPerformed
 
     private void cmdHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdHomeActionPerformed

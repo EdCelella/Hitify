@@ -181,11 +181,17 @@ public class MainScreen extends javax.swing.JFrame {
         C.SetForm(this);
         Thread t1 = new Thread(C);
         t1.start(); 
+        //Thread timer to refresh Posts and All Friends every 60 seconds
+        TimerThread2 D = new TimerThread2();  
+        D.SetForm(this);
+        Thread t2 = new Thread(D);
+        t2.start();
+        
                
         //ListAllFriends.getSelectedValue() to retrieve currently selected item
     }
     
-    public void RefreshAllFriendsList() throws IOException, ClassNotFoundException
+     public void RefreshAllFriendsList() throws IOException, ClassNotFoundException
     {
         Socket MainServer = new Socket("localhost", 9090);
                     
@@ -335,11 +341,18 @@ public class MainScreen extends javax.swing.JFrame {
         for (int i = 0 ; i < FriendsPosts.size(); i++)
         {
             String PostFormat = "";
-            if ("Select Mood:".equals(FriendsPosts.get(i).get(3))) {
-                PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + ": " + FriendsPosts.get(i).get(2) +"\n";
+            if ("TextPost".equals(FriendsPosts.get(i).get(4)))
+            {
+                if ("Select Mood:".equals(FriendsPosts.get(i).get(3))) {
+                    PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + ": " + FriendsPosts.get(i).get(2) +"\n";
+                }
+                else {
+                    PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + ": " + FriendsPosts.get(i).get(2) + " - Feeling " + FriendsPosts.get(i).get(3)+"\n";
+                }
             }
-            else {
-                PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + ": " + FriendsPosts.get(i).get(2) + " - Feeling " + FriendsPosts.get(i).get(3)+"\n";
+            else if ("SongUpload".equals(FriendsPosts.get(i).get(4)))
+            {
+                PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + " uploaded a new song: " + FriendsPosts.get(i).get(2) +"\n";
             }
             txtPostArea.append(PostFormat);
 
@@ -405,6 +418,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         cmdPlayPause = new javax.swing.JButton();
         songProgress = new javax.swing.JProgressBar();
+        cmdFindOtherUsers = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(43, 45, 66));
@@ -705,6 +719,13 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        cmdFindOtherUsers.setText("Find Other Users");
+        cmdFindOtherUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdFindOtherUsersActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -803,7 +824,8 @@ public class MainScreen extends javax.swing.JFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                     .addComponent(cmdDeclineFriendRequest, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(cmdAcceptFriendRequest, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(cmdSendFreindRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)))
+                                                    .addComponent(cmdSendFreindRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                                    .addComponent(cmdFindOtherUsers, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                             .addComponent(jLabel3))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -891,14 +913,15 @@ public class MainScreen extends javax.swing.JFrame {
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addGap(4, 4, 4)
                                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addGap(36, 36, 36)
-                                            .addComponent(cmdAcceptFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(cmdDeclineFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cmdAcceptFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(cmdDeclineFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(7, 7, 7)
+                                            .addComponent(cmdFindOtherUsers)
+                                            .addGap(18, 18, 18)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(txtNewFriendRequest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(cmdSendFreindRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -931,9 +954,19 @@ public class MainScreen extends javax.swing.JFrame {
         LoggingOff.SetService("LGO");
         LoggingOff.SetSingleData(Username);
         
+        File Pdir = new File("res/Photos"); 
+        File Mdir = new File("res/Music"); 
             
         try {
             //Send the NamePass infopacket
+            //Remove Files in Music and Photo Folders
+            for(File file: Pdir.listFiles()) 
+                if (!file.isDirectory()) 
+                    file.delete();
+            for(File file: Mdir.listFiles()) 
+                if (!file.isDirectory()) 
+                    file.delete();
+            
             Socket MainServer = new Socket("localhost", 9090);
             ObjectOutputStream ToServerStream = new ObjectOutputStream(MainServer.getOutputStream());
             System.out.println("Made Output Stream");
@@ -946,12 +979,16 @@ public class MainScreen extends javax.swing.JFrame {
             
             
             MainServer.close();
+            
+            
+            
+            
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         new LogInScreen().setVisible(true);
-        this.dispose();        
+        this.dispose();       
     }//GEN-LAST:event_cmdLogOutActionPerformed
 
     private void cmdUploadSongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdUploadSongActionPerformed
@@ -968,7 +1005,7 @@ public class MainScreen extends javax.swing.JFrame {
             ArrayList<String> Users = new ArrayList();
             Users.add(Username);
             Users.add(txtNewFriendRequest.getText());
-            FriendRequest.SetSingleData(Username);
+            //FriendRequest.SetSingleData(Username);
             FriendRequest.SetArray(Users);
         
             Socket MainServer = new Socket("localhost", 9090);
@@ -982,24 +1019,41 @@ public class MainScreen extends javax.swing.JFrame {
 
             InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
 
-            ArrayList<String> AllUsersFriends = ServerReply.GetArray();
+            String State = ServerReply.GetData();
 
             OutToServer.close();
             FromServerStream.close();
 
+            
+            
+            if ("Exists".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "Request has been sent to " + txtNewFriendRequest.getText(),
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
+            else if ("Doesnt".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "Declined, this username does not exist on Hitify",
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
+            else if ("AlreadyFriends".equals(State))
+            {
+                JOptionPane.showMessageDialog(this,
+                "You are already friends with this user, or they have sent you a friend request",
+                "Friend Request",
+                 JOptionPane.PLAIN_MESSAGE);
+            }
+            
             txtNewFriendRequest.setText("");
             
-            JOptionPane.showMessageDialog(this,
-            "Friend Request Sent",
-            "Success",
-            JOptionPane.PLAIN_MESSAGE);
-            
             OutToServer.close();
             FromServerStream.close();
             
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_cmdSendFreindRequestActionPerformed
@@ -1033,7 +1087,6 @@ public class MainScreen extends javax.swing.JFrame {
         {
             System.out.println(e.getMessage());
         }
-        
     }//GEN-LAST:event_cmdAcceptFriendRequestActionPerformed
 
     private void cmdDeclineFriendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeclineFriendRequestActionPerformed
@@ -1132,12 +1185,16 @@ public class MainScreen extends javax.swing.JFrame {
             
             ArrayList<ArrayList<String>> UserInformation = ServerReply.GetMultipleArray();
             
+            
+            File PhotoDirectory = new File("res/Photos/" + UsernameToFind + ".png");
+            
             byte [] ProfileImage = (byte []) ServerReply.GetByteData();
-            String WhereToSave = "./res/Photos" + UsernameToFind + ".png";
-            FileOutputStream FileOut = new FileOutputStream(WhereToSave);
+            FileOutputStream FileOut = new FileOutputStream(PhotoDirectory);
             FileOut.write(ProfileImage);
             
-            lblProfilePicture.setIcon(ResizeImage(WhereToSave));
+            
+            
+            lblProfilePicture.setIcon(ResizeImage(PhotoDirectory.getPath()));
             lblUsername.setText("Username: " + UsernameToFind);     
             lblFirstName.setText("First Name: " + UserInformation.get(0).get(0));
             lblSecondName.setText("Second Name: " + UserInformation.get(0).get(1));
@@ -1196,6 +1253,9 @@ public class MainScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cmdDeleteFriendActionPerformed
 
+    
+    
+    
     private void txtNewPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNewPostActionPerformed
@@ -1391,11 +1451,96 @@ public class MainScreen extends javax.swing.JFrame {
     private void cmdPlayPauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPlayPauseMouseClicked
         if(!(ListMySongs.isSelectionEmpty())){
             System.out.println(ListMySongs.getSelectedValue());
+            PlayYourSong();
         }else if(!(listSelectedUsersSongs.isSelectionEmpty())){
             System.out.println(listSelectedUsersSongs.getSelectedValue());
+            PlaySelectedUserSong();
         }
     }//GEN-LAST:event_cmdPlayPauseMouseClicked
 
+    private void cmdFindOtherUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdFindOtherUsersActionPerformed
+        // TODO add your handling code here:
+        new FindUsers(Username).setVisible(true);
+    }//GEN-LAST:event_cmdFindOtherUsersActionPerformed
+    
+    public void PlaySelectedUserSong()
+    {
+        String FileName = listSelectedUsersSongs.getSelectedValue();
+        InfoPacket SelectedSong = new InfoPacket();
+        SelectedSong.SetService("DWS");
+        SelectedSong.SetSingleData(FileName);
+        
+        try {
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+            OutToServer.writeObject(SelectedSong);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+            
+            File MusicDirectory = new File("res/Music/" + FileName + ".mp3");
+            File PhotoDirectory = new File("res/Photos/" + FileName + ".png");
+            
+            byte [] Song = (byte []) ServerReply.GetByteData();
+            FileOutputStream SongOut = new FileOutputStream(MusicDirectory);
+            SongOut.write(Song);
+
+            byte [] CoverPhoto = (byte []) ServerReply.GetSecondData();
+            FileOutputStream PhotoOut = new FileOutputStream(PhotoDirectory);
+            PhotoOut.write(CoverPhoto);
+            
+            OutToServer.close();
+            FromServerStream.close();
+            
+            //Pass song name to music player form    
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void PlayYourSong()
+    {
+        String FileName = ListMySongs.getSelectedValue();
+        InfoPacket SelectedSong = new InfoPacket();
+        SelectedSong.SetService("DWS");
+        SelectedSong.SetSingleData(FileName);
+        
+        try {
+            Socket MainServer = new Socket("localhost", 9090);
+
+            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
+            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
+
+            OutToServer.writeObject(SelectedSong);
+
+            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
+            
+            File MusicDirectory = new File("res/Music/" + FileName + ".mp3");
+            File PhotoDirectory = new File("res/Photos/" + FileName + ".png");
+            
+            
+            byte [] Song = (byte []) ServerReply.GetByteData();
+            FileOutputStream SongOut = new FileOutputStream(MusicDirectory);
+            SongOut.write(Song);
+
+            byte [] CoverPhoto = (byte []) ServerReply.GetSecondData();
+            FileOutputStream PhotoOut = new FileOutputStream(PhotoDirectory);
+            PhotoOut.write(CoverPhoto);
+            
+            OutToServer.close();
+            FromServerStream.close();
+            //Pass song name to music player form
+            
+        } catch (IOException | ClassNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    
     public void RefreshUserSongs(ArrayList<String> Songs) throws IOException, ClassNotFoundException
     {              
         DefaultListModel UserSongs = new DefaultListModel();
@@ -1470,6 +1615,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton cmdClearPost;
     private javax.swing.JButton cmdDeclineFriendRequest;
     private javax.swing.JButton cmdDeleteFriend;
+    private javax.swing.JButton cmdFindOtherUsers;
     private javax.swing.JButton cmdFindUser;
     private javax.swing.JButton cmdLogOut;
     private javax.swing.JButton cmdPlayPause;

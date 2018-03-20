@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import database.Database;
+import java.io.File;
 import java.io.FileInputStream;
 import java.net.InetSocketAddress;
 
@@ -119,19 +120,31 @@ public class MusicServerExtended extends Thread {
                 System.out.println("Creating New User");
                 //Retreive all information about user and add it to the DB
                 ArrayList UsersInfo = InFromClient.GetArray();
-                db.InsertNewRegUser(UsersInfo);
-                byte [] Image = (byte []) InFromClient.GetByteData();
-
-                String WhereToSave = "./res/Photos/" + InFromClient.GetArray().get(0) + ".png";
-                FileOutputStream FileOut = new FileOutputStream(WhereToSave);
-                FileOut.write(Image);
                 
+                boolean AlreadyExists = db.DoesUsernameExist(UsersInfo.get(0).toString());
                 InfoPacket Reply = new InfoPacket();
-                Reply.SetService("LGO");
-                Reply.SetSingleData("Logout");
+                Reply.SetService("CNU");
+                if (AlreadyExists == false)
+                {
+                    db.InsertNewRegUser(UsersInfo);
+                    byte [] Image = (byte []) InFromClient.GetByteData();
+
+
+                    File PhotoDirectory = new File("res/Photos/" + InFromClient.GetArray().get(0) + ".png");
+                    FileOutputStream FileOut = new FileOutputStream(PhotoDirectory);
+                    FileOut.write(Image);
+
+                    
+                    Reply.SetSingleData("Registered");
+                    
+                }
+                else
+                {
+                    Reply.SetSingleData("UsernameExists");
+                }
+                
                 ToClientStream.writeObject(Reply);
                 
-                System.out.println("Sucessfull");
             }
 
             //Upload new song
@@ -141,15 +154,16 @@ public class MusicServerExtended extends Thread {
 
                 ArrayList SongInformation = InFromClient.GetArray();
                 String FileName = SongInformation.get(2) + "," + SongInformation.get(3);
+                
+                File MusicDirectory = new File("res/Music/" + FileName + ".mp3");
+                File PhotoDirectory = new File("res/Photos/" + FileName + ".png");
 
                 byte [] Song = (byte []) InFromClient.GetByteData();
-                String WhereToSaveSong = "./res/Music/" + FileName + ".mp3";
-                FileOutputStream SongOut = new FileOutputStream(WhereToSaveSong);
+                FileOutputStream SongOut = new FileOutputStream(MusicDirectory);
                 SongOut.write(Song);
 
                 byte [] CoverPhoto = (byte []) InFromClient.GetSecondData();
-                String WhereToSavePhoto= "./res/Photos/" + FileName + ".png";
-                FileOutputStream PhotoOut = new FileOutputStream(WhereToSavePhoto);
+                FileOutputStream PhotoOut = new FileOutputStream(PhotoDirectory);
                 PhotoOut.write(CoverPhoto);
 
                 db.InsertSong(SongInformation);
@@ -179,6 +193,15 @@ public class MusicServerExtended extends Thread {
                 ToClientStream.writeObject(Reply);
                 
             }
+            //Get Users based on Prefernces
+            else if ("GUP".equals(InFromClient.GetService()))
+            {
+                ArrayList<String> Users = db.GetUsernamesOnPreferences(InFromClient.GetData());
+                InfoPacket Reply = new InfoPacket();
+                Reply.SetService("GUP");
+                Reply.SetArray(Users);
+                ToClientStream.writeObject(Reply);
+            }
             //Get Active Friends
             else if ("GAF".equals(InFromClient.GetService()))
             {
@@ -193,10 +216,27 @@ public class MusicServerExtended extends Thread {
             else if ("NFR".equals(InFromClient.GetService()))
             {
                 ArrayList<String> Users = InFromClient.GetArray();
-                db.NewFriendRequest(Users);
+                boolean UsernameExists = db.DoesUsernameExist(Users.get(1));
                 InfoPacket Reply = new InfoPacket();
                 Reply.SetService("NFR");
-                Reply.SetSingleData("Send Request");
+                if (UsernameExists == true)
+                {
+                    boolean AlreadyFriends = db.AlreadyFriends(Users);
+                    if (AlreadyFriends == false)
+                    {
+                        Reply.SetSingleData("Exists");
+                        db.NewFriendRequest(Users);
+                    }
+                    else
+                    {
+                        Reply.SetSingleData("AlreadyFriends");
+                    }
+                }
+                else
+                {
+                    Reply.SetSingleData("Doesnt");
+                }
+                             
                 ToClientStream.writeObject(Reply);
             }
             //Get Friend Requests
@@ -261,8 +301,10 @@ public class MusicServerExtended extends Thread {
                 UserInformation.SetService("GUD");
                 UserInformation.SetMultipleArray(UsersInfo);
                 
-                String PhotoFilePath = "./res/Photos/" + Username + ".png";
-                FileInputStream UserPicture = new FileInputStream(PhotoFilePath);
+                
+                File PhotoDirectory = new File("res/Photos/" + Username + ".png");
+                
+                FileInputStream UserPicture = new FileInputStream(PhotoDirectory);
                 byte [] buffer = new byte[UserPicture.available()];
                 UserPicture.read(buffer);
                 
@@ -284,6 +326,30 @@ public class MusicServerExtended extends Thread {
                 FriendsPosts.SetService("GFP");
                 FriendsPosts.SetMultipleArray(UserPosts);
                 ToClientStream.writeObject(FriendsPosts);
+            }
+            //DoWnload Song
+            else if ("DWS".equals(InFromClient.GetService()))
+            {
+                               
+                InfoPacket SongData = new InfoPacket();
+                
+                File MusicDirectory = new File("res/Music/" + InFromClient.GetData() + ".mp3");
+                File PhotoDirectory = new File("res/Photos/" + InFromClient.GetData() + ".png");
+                
+                FileInputStream SongFile = new FileInputStream(MusicDirectory);
+                byte [] buffer = new byte[SongFile.available()];
+                SongFile.read(buffer);
+                
+                FileInputStream PhotoFile = new FileInputStream(PhotoDirectory);
+                byte [] buffer2 = new byte[PhotoFile.available()];
+                PhotoFile.read(buffer2);
+                
+                SongData.SetService("DWS");
+                SongData.SetFirstByte(buffer);
+                SongData.SetSecondByte(buffer2);
+                
+                ToClientStream.writeObject(SongData);
+                
             }
             else
             {

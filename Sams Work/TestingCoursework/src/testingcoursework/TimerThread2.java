@@ -6,8 +6,6 @@
 package testingcoursework;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author samal
  */
-public class TimerThread extends Thread{
+public class TimerThread2 extends Thread{
     
     private MainScreen form;
     
@@ -32,9 +30,10 @@ public class TimerThread extends Thread{
         while(true)
         {
             try {
-                  form.RefreshActiveFriendsList();
-                  form.RefreshFriendsRequestList();
-                  Thread.sleep(2000);
+                  
+                  form.RefreshAllFriendsList();
+                  form.RefreshPosts();
+                  Thread.sleep(60000);
             } catch (IOException | ClassNotFoundException | InterruptedException ex) {
                   Logger.getLogger(TimerThread.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -8,6 +8,7 @@ package testingcoursework;
 import infopacket.InfoPacket;
 import java.awt.Color;
 import java.awt.Image;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -103,7 +104,7 @@ public class MainScreen extends javax.swing.JFrame {
         cmdPlayPause.setContentAreaFilled(false);
         cmdPlayPause.setBackground(background);
 	cmdPlayPause.setForeground(foreground);
-        cmdPlayPause.setIcon(ResizeImage("/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/PlayPause.png"));
+        cmdPlayPause.setIcon(ResizeImage("./res/Photos/PlayPause.png"));
         
         // Sets background and foreground colours for lists and removes the 
         // scroll pane border
@@ -145,7 +146,8 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel12.setBorder(new LineBorder(foreground, 4));
         
         // Sets Logo
-        jLabel13.setIcon(ResizeImage("/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/logo.png"));
+        
+        jLabel13.setIcon(ResizeImage("./res/Photos/logo.png"));
         
         // Styles drop down menu
         cbUserMood.setBackground(foreground);
@@ -1131,7 +1133,7 @@ public class MainScreen extends javax.swing.JFrame {
             ArrayList<ArrayList<String>> UserInformation = ServerReply.GetMultipleArray();
             
             byte [] ProfileImage = (byte []) ServerReply.GetByteData();
-            String WhereToSave = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/MusicServer/res/Photos" + UsernameToFind + ".png";
+            String WhereToSave = "./res/Photos" + UsernameToFind + ".png";
             FileOutputStream FileOut = new FileOutputStream(WhereToSave);
             FileOut.write(ProfileImage);
             
@@ -1378,12 +1380,12 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void cmdPlayPauseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPlayPauseMouseEntered
         // Changes icon colour when mouse hovers
-        cmdPlayPause.setIcon(ResizeImage("/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/PlayPauseHover.png"));
+        cmdPlayPause.setIcon(ResizeImage("./res/Photos/PlayPauseHover.png"));
     }//GEN-LAST:event_cmdPlayPauseMouseEntered
 
     private void cmdPlayPauseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPlayPauseMouseExited
         // Changes icon colour when mouse leaves
-        cmdPlayPause.setIcon(ResizeImage("/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/TestingCoursework/res/Photos/PlayPause.png"));
+        cmdPlayPause.setIcon(ResizeImage("./res/Photos/PlayPause.png"));
     }//GEN-LAST:event_cmdPlayPauseMouseExited
 
     private void cmdPlayPauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPlayPauseMouseClicked

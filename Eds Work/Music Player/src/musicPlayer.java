@@ -5,6 +5,7 @@ import sun.audio.AudioStream;
 import java.util.concurrent.TimeUnit;
 
 import java.io.*;
+import java.net.*;
 import java.nio.channels.FileChannel;
 
 public class musicPlayer{
@@ -38,6 +39,11 @@ public class musicPlayer{
     // play the audio clip with the audioplayer class
     AudioPlayer.player.start(audioStream);
 
+    }
+    
+}
+
+/*
     TimeUnit.SECONDS.sleep(15);
 
     AudioPlayer.player.stop(audioStream);
@@ -45,9 +51,4 @@ public class musicPlayer{
     TimeUnit.SECONDS.sleep(5);
 
     AudioPlayer.player.start(audioStream);
-    
-
-    }
-    
-}
-
+*/

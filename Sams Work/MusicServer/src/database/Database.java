@@ -52,7 +52,7 @@ public class Database {
 
     public ArrayList<ArrayList<String>> GetFriendsPosts(ArrayList<String> Friends)
     {
-        String SQLCreateView = "CREATE TABLE TempPosts (DateTimePosted VARCHAR(30), Username VARCHAR(20), MessageOrFilename VARCHAR(256), UserMood VARCHAR(20));";
+        String SQLCreateView = "CREATE TABLE TempPosts (DateTimePosted VARCHAR(30), Username VARCHAR(20), MessageOrFilename VARCHAR(256), UserMood VARCHAR(20), TypeOfPost VARCHAR(20));";
         
         
         //"CREATE TABLE TempPosts (DateTimePosted, Username, MessageOrFilename, UserMood) AS SELECT DateTimePosted,Username,"
@@ -70,7 +70,7 @@ public class Database {
         
         for (int i = 0; i < Friends.size(); i++)
         {
-            String SQLInsertView = "INSERT INTO TempPosts SELECT DateTimePosted,Username,MessageOrFilename,UserMood FROM Posts WHERE Username = '"+Friends.get(i)+"' AND TypeOfPost = 'TextPost';";
+            String SQLInsertView = "INSERT INTO TempPosts SELECT DateTimePosted,Username,MessageOrFilename,UserMood,TypeOfPost FROM Posts WHERE Username = '"+Friends.get(i)+"';";
             try (Connection con = this.connect();
                 PreparedStatement pstmt = con.prepareStatement(SQLInsertView)) {
                 pstmt.execute();                              
@@ -80,7 +80,7 @@ public class Database {
             }
         }
         
-        String sqlSelectFromView = "SELECT DateTimePosted, Username, MessageOrFilename, UserMood FROM TempPosts ORDER BY DateTimePosted;";
+        String sqlSelectFromView = "SELECT DateTimePosted, Username, MessageOrFilename, UserMood, TypeOfPost FROM TempPosts ORDER BY DateTimePosted;";
         
         ArrayList<ArrayList<String>> FriendsPosts = new ArrayList();
         
@@ -95,6 +95,7 @@ public class Database {
                 Posts.add(rs.getString("Username"));
                 Posts.add(rs.getString("MessageOrFilename"));
                 Posts.add(rs.getString("UserMood"));
+                Posts.add(rs.getString("TypeOfPost"));
                 FriendsPosts.add(Posts);
             } 
             
@@ -388,28 +389,7 @@ public class Database {
                 System.out.println(e.getMessage());
                     }
         }
-        
-        
-//        String SQLQuery2 = "SELECT FirstUserName FROM Friends WHERE SecondUserName = '" + Username + "'"
-//                + " AND Status = 'Accepted';";
-//        
-//        try (Connection con = this.connect();
-//             Statement stmt  = con.createStatement()) 
-//                {
-//                    ResultSet rs = stmt.executeQuery(SQLQuery2);
-//                    
-//                    
-//                    while (rs.next())
-//                    {
-//                        FriendsList.add(rs.getString("FirstUserName"));
-//                    }
-//                    
-//                    con.close();
-//                } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//                }
-        
-        
+                
         return ActiveFriends;
     }
     
@@ -418,32 +398,13 @@ public class Database {
         
         ArrayList<String> FriendsRequestList = new ArrayList();
         
-        String SQLQuery = "SELECT SecondUserName FROM Friends WHERE FirstUserName = '" + Username + "'"
+        String SQLQuery = "SELECT FirstUserName FROM Friends WHERE SecondUserName = '" + Username + "'"
                 + " AND Status = 'Pending';";
         
         try (Connection con = this.connect();
              Statement stmt  = con.createStatement()) 
                 {
                     ResultSet rs = stmt.executeQuery(SQLQuery);
-                    
-                    
-                    while (rs.next())
-                    {
-                        FriendsRequestList.add(rs.getString("SecondUserName"));
-                    }
-                    
-                    con.close();
-                } catch (SQLException e) {
-            System.out.println(e.getMessage());
-                }
-        
-        String SQLQuery2 = "SELECT FirstUserName FROM Friends WHERE SecondUserName = '" + Username + "'"
-                + " AND Status = 'Pending';";
-        
-        try (Connection con = this.connect();
-             Statement stmt  = con.createStatement()) 
-                {
-                    ResultSet rs = stmt.executeQuery(SQLQuery2);
                     
                     
                     while (rs.next())
@@ -484,7 +445,7 @@ public class Database {
         String FirstUser = Users.get(0);
         String SecondUser = Users.get(1);
         
-        String SQLQuery = "UPDATE Friends SET Status = 'Accepted' WHERE FirstUserName = '" + FirstUser + "' AND SecondUserName = '" + SecondUser + "';";
+        String SQLQuery = "UPDATE Friends SET Status = 'Accepted' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
         
         
         try (Connection con = this.connect();
@@ -497,17 +458,17 @@ public class Database {
             System.out.println(e.getMessage());
                 }
         
-        String SQLQuery2 = "UPDATE Friends SET Status = 'Accepted' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
-        
-        try (Connection con = this.connect();
-             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
-                    pstmt.execute();
-                    System.out.println("INSERTED NEW FRIENDSHIP PENDING");
-            
-                    con.close();
-                } catch (SQLException e) {
-            System.out.println(e.getMessage());
-                }
+//        String SQLQuery2 = "UPDATE Friends SET Status = 'Accepted' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
+//        
+//        try (Connection con = this.connect();
+//             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
+//                    pstmt.execute();
+//                    System.out.println("INSERTED NEW FRIENDSHIP PENDING");
+//            
+//                    con.close();
+//                } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//                }
     }
     
     
@@ -516,11 +477,12 @@ public class Database {
         String FirstUser = Users.get(0);
         String SecondUser = Users.get(1);
         
-        String SQLQuery = "UPDATE Friends SET Status = 'Declined' WHERE FirstUserName = '" + FirstUser + "' AND SecondUserName = '" + SecondUser + "';";
+        //String SQLQuery = "UPDATE Friends SET Status = 'Declined' WHERE FirstUserName = '" + FirstUser + "' AND SecondUserName = '" + SecondUser + "';";
+        String SQLQuery3 = "DELETE FROM Friends WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
         
         
         try (Connection con = this.connect();
-             PreparedStatement pstmt  = con.prepareStatement(SQLQuery)) {
+             PreparedStatement pstmt  = con.prepareStatement(SQLQuery3)) {
                     pstmt.execute();
                     System.out.println("INSERTED NEW FRIENDSHIP Declined");
             
@@ -529,16 +491,101 @@ public class Database {
             System.out.println(e.getMessage());
                 }
         
-        String SQLQuery2 = "UPDATE Friends SET Status = 'Declined' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
-        
-        try (Connection con = this.connect();
-             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
-                    pstmt.execute();
-                    System.out.println("INSERTED NEW FRIENDSHIP Declined");
-            
-                    con.close();
-                } catch (SQLException e) {
-            System.out.println(e.getMessage());
-                }
+//        String SQLQuery2 = "UPDATE Friends SET Status = 'Declined' WHERE FirstUserName = '" + SecondUser + "' AND SecondUserName = '" + FirstUser + "';";
+//        
+//        try (Connection con = this.connect();
+//             PreparedStatement pstmt  = con.prepareStatement(SQLQuery2)) {
+//                    pstmt.execute();
+//                    System.out.println("INSERTED NEW FRIENDSHIP Declined");
+//            
+//                    con.close();
+//                } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//                }
     }
+    
+    public ArrayList<String> GetUsernamesOnPreferences(String MusicPref)
+    {
+        ArrayList<String> AllUsers = new ArrayList();
+        
+        String SQLQuery = "SELECT UserName, Preferences FROM UserTable";
+        
+        
+        try (Connection con = this.connect();
+             Statement stmt  = con.createStatement()) 
+                {
+                    ResultSet rs = stmt.executeQuery(SQLQuery);
+                    
+                    
+                    while (rs.next())
+                    {
+                        String Username = rs.getString("UserName");
+                        String Preferences = rs.getString("Preferences");
+                        
+                        if ("All".equals(MusicPref))
+                            {
+                                AllUsers.add(Username);
+                            }
+                        else {
+                            if (Preferences.contains(MusicPref))
+                            {
+                                AllUsers.add(Username);
+                            }
+                        }
+                    }
+                    
+                    con.close();
+                } catch (SQLException e) {
+            System.out.println(e.getMessage());
+                }
+        
+        return AllUsers;
+    }
+    
+    public boolean DoesUsernameExist(String Username)
+    {
+        boolean Exists = false;
+        ArrayList<String> Users = GetUsernamesOnPreferences("All");
+
+        for (int i = 0; i < Users.size(); i++)
+        {
+            if (Username.equals(Users.get(i)))
+            {
+                Exists = true;
+            }
+        }
+        return Exists;
+    }
+    
+    public boolean AlreadyFriends (ArrayList<String> Users)
+    {
+        boolean AlreadyFriends = false;
+        //User[0] to retrieve friends for
+        //if User[1] is in the ArrayList then they are already friends
+        ArrayList<String> AllFriends = GetUsersFriends(Users.get(0));
+        
+        
+        for (int i = 0; i < AllFriends.size(); i++)
+        {
+           if (Users.get(1).equals(AllFriends.get(i)))
+           {
+               AlreadyFriends = true;
+           }
+        }
+        
+        ArrayList<String> FriendRequests = GetUsersFriendRequests(Users.get(0));
+        
+        for (int i = 0; i < FriendRequests.size(); i++)
+        {
+           if (Users.get(1).equals(FriendRequests.get(i)))
+           {
+               AlreadyFriends = true;
+           }
+        }
+        
+        return AlreadyFriends;
+    }
+    
+    
+    
 }

@@ -33,7 +33,7 @@ public class TimerThread extends Thread{
         {
             try {
                   form.RefreshActiveFriendsList();
-                  
+                  form.RefreshFriendsRequestList();
                   Thread.sleep(2000);
             } catch (IOException | ClassNotFoundException | InterruptedException ex) {
                   Logger.getLogger(TimerThread.class.getName()).log(Level.SEVERE, null, ex);

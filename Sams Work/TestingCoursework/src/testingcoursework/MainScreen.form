@@ -145,6 +145,7 @@
                                                   <Component id="cmdDeclineFriendRequest" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="cmdAcceptFriendRequest" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="cmdSendFreindRequest" pref="238" max="32767" attributes="0"/>
+                                                  <Component id="cmdFindOtherUsers" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -268,14 +269,15 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jLabel11" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel11" min="-2" pref="180" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                          <Component id="cmdAcceptFriendRequest" min="-2" pref="47" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cmdDeclineFriendRequest" min="-2" pref="47" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="cmdAcceptFriendRequest" min="-2" pref="24" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="cmdDeclineFriendRequest" min="-2" pref="23" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                          <Component id="cmdFindOtherUsers" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="txtNewFriendRequest" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="cmdSendFreindRequest" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
@@ -805,6 +807,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JProgressBar" name="songProgress">
+    </Component>
+    <Component class="javax.swing.JButton" name="cmdFindOtherUsers">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Find Other Users"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdFindOtherUsersActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

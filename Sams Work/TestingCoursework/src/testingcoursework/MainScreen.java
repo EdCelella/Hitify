@@ -21,6 +21,13 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import java.util.concurrent.TimeUnit;
+import javazoom.jl.converter.Converter;
+import javazoom.jl.decoder.JavaLayerException;
 
 public class MainScreen extends javax.swing.JFrame {
 
@@ -38,7 +45,12 @@ public class MainScreen extends javax.swing.JFrame {
     // Used for border thickness
     int buttonBorder = 4;
     int listBorder = 4;
-  
+    
+    //Used for music player
+    boolean musicPlaying = false;
+    String previousSongChoice = "";
+    AudioStream audioStream = null;
+    
     public MainScreen() {
         initComponents();
     }
@@ -104,7 +116,7 @@ public class MainScreen extends javax.swing.JFrame {
         cmdPlayPause.setContentAreaFilled(false);
         cmdPlayPause.setBackground(background);
 	cmdPlayPause.setForeground(foreground);
-        cmdPlayPause.setIcon(ResizeImage("./res/Photos/PlayPause.png"));
+        cmdPlayPause.setIcon(ResizeImage("./res/Photos/SystemPics/PlayPause.png"));
         
         // Sets background and foreground colours for lists and removes the 
         // scroll pane border
@@ -147,7 +159,7 @@ public class MainScreen extends javax.swing.JFrame {
         
         // Sets Logo
         
-        jLabel13.setIcon(ResizeImage("./res/Photos/logo.png"));
+        jLabel13.setIcon(ResizeImage("./res/Photos/SystemPics/logo.png"));
         
         // Styles drop down menu
         cbUserMood.setBackground(foreground);
@@ -1440,22 +1452,43 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void cmdPlayPauseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPlayPauseMouseEntered
         // Changes icon colour when mouse hovers
-        cmdPlayPause.setIcon(ResizeImage("./res/Photos/PlayPauseHover.png"));
+        cmdPlayPause.setIcon(ResizeImage("./res/Photos/SystemPics/PlayPauseHover.png"));
     }//GEN-LAST:event_cmdPlayPauseMouseEntered
 
     private void cmdPlayPauseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPlayPauseMouseExited
         // Changes icon colour when mouse leaves
-        cmdPlayPause.setIcon(ResizeImage("./res/Photos/PlayPause.png"));
+        cmdPlayPause.setIcon(ResizeImage("./res/Photos/SystemPics/PlayPause.png"));
     }//GEN-LAST:event_cmdPlayPauseMouseExited
 
     private void cmdPlayPauseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPlayPauseMouseClicked
+        
+        String songChoice = "";
+        
         if(!(ListMySongs.isSelectionEmpty())){
-            System.out.println(ListMySongs.getSelectedValue());
-            PlayYourSong();
+            songChoice = ListMySongs.getSelectedValue();
         }else if(!(listSelectedUsersSongs.isSelectionEmpty())){
-            System.out.println(listSelectedUsersSongs.getSelectedValue());
-            PlaySelectedUserSong();
+            songChoice = listSelectedUsersSongs.getSelectedValue();
         }
+        
+        if( !(songChoice.equals(previousSongChoice)) && (songChoice != "") ){
+            if(musicPlaying == true){
+                AudioPlayer.player.stop(audioStream);
+            }
+            downloadSong(songChoice);
+            convertFile(songChoice);
+            playSong();
+            previousSongChoice = songChoice;
+            musicPlaying = true;
+        }else{
+            if(musicPlaying == true){
+                AudioPlayer.player.stop(audioStream);
+                musicPlaying = false;
+            }else{
+                AudioPlayer.player.start(audioStream);
+                musicPlaying = true;
+            }
+        }
+        
     }//GEN-LAST:event_cmdPlayPauseMouseClicked
 
     private void cmdFindOtherUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdFindOtherUsersActionPerformed
@@ -1463,9 +1496,33 @@ public class MainScreen extends javax.swing.JFrame {
         new FindUsers(Username).setVisible(true);
     }//GEN-LAST:event_cmdFindOtherUsersActionPerformed
     
-    public void PlaySelectedUserSong()
+    public void playSong(){
+        try {
+            
+            // open the sound file as a Java input stream
+            InputStream in = new FileInputStream("./res/Music/Conv/playSong.wav");
+            // create an audiostream from the inputstream
+            audioStream = new AudioStream(in);
+            // play the audio clip with the audioplayer class
+            AudioPlayer.player.start(audioStream);
+            
+        }catch(IOException e){}  
+    }
+    public void convertFile(String songName){
+        
+        String songPath = "./res/Music/" + songName + ".mp3";
+        //String songPath = "./res/Music/James Bay,Wild Love.mp3";
+        System.out.println(songPath);
+        Converter converter = new Converter();
+        try {
+            converter.convert(songPath, "./res/Music/Conv/playSong.wav");
+        } catch (JavaLayerException ex) {}
+        //new File("./src/res/Music/Conv/playSong.wav");
+       
+    }
+    
+    public void downloadSong(String FileName)
     {
-        String FileName = listSelectedUsersSongs.getSelectedValue();
         InfoPacket SelectedSong = new InfoPacket();
         SelectedSong.SetService("DWS");
         SelectedSong.SetSingleData(FileName);
@@ -1499,46 +1556,6 @@ public class MainScreen extends javax.swing.JFrame {
         {
             System.out.println(e.getMessage());
         }
-    }
-    
-    public void PlayYourSong()
-    {
-        String FileName = ListMySongs.getSelectedValue();
-        InfoPacket SelectedSong = new InfoPacket();
-        SelectedSong.SetService("DWS");
-        SelectedSong.SetSingleData(FileName);
-        
-        try {
-            Socket MainServer = new Socket("localhost", 9090);
-
-            ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
-            ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
-
-            OutToServer.writeObject(SelectedSong);
-
-            InfoPacket ServerReply = (InfoPacket) FromServerStream.readObject();
-            
-            File MusicDirectory = new File("res/Music/" + FileName + ".mp3");
-            File PhotoDirectory = new File("res/Photos/" + FileName + ".png");
-            
-            
-            byte [] Song = (byte []) ServerReply.GetByteData();
-            FileOutputStream SongOut = new FileOutputStream(MusicDirectory);
-            SongOut.write(Song);
-
-            byte [] CoverPhoto = (byte []) ServerReply.GetSecondData();
-            FileOutputStream PhotoOut = new FileOutputStream(PhotoDirectory);
-            PhotoOut.write(CoverPhoto);
-            
-            OutToServer.close();
-            FromServerStream.close();
-            //Pass song name to music player form
-            
-        } catch (IOException | ClassNotFoundException e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
     }
     
     public void RefreshUserSongs(ArrayList<String> Songs) throws IOException, ClassNotFoundException

@@ -26,12 +26,12 @@ public class musicPlayer{
         destChannel.close();
     }catch(IOException e){}
 
-    String playSong = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Eds Work/Music Player/play/playSong.wav";
+    String playSong = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Sams Work/TestingCoursework/res/Music/Conv/playSong.wav";
 
     String musicFile = "/Users/edwardcelella/Documents/University/Systems Software/Shitify/Eds Work/Music Player/music/test.wav";
 
     // open the sound file as a Java input stream
-    InputStream in = new FileInputStream(musicFile);
+    InputStream in = new FileInputStream(playSong);
 
     // create an audiostream from the inputstream
     AudioStream audioStream = new AudioStream(in);

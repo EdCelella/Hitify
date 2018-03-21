@@ -85,8 +85,8 @@ public class RegisterUser extends javax.swing.JFrame {
         PFPassword.setBorder(new LineBorder(foreground, 4));
         PFPassword2.setBorder(new LineBorder(foreground, 4));
         
-        ImageIcon RadioOff = new ImageIcon("./res/Photos/RadioBtnOff.png");
-        ImageIcon RadioOn = new ImageIcon("./res/Photos/RadioBtnOn.png");
+        ImageIcon RadioOff = new ImageIcon("./res/Photos/SystemPics/RadioBtnOff.png");
+        ImageIcon RadioOn = new ImageIcon("./res/Photos/SystemPics/RadioBtnOn.png");
         
         rbFolk.setIcon(RadioOff);
         rbFolk.setSelectedIcon(RadioOn);

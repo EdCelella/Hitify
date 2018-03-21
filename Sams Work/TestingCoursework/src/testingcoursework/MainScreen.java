@@ -168,7 +168,7 @@ public class MainScreen extends javax.swing.JFrame {
         
         // Styles drop down menu
         cbUserMood.setBackground(foreground);
-        cbUserMood.setBorder(new LineBorder(foreground, 4));
+        cbUserMood.setUI(new CustomComboBoxUI());
         
         // Styles textboxs on pages
         txtNewPost.setBorder(new LineBorder(foreground, 4));

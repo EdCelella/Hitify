@@ -14,7 +14,7 @@ public class CustomScrollBarUI extends BasicScrollBarUI{
     Color warning = Color.decode("#FF3366");
    
     
-    //Makes up and down buttons white squares
+        //Makes up and down buttons white squares
         @Override
         protected JButton createDecreaseButton(int orientation) {
             JButton button = super.createDecreaseButton(orientation);

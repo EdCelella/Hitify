@@ -83,7 +83,7 @@ public class UploadSong extends javax.swing.JFrame {
         txtSongName.setBorder(new LineBorder(foreground, 4));
         
         cbGenre.setBackground(foreground);
-        cbGenre.setBorder(new LineBorder(foreground, 4));
+        cbGenre.setUI(new CustomComboBoxUI());
         
         
         

@@ -2,6 +2,7 @@ package testingcoursework;
 
 import infopacket.InfoPacket;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,9 +10,18 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.basic.ComboPopup;
 
 public class FindUsers extends javax.swing.JFrame {
 
@@ -54,7 +64,12 @@ public class FindUsers extends javax.swing.JFrame {
         
         // Styles drop down menu
         cbPreference.setBackground(foreground);
-        cbPreference.setBorder(new LineBorder(foreground, 4));
+        cbPreference.setUI(new CustomComboBoxUI());
+        
+        // Turns vertical scroll bars on permenatly and sets the style
+        jScrollPane1.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        
+        
         
         this.Username = User;
         UpdateList(FindUsers());

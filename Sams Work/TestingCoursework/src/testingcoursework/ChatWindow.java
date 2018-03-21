@@ -132,8 +132,6 @@ public class ChatWindow extends javax.swing.JFrame {
         tabelMessages.getColumnModel().getColumn(0).setPreferredWidth(150);
         tabelMessages.getColumnModel().getColumn(1).setPreferredWidth(568);
         
-        
-        
         // Creates an info packet to send the username of the person you're talking to
         InfoPacket FindUserDetails = new InfoPacket();
         FindUserDetails.SetService("GUD");
@@ -578,7 +576,10 @@ public class ChatWindow extends javax.swing.JFrame {
             
             // Checks if text message has been written to be sent
             if (!(taNewMessage.getText().equals(""))){
+                
                 String message = "T§" + username + "§" + taNewMessage.getText();
+                // Removes line breaks
+                message = message.replaceAll("\r", " ").replaceAll("\n", " ");
                 outToMsgServer.writeUTF(message);
             }
             

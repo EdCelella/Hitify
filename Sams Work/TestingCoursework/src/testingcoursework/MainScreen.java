@@ -1484,8 +1484,9 @@ public class MainScreen extends javax.swing.JFrame {
         }else if(!(listSelectedUsersSongs.isSelectionEmpty())){
             songChoice = listSelectedUsersSongs.getSelectedValue();
         }
-        
+        //If song not same as previous song or empty choice 
         if( !(songChoice.equals(previousSongChoice)) && (songChoice != "") ){
+            //if music already playing
             if(musicPlaying == true){
                 AudioPlayer.player.stop(audioStream);
             }

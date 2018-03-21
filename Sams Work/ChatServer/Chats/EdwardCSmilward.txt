@@ -25,3 +25,4 @@ T§EdwardC§test4
 T§Smilward§the
 T§EdwardC§test test2 test3
 T§EdwardC§yes no yes
+T§Smilward§Hi 

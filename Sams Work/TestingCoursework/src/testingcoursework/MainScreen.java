@@ -975,6 +975,11 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void cmdLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLogOutActionPerformed
         
+        // Stops playing music on logout
+        if(musicPlaying == true){
+            AudioPlayer.player.stop(audioStream);
+        }
+        
         //message to server to say disconnected user
         InfoPacket LoggingOff = new InfoPacket();
         

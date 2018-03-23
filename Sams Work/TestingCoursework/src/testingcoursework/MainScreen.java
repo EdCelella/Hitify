@@ -705,8 +705,10 @@ public class MainScreen extends javax.swing.JFrame {
         txtPosts.setBackground(new java.awt.Color(46, 47, 47));
         txtPosts.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        txtPostArea.setEditable(false);
         txtPostArea.setColumns(20);
         txtPostArea.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        txtPostArea.setLineWrap(true);
         txtPostArea.setRows(5);
         txtPostArea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtPosts.setViewportView(txtPostArea);
@@ -723,11 +725,11 @@ public class MainScreen extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cmdPlayPauseMouseClicked(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cmdPlayPauseMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 cmdPlayPauseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdPlayPauseMouseExited(evt);
             }
         });
         cmdPlayPause.addActionListener(new java.awt.event.ActionListener() {
@@ -1489,8 +1491,9 @@ public class MainScreen extends javax.swing.JFrame {
         }else if(!(listSelectedUsersSongs.isSelectionEmpty())){
             songChoice = listSelectedUsersSongs.getSelectedValue();
         }
-        
+        //If song not same as previous song or empty choice 
         if( !(songChoice.equals(previousSongChoice)) && (songChoice != "") ){
+            //if music already playing
             if(musicPlaying == true){
                 AudioPlayer.player.stop(audioStream);
             }

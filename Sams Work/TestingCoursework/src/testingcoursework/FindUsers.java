@@ -192,12 +192,7 @@ public class FindUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdBackToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackToMainActionPerformed
-        try {
-            new MainScreen(Username).setVisible(true);
-            this.dispose();
-        } catch (IOException | ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
+        this.dispose();
         
     }//GEN-LAST:event_cmdBackToMainActionPerformed
 

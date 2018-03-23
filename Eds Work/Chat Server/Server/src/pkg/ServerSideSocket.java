@@ -3,8 +3,6 @@ package pkg;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import java.sql.*;
-import java.sql.DriverManager;
 
 public class ServerSideSocket{
 
@@ -13,7 +11,7 @@ public class ServerSideSocket{
 		try{
 
 			// Sets a port number for the server socket
-			ServerSocket server = new ServerSocket(9090);
+			ServerSocket server = new ServerSocket(9091);
 
 			while(true){
 

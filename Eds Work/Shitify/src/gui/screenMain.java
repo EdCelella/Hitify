@@ -63,7 +63,6 @@ public class screenMain extends JFrame implements ActionListener{
   		menu.setBounds(0,100,300,500);
   		menu.add(makeScrollFrame());
   		screenContainer.add(menu); 
-
 		
 	}
 
@@ -91,7 +90,7 @@ public class screenMain extends JFrame implements ActionListener{
 		JPanel test = new JPanel();
 
 		test.setLayout(new BoxLayout(test, BoxLayout.Y_AXIS));
-		test.setPreferredSize(new Dimension(300, 500));
+		//test.setPreferredSize(new Dimension(300, 500));
 
 		int listYStart = 100;
 		numOfFriends = 17;

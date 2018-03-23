@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -33,6 +34,12 @@ import javax.swing.JOptionPane;
 public class RegisterUser extends javax.swing.JFrame {
 
     private String Filepath = "";
+    
+    // Sets colours to be used in design
+    Color foreground = Color.decode("#FDFFFC");
+    Color background = Color.decode("#2E2F2F");
+    Color highlight = Color.decode("#5DFDCB");
+    Color warning = Color.decode("#FF3366");
     
     static void SetPhoto(ImageIcon ResizeImage) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -44,7 +51,68 @@ public class RegisterUser extends javax.swing.JFrame {
     public RegisterUser() {
         initComponents();
         
-        this.getContentPane().setBackground(Color.decode("#2B2D42"));
+        int buttonBorder = 4;
+        
+        this.getContentPane().setBackground(background);
+        
+        //Sets background, text and border colours for buttons
+        cmdPhoto.setContentAreaFilled(false);
+        cmdPhoto.setBackground(background);
+        cmdPhoto.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdPhoto.setForeground(foreground);
+        
+        cmdLogIn.setContentAreaFilled(false);
+        cmdLogIn.setBackground(background);
+        cmdLogIn.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdLogIn.setForeground(foreground);
+        
+        cmdClear.setContentAreaFilled(false);
+        cmdClear.setBackground(background);
+        cmdClear.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdClear.setForeground(foreground);
+        
+        cmdCreate.setContentAreaFilled(false);
+        cmdCreate.setBackground(background);
+        cmdCreate.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdCreate.setForeground(foreground);
+        
+        lblPhoto.setBorder(new LineBorder(foreground, 2));
+        
+        txtFirstName.setBorder(new LineBorder(foreground, 4));
+        txtSecondName.setBorder(new LineBorder(foreground, 4));
+        txtEmail.setBorder(new LineBorder(foreground, 4));
+        txtUserName.setBorder(new LineBorder(foreground, 4));
+        PFPassword.setBorder(new LineBorder(foreground, 4));
+        PFPassword2.setBorder(new LineBorder(foreground, 4));
+        
+        ImageIcon RadioOff = new ImageIcon("./res/Photos/SystemPics/RadioBtnOff.png");
+        ImageIcon RadioOn = new ImageIcon("./res/Photos/SystemPics/RadioBtnOn.png");
+        
+        rbFolk.setIcon(RadioOff);
+        rbFolk.setSelectedIcon(RadioOn);
+        rbPop.setIcon(RadioOff);
+        rbPop.setSelectedIcon(RadioOn);
+        rbRock.setIcon(RadioOff);
+        rbRock.setSelectedIcon(RadioOn);
+        rbBlues.setIcon(RadioOff);
+        rbBlues.setSelectedIcon(RadioOn);
+        rbTechno.setIcon(RadioOff);
+        rbTechno.setSelectedIcon(RadioOn);
+        rbJazz.setIcon(RadioOff);
+        rbJazz.setSelectedIcon(RadioOn);
+        rbEDM.setIcon(RadioOff);
+        rbEDM.setSelectedIcon(RadioOn);
+        rbSoul.setIcon(RadioOff);
+        rbSoul.setSelectedIcon(RadioOn);
+        rbRapping.setIcon(RadioOff);
+        rbRapping.setSelectedIcon(RadioOn);
+        rbReggae.setIcon(RadioOff);
+        rbReggae.setSelectedIcon(RadioOn);
+        rbIndie.setIcon(RadioOff);
+        rbIndie.setSelectedIcon(RadioOn);
+        rbClassical.setIcon(RadioOff);
+        rbClassical.setSelectedIcon(RadioOn);
+        
     }
 
     /**
@@ -100,73 +168,151 @@ public class RegisterUser extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(43, 45, 66));
 
-        lblRegisterNewUser.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lblRegisterNewUser.setText("Register New User");
+        lblRegisterNewUser.setFont(new java.awt.Font("Futura", 1, 48)); // NOI18N
+        lblRegisterNewUser.setForeground(new java.awt.Color(93, 253, 203));
+        lblRegisterNewUser.setText("REGISTER");
 
-        lblFirstName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFirstName.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        lblFirstName.setForeground(new java.awt.Color(253, 255, 252));
         lblFirstName.setText("First Name:");
 
-        lblSecondName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFirstName.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
+        lblSecondName.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        lblSecondName.setForeground(new java.awt.Color(253, 255, 252));
         lblSecondName.setText("Second Name:");
 
-        lblEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSecondName.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
+        lblEmail.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(253, 255, 252));
         lblEmail.setText("Email Address:");
 
-        lblUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
+        lblUserName.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        lblUserName.setForeground(new java.awt.Color(253, 255, 252));
         lblUserName.setText("Username:");
 
-        lblPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUserName.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
+        lblPassword.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        lblPassword.setForeground(new java.awt.Color(253, 255, 252));
         lblPassword.setText("Password:");
 
-        lblPassword2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblPassword2.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        lblPassword2.setForeground(new java.awt.Color(253, 255, 252));
         lblPassword2.setText("Confirm Password:");
 
-        lblMusicChoice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblMusicChoice.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        lblMusicChoice.setForeground(new java.awt.Color(253, 255, 252));
         lblMusicChoice.setText("Select Music Interests:");
 
+        rbFolk.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbFolk.setForeground(new java.awt.Color(253, 255, 252));
         rbFolk.setText("Folk");
 
+        rbRock.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbRock.setForeground(new java.awt.Color(253, 255, 252));
         rbRock.setText("Rock");
+        rbRock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbRockActionPerformed(evt);
+            }
+        });
 
+        rbTechno.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbTechno.setForeground(new java.awt.Color(253, 255, 252));
         rbTechno.setText("Techno");
 
+        rbSoul.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbSoul.setForeground(new java.awt.Color(253, 255, 252));
         rbSoul.setText("Soul");
 
+        rbPop.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbPop.setForeground(new java.awt.Color(253, 255, 252));
         rbPop.setText("Pop");
 
+        rbBlues.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbBlues.setForeground(new java.awt.Color(253, 255, 252));
         rbBlues.setText("Blues");
         rbBlues.setToolTipText("");
 
-        rbJazz.setText("Jazz");
+        rbJazz.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbJazz.setForeground(new java.awt.Color(253, 255, 252));
+        rbJazz.setText("Jazz  ");
+        rbJazz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbJazzActionPerformed(evt);
+            }
+        });
 
+        rbReggae.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbReggae.setForeground(new java.awt.Color(253, 255, 252));
         rbReggae.setText("Reggae");
 
+        rbEDM.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbEDM.setForeground(new java.awt.Color(253, 255, 252));
         rbEDM.setText("EDM");
 
+        rbRapping.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbRapping.setForeground(new java.awt.Color(253, 255, 252));
         rbRapping.setText("Rapping");
 
+        rbIndie.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbIndie.setForeground(new java.awt.Color(253, 255, 252));
         rbIndie.setText("Indie");
 
+        rbClassical.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+        rbClassical.setForeground(new java.awt.Color(253, 255, 252));
         rbClassical.setText("Classical");
 
-        lblUploadPicture.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblUploadPicture.setFont(new java.awt.Font("Futura", 0, 18)); // NOI18N
+        lblUploadPicture.setForeground(new java.awt.Color(253, 255, 252));
         lblUploadPicture.setText("Upload Profile Picture");
 
-        cmdPhoto.setText("Upload Photo");
+        cmdPhoto.setFont(new java.awt.Font("Futura", 1, 18)); // NOI18N
+        cmdPhoto.setText("UPLOAD PHOTO");
+        cmdPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdPhotoMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdPhotoMouseEntered(evt);
+            }
+        });
         cmdPhoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdPhotoActionPerformed(evt);
             }
         });
 
-        cmdCreate.setText("Create New Profile");
+        cmdCreate.setFont(new java.awt.Font("Futura", 1, 18)); // NOI18N
+        cmdCreate.setText("SIGN UP");
+        cmdCreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdCreateMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdCreateMouseEntered(evt);
+            }
+        });
         cmdCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdCreateActionPerformed(evt);
             }
         });
 
-        cmdLogIn.setText("Back To Log In Screen");
+        cmdLogIn.setFont(new java.awt.Font("Futura", 1, 18)); // NOI18N
+        cmdLogIn.setText("LOG IN");
+        cmdLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdLogInMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdLogInMouseEntered(evt);
+            }
+        });
         cmdLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLogInActionPerformed(evt);
@@ -175,141 +321,162 @@ public class RegisterUser extends javax.swing.JFrame {
 
         lblPhoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        cmdClear.setText("Clear");
+        cmdClear.setFont(new java.awt.Font("Futura", 1, 18)); // NOI18N
+        cmdClear.setText("CLEAR");
+        cmdClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdClearMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdClearMouseEntered(evt);
+            }
+        });
         cmdClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdClearActionPerformed(evt);
             }
         });
 
+        PFPassword.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
+        PFPassword2.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMusicChoice)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUserName)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPassword2)
-                            .addComponent(lblPassword)
+                            .addComponent(rbFolk)
+                            .addComponent(rbPop))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbBlues)
+                            .addComponent(rbRock, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbTechno)
+                            .addComponent(rbJazz))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(rbEDM)
+                                .addGap(40, 40, 40))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                                    .addComponent(lblFirstName)
-                                    .addComponent(lblSecondName)
-                                    .addComponent(txtSecondName, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                                    .addComponent(lblEmail)
-                                    .addComponent(PFPassword)
-                                    .addComponent(PFPassword2))
-                                .addGap(75, 75, 75)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblMusicChoice)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(rbFolk)
-                                                    .addComponent(rbPop)
-                                                    .addComponent(rbEDM))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(rbRock)
-                                                    .addComponent(rbBlues)
-                                                    .addComponent(rbRapping)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(rbSoul)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(rbReggae)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rbClassical)
-                                            .addComponent(rbJazz)
-                                            .addComponent(rbTechno)
-                                            .addComponent(rbIndie)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(cmdCreate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cmdLogIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(lblUploadPicture, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmdPhoto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cmdClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(102, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 436, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
-                .addComponent(lblRegisterNewUser)
-                .addGap(155, 155, 155))
+                                .addComponent(rbSoul)
+                                .addGap(44, 44, 44)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(rbReggae, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rbRapping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbIndie)
+                            .addComponent(rbClassical)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(cmdLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cmdClear, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblPassword2)
+                                        .addComponent(lblPassword))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(PFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(PFPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(2, 2, 2)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblUserName)
+                                                .addComponent(lblEmail)
+                                                .addComponent(lblSecondName)
+                                                .addComponent(lblFirstName))
+                                            .addGap(41, 41, 41)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lblRegisterNewUser))))
+                            .addGap(74, 74, 74)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmdPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblUploadPicture, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(lblRegisterNewUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblFirstName)
-                    .addComponent(lblMusicChoice))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblUploadPicture)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSecondName)
+                            .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEmail)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUserName)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPassword)
+                            .addComponent(PFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PFPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPassword2))
+                        .addGap(35, 35, 35)
+                        .addComponent(lblMusicChoice)
+                        .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmdPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(70, 70, 70)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbFolk)
                     .addComponent(rbRock)
-                    .addComponent(rbTechno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSecondName)
-                    .addComponent(rbPop)
-                    .addComponent(rbBlues)
-                    .addComponent(rbJazz))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSecondName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbTechno)
                     .addComponent(rbEDM)
                     .addComponent(rbRapping)
                     .addComponent(rbIndie))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
+                    .addComponent(rbPop)
+                    .addComponent(rbBlues)
+                    .addComponent(rbJazz)
                     .addComponent(rbSoul)
                     .addComponent(rbReggae)
                     .addComponent(rbClassical))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblUserName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPassword)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPassword2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmdLogIn)
-                            .addComponent(PFPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblUploadPicture)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cmdPhoto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmdCreate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmdClear)
-                                .addGap(0, 36, Short.MAX_VALUE))
-                            .addComponent(lblPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmdClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                    .addComponent(cmdLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -437,6 +604,66 @@ public class RegisterUser extends javax.swing.JFrame {
     private void cmdClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdClearActionPerformed
         ClearForm();
     }//GEN-LAST:event_cmdClearActionPerformed
+
+    private void rbJazzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbJazzActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbJazzActionPerformed
+
+    private void rbRockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbRockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbRockActionPerformed
+
+    private void cmdPhotoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPhotoMouseEntered
+        // Changes colour of button when hovered over
+        cmdPhoto.setContentAreaFilled(true);
+        cmdPhoto.setBackground(foreground);
+        cmdPhoto.setForeground(highlight);
+    }//GEN-LAST:event_cmdPhotoMouseEntered
+
+    private void cmdPhotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdPhotoMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdPhoto.setContentAreaFilled(false);
+        cmdPhoto.setForeground(foreground);
+    }//GEN-LAST:event_cmdPhotoMouseExited
+
+    private void cmdLogInMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdLogInMouseEntered
+        // Changes colour of button when hovered over
+        cmdLogIn.setContentAreaFilled(true);
+        cmdLogIn.setBackground(foreground);
+        cmdLogIn.setForeground(highlight);
+    }//GEN-LAST:event_cmdLogInMouseEntered
+
+    private void cmdLogInMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdLogInMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdLogIn.setContentAreaFilled(false);
+        cmdLogIn.setForeground(foreground);
+    }//GEN-LAST:event_cmdLogInMouseExited
+
+    private void cmdClearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdClearMouseEntered
+        // Changes colour of button when hovered over
+        cmdClear.setContentAreaFilled(true);
+        cmdClear.setBackground(foreground);
+        cmdClear.setForeground(warning);
+    }//GEN-LAST:event_cmdClearMouseEntered
+
+    private void cmdClearMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdClearMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdClear.setContentAreaFilled(false);
+        cmdClear.setForeground(foreground);
+    }//GEN-LAST:event_cmdClearMouseExited
+
+    private void cmdCreateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdCreateMouseEntered
+        // Changes colour of button when hovered over
+        cmdCreate.setContentAreaFilled(true);
+        cmdCreate.setBackground(foreground);
+        cmdCreate.setForeground(highlight);
+    }//GEN-LAST:event_cmdCreateMouseEntered
+
+    private void cmdCreateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdCreateMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdCreate.setContentAreaFilled(false);
+        cmdCreate.setForeground(foreground);
+    }//GEN-LAST:event_cmdCreateMouseExited
 
     private Boolean ValidChecks() {
         

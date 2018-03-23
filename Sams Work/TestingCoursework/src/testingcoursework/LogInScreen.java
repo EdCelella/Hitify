@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.lang.*;
 import java.net.Socket;
 import infopacket.InfoPacket;
+import java.awt.Color;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ObjectInputStream;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 /**
  *
  * @author samal
@@ -28,10 +30,34 @@ public class LogInScreen extends javax.swing.JFrame {
      * Creates new form LogInScreen
      */
     
-    
+    //#2B2D42
+    // Sets colours to be used in design
+    Color foreground = Color.decode("#FDFFFC");
+    Color background = Color.decode("#2E2F2F");
+    Color highlight = Color.decode("#5DFDCB");
     
     public LogInScreen() {
         initComponents();
+        
+        int buttonBorder = 4;
+        
+        //Sets frame background colour
+        getContentPane().setBackground(background);
+        
+        
+        //Sets background, text and border colours for buttons
+        cmdNewUser.setContentAreaFilled(false);
+        cmdNewUser.setBackground(background);
+        cmdNewUser.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdNewUser.setForeground(foreground);
+        
+        cmdLogIn.setContentAreaFilled(false);
+        cmdLogIn.setBackground(background);
+        cmdLogIn.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdLogIn.setForeground(foreground);
+        
+        txtUserName.setBorder(new LineBorder(foreground, 4));
+        PFPassword.setBorder(new LineBorder(foreground, 4));
     }
 
     /**
@@ -55,72 +81,102 @@ public class LogInScreen extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(43, 45, 66));
+        setForeground(new java.awt.Color(43, 45, 66));
 
-        lblLogInForm.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblLogInForm.setFont(new java.awt.Font("Futura", 1, 48)); // NOI18N
+        lblLogInForm.setForeground(new java.awt.Color(93, 253, 203));
         lblLogInForm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLogInForm.setText("Log In Form");
+        lblLogInForm.setText("LOG IN");
 
-        lblUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblUserName.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        lblUserName.setForeground(new java.awt.Color(253, 255, 252));
         lblUserName.setText("User Name:");
 
-        lblPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblPassword.setFont(new java.awt.Font("Futura", 0, 24)); // NOI18N
+        lblPassword.setForeground(new java.awt.Color(253, 255, 252));
         lblPassword.setText("Password:");
 
-        txtUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUserName.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
 
-        cmdLogIn.setText("Log In!");
+        cmdLogIn.setFont(new java.awt.Font("Futura", 1, 18)); // NOI18N
+        cmdLogIn.setText("LOG IN");
+        cmdLogIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdLogInMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdLogInMouseEntered(evt);
+            }
+        });
         cmdLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLogInActionPerformed(evt);
             }
         });
 
-        cmdNewUser.setText("New User");
+        cmdNewUser.setFont(new java.awt.Font("Futura", 1, 18)); // NOI18N
+        cmdNewUser.setText("REGISTER");
+        cmdNewUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdNewUserMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdNewUserMouseEntered(evt);
+            }
+        });
         cmdNewUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdNewUserActionPerformed(evt);
             }
         });
 
+        PFPassword.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblLogInForm, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PFPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmdLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmdNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(42, 42, 42))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmdNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cmdLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(lblLogInForm, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblLogInForm, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdLogIn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLogInForm, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdNewUser)
+                    .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PFPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmdLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                    .addComponent(cmdNewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -192,13 +248,40 @@ public class LogInScreen extends javax.swing.JFrame {
             Logger.getLogger(LogInScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cmdLogInActionPerformed
-
+    
+    
     private void cmdNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNewUserActionPerformed
         //Open new Register User Form
         new RegisterUser().setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_cmdNewUserActionPerformed
+
+    private void cmdNewUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdNewUserMouseEntered
+        // Changes colour of button when hovered over
+        cmdNewUser.setContentAreaFilled(true);
+        cmdNewUser.setBackground(foreground);
+        cmdNewUser.setForeground(highlight);
+    }//GEN-LAST:event_cmdNewUserMouseEntered
+
+    private void cmdNewUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdNewUserMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdNewUser.setContentAreaFilled(false);
+        cmdNewUser.setForeground(foreground);
+    }//GEN-LAST:event_cmdNewUserMouseExited
+
+    private void cmdLogInMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdLogInMouseEntered
+        // Changes colour of button when hovered over
+        cmdLogIn.setContentAreaFilled(true);
+        cmdLogIn.setBackground(foreground);
+        cmdLogIn.setForeground(highlight);
+    }//GEN-LAST:event_cmdLogInMouseEntered
+
+    private void cmdLogInMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdLogInMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdLogIn.setContentAreaFilled(false);
+        cmdLogIn.setForeground(foreground);
+    }//GEN-LAST:event_cmdLogInMouseExited
 
     /**
      * @param args the command line arguments

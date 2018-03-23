@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package testingcoursework;
 
 import infopacket.InfoPacket;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,25 +10,67 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.plaf.basic.ComboPopup;
 
-/**
- *
- * @author samal
- */
 public class FindUsers extends javax.swing.JFrame {
 
     private String Username;
-    /**
-     * Creates new form FindUsers
-     */
+    
+    // Sets colours to be used in design
+    Color foreground = Color.decode("#FDFFFC");
+    Color background = Color.decode("#2E2F2F");
+    Color highlight = Color.decode("#5DFDCB");
+    Color warning = Color.decode("#FF3366");
+    
+    // Used for border thickness
+    int buttonBorder = 4;
+    
     public FindUsers() {
         initComponents();
     }
     
     public FindUsers(String User) {
         initComponents();
+        
+        //Sets frame background colour
+        getContentPane().setBackground(background);
+        
+        //Sets background, text and border colours for buttons
+        cmdFind.setContentAreaFilled(false);
+        cmdFind.setBackground(background);
+        cmdFind.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdFind.setForeground(foreground);
+        
+        cmdAddFriend.setContentAreaFilled(false);
+        cmdAddFriend.setBackground(background);
+        cmdAddFriend.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdAddFriend.setForeground(foreground);
+        
+        cmdBackToMain.setContentAreaFilled(false);
+        cmdBackToMain.setBackground(background);
+        cmdBackToMain.setBorder(new LineBorder(foreground, buttonBorder));
+	cmdBackToMain.setForeground(foreground);
+        
+        // Styles drop down menu
+        cbPreference.setBackground(foreground);
+        cbPreference.setUI(new CustomComboBoxUI());
+        
+        // Turns vertical scroll bars on permenatly and sets the style
+        jScrollPane1.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        
+        
+        
         this.Username = User;
         UpdateList(FindUsers());
     }
@@ -53,30 +92,60 @@ public class FindUsers extends javax.swing.JFrame {
         cmdBackToMain = new javax.swing.JButton();
         cmdFind = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        ListUsers.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(ListUsers);
 
+        cbPreference.setFont(new java.awt.Font("Futura", 0, 14)); // NOI18N
         cbPreference.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Folk", "Rock", "Techno", "Pop", "Blues", "Jazz", "EDM", "Rapping", "Indie", "Soul", "Raggae", "Classical" }));
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblTitle.setText("Find Users Using Prefences");
+        lblTitle.setFont(new java.awt.Font("Futura", 1, 48)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(93, 253, 203));
+        lblTitle.setText("FIND USERS");
 
+        cmdAddFriend.setFont(new java.awt.Font("Futura", 1, 24)); // NOI18N
         cmdAddFriend.setText("Add Friend");
+        cmdAddFriend.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdAddFriendMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdAddFriendMouseEntered(evt);
+            }
+        });
         cmdAddFriend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdAddFriendActionPerformed(evt);
             }
         });
 
-        cmdBackToMain.setText("Back To Main Screen");
+        cmdBackToMain.setFont(new java.awt.Font("Futura", 1, 24)); // NOI18N
+        cmdBackToMain.setText("Back");
+        cmdBackToMain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdBackToMainMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdBackToMainMouseEntered(evt);
+            }
+        });
         cmdBackToMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdBackToMainActionPerformed(evt);
             }
         });
 
+        cmdFind.setFont(new java.awt.Font("Futura", 1, 24)); // NOI18N
         cmdFind.setText("Find");
+        cmdFind.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cmdFindMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cmdFindMouseEntered(evt);
+            }
+        });
         cmdFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdFindActionPerformed(evt);
@@ -90,14 +159,14 @@ public class FindUsers extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmdAddFriend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmdBackToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbPreference, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmdFind, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmdFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbPreference, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmdAddFriend, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(cmdBackToMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -106,28 +175,24 @@ public class FindUsers extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(lblTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbPreference, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdFind))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmdAddFriend)
-                .addGap(18, 18, 18)
-                .addComponent(cmdBackToMain)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbPreference, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdFind, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdAddFriend, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdBackToMain, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdBackToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackToMainActionPerformed
-        try {
-            new MainScreen(Username).setVisible(true);
-            this.dispose();
-        } catch (IOException | ClassNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        }
+        this.dispose();
         
     }//GEN-LAST:event_cmdBackToMainActionPerformed
 
@@ -194,6 +259,45 @@ public class FindUsers extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_cmdAddFriendActionPerformed
+
+    private void cmdFindMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdFindMouseEntered
+        // Changes colour of button when hovered over
+        cmdFind.setContentAreaFilled(true);
+        cmdFind.setBackground(foreground);
+        cmdFind.setForeground(highlight);
+    }//GEN-LAST:event_cmdFindMouseEntered
+
+    private void cmdFindMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdFindMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdFind.setContentAreaFilled(false);
+        cmdFind.setForeground(foreground);
+    }//GEN-LAST:event_cmdFindMouseExited
+
+    private void cmdAddFriendMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdAddFriendMouseEntered
+        // Changes colour of button when hovered over
+        cmdAddFriend.setContentAreaFilled(true);
+        cmdAddFriend.setBackground(foreground);
+        cmdAddFriend.setForeground(highlight);
+    }//GEN-LAST:event_cmdAddFriendMouseEntered
+
+    private void cmdAddFriendMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdAddFriendMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdAddFriend.setContentAreaFilled(false);
+        cmdAddFriend.setForeground(foreground);
+    }//GEN-LAST:event_cmdAddFriendMouseExited
+
+    private void cmdBackToMainMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdBackToMainMouseEntered
+        // Changes colour of button when hovered over
+        cmdBackToMain.setContentAreaFilled(true);
+        cmdBackToMain.setBackground(foreground);
+        cmdBackToMain.setForeground(highlight);
+    }//GEN-LAST:event_cmdBackToMainMouseEntered
+
+    private void cmdBackToMainMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmdBackToMainMouseExited
+        // Changes colour of button when mouse isn't hovering
+        cmdBackToMain.setContentAreaFilled(false);
+        cmdBackToMain.setForeground(foreground);
+    }//GEN-LAST:event_cmdBackToMainMouseExited
 
     public ArrayList<String> FindUsers()
     {

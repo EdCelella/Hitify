@@ -34,6 +34,7 @@ import java.net.InetSocketAddress;
 public class MusicServerExtended extends Thread {
     
     private Socket client;
+    private MServerGUI GUI;
     public InfoPacket InFromClient = new InfoPacket();
     public InfoPacket ToClient = new InfoPacket();
     
@@ -50,6 +51,12 @@ public class MusicServerExtended extends Thread {
         MusicServerExtended PassBack = new MusicServerExtended();
         return PassBack;
     }
+    
+    public void SetGUI(MServerGUI GUI)
+    {
+        this.GUI = GUI;
+    }
+    
     @Override
     public void run()
     {
@@ -71,6 +78,7 @@ public class MusicServerExtended extends Thread {
             //Accessing the DataBase
 
             InFromClient = (InfoPacket) FromClientStream.readObject();
+            String ip = client.getInetAddress().toString().replace("/","");
             //System.out.println(InFromClient.GetService());
 
             //Login attempted
@@ -81,7 +89,7 @@ public class MusicServerExtended extends Thread {
 
                 //Get password from DB searching with username                                
                 String DBPassword = db.SelectLogInDetails(UserName);
-                System.out.println(UserName + " " + UserPassWord + " " + DBPassword);
+                
 
                 ToClient.SetService("LGN");
                 if (UserPassWord.equals(DBPassword))
@@ -89,15 +97,16 @@ public class MusicServerExtended extends Thread {
                     ToClient.SetSingleData("CORRECT");
 
                     //Get IP Address
-                    String ip = client.getInetAddress().toString().replace("/","");
-                    System.out.println(ip);
+                    
                     db.InsertActiveMember(UserName, ip);
+                    GUI.AddToLog(UserName + " Logged in using address: " + ip);
                     //Insert username and IP address into Active Members
 
                 }
                 else
                 {
                     ToClient.SetSingleData("INCORRECT");
+                    GUI.AddToLog("Incorrect Log in attempt from: " + ip);
                 }
                 //Send InfoPacket To user
                 ToClientStream.writeObject(ToClient);
@@ -106,18 +115,19 @@ public class MusicServerExtended extends Thread {
             //When user logs out
             else if ("LGO".equals(InFromClient.GetService()))
             {
-                System.out.println("Log Out Command");
+                
                 db.RemoveActiveMember(InFromClient.GetData());
 
                 InfoPacket Reply = new InfoPacket();
                 Reply.SetService("LGO");
                 Reply.SetSingleData("Logout");
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(InFromClient.GetData() + " has logged out");
             }
             //Create new user
             else if ("CNU".equals(InFromClient.GetService()))
             {
-                System.out.println("Creating New User");
+                
                 //Retreive all information about user and add it to the DB
                 ArrayList UsersInfo = InFromClient.GetArray();
                 
@@ -144,6 +154,7 @@ public class MusicServerExtended extends Thread {
                 }
                 
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog("Added new user: " + UsersInfo.get(0));
                 
             }
 
@@ -168,7 +179,8 @@ public class MusicServerExtended extends Thread {
 
                 db.InsertSong(SongInformation);
                 db.InsertPost(SongInformation);
-
+                
+                GUI.AddToLog(SongInformation.get(0) + " Uploaded a new song: " + FileName);
             
 
                 //System.out.println("Successfull");
@@ -181,16 +193,18 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("GMF");
                 Reply.SetSingleData("Added Post");
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(InFromClient.GetArray().get(0) + " made a new post");
             }
             //Get My Friends
             else if ("GMF".equals(InFromClient.GetService()))
             {
-                System.out.println("MusicServer GMF Username: " + InFromClient.GetData());
+                
                 ArrayList<String> UsersFriends = db.GetUsersFriends(InFromClient.GetData());
                 InfoPacket Reply = new InfoPacket();
                 Reply.SetService("GMF");
                 Reply.SetArray(UsersFriends);
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(InFromClient.GetData() + " requested to view all friends");
                 
             }
             //Get Users based on Prefernces
@@ -201,6 +215,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("GUP");
                 Reply.SetArray(Users);
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(ip + " requested to get users based on preferences");
             }
             //Get Active Friends
             else if ("GAF".equals(InFromClient.GetService()))
@@ -211,6 +226,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("GAF");
                 Reply.SetArray(ActiveFriends);
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog("Getting " + InFromClient.GetData() + " active friends");
             }
             //New Friend Request
             else if ("NFR".equals(InFromClient.GetService()))
@@ -226,15 +242,18 @@ public class MusicServerExtended extends Thread {
                     {
                         Reply.SetSingleData("Exists");
                         db.NewFriendRequest(Users);
+                        GUI.AddToLog(Users.get(0) + " sent " + Users.get(1) + " a friends request");
                     }
                     else
                     {
                         Reply.SetSingleData("AlreadyFriends");
+                        GUI.AddToLog(Users.get(0) + " tried to send " + Users.get(1) + " a friend request, but they are already friends");
                     }
                 }
                 else
                 {
                     Reply.SetSingleData("Doesnt");
+                    GUI.AddToLog(Users.get(0) + " tried to send a friend request to a none existing user");
                 }
                              
                 ToClientStream.writeObject(Reply);
@@ -247,6 +266,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("GFR");
                 Reply.SetArray(UsersFriendRequests);
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(InFromClient.GetData() + " reqested to see their friend requests");
             }
             //Accept Friend Request
             else if ("AFR".equals(InFromClient.GetService()))
@@ -256,6 +276,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("GFR");
                 Reply.SetSingleData("Accepted");
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(InFromClient.GetArray().get(0) + " accepted " + InFromClient.GetArray().get(1) + " friend request");
             }
             //Decline Friend Request
             else if ("DFR".equals(InFromClient.GetService()))
@@ -265,6 +286,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("DFR");
                 Reply.SetSingleData("Declined");
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(InFromClient.GetArray().get(0) + " declined " + InFromClient.GetArray().get(1) + " friend request");
             }
             //Get My Songs
             else if ("GMS".equals(InFromClient.GetService()))
@@ -274,6 +296,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("GMS");
                 Reply.SetArray(MySongs);
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(ip + " requests to see " + InFromClient.GetData() + " songs");
             }
             //Delete FRiend
             else if ("DFS".equals(InFromClient.GetService()))
@@ -283,6 +306,7 @@ public class MusicServerExtended extends Thread {
                 Reply.SetService("DFS");
                 Reply.SetSingleData("Removed");
                 ToClientStream.writeObject(Reply);
+                GUI.AddToLog(InFromClient.GetArray().get(0) + "removed " + InFromClient.GetArray().get(1) + " as a friend");
             }
             //Get user details
             else if ("GUD".equals(InFromClient.GetService()))
@@ -313,6 +337,7 @@ public class MusicServerExtended extends Thread {
                 
                 
                 ToClientStream.writeObject(UserInformation);
+                GUI.AddToLog("Sending " + Username + " details and songs to " + ip);
             }
             //Get Friends Posts
             else if ("GFP".equals(InFromClient.GetService()))
@@ -326,6 +351,7 @@ public class MusicServerExtended extends Thread {
                 FriendsPosts.SetService("GFP");
                 FriendsPosts.SetMultipleArray(UserPosts);
                 ToClientStream.writeObject(FriendsPosts);
+                GUI.AddToLog(Username + " requests to see their friends posts");
             }
             //DoWnload Song
             else if ("DWS".equals(InFromClient.GetService()))
@@ -349,11 +375,12 @@ public class MusicServerExtended extends Thread {
                 SongData.SetSecondByte(buffer2);
                 
                 ToClientStream.writeObject(SongData);
+                GUI.AddToLog(ip + " is downloading the song and cover photo for " + InFromClient.GetData());
                 
             }
             else
             {
-                System.out.println("Not a valid command");
+                GUI.AddToLog(ip + " has sent an invalid command");
             }
                 
                 
@@ -365,16 +392,10 @@ public class MusicServerExtended extends Thread {
             ToClientStream.close();
                 
                 
-        } catch (IOException e)
+        } catch (IOException | ClassNotFoundException e)
         {
-            System.err.println("Error - " + e.getMessage());
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MusicServerExtended.class.getName()).log(Level.SEVERE, null, ex);
+            GUI.AddToLog(e.getMessage());
         }
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(MusicServerExtended.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
     }
    
 }

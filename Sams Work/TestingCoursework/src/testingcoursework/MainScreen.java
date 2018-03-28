@@ -36,6 +36,7 @@ public class MainScreen extends javax.swing.JFrame {
      */
     private String Username;
     
+    
     // Sets colours to be used in design
     Color foreground = Color.decode("#FDFFFC");
     Color background = Color.decode("#2E2F2F");
@@ -215,7 +216,7 @@ public class MainScreen extends javax.swing.JFrame {
     
      public void RefreshAllFriendsList() throws IOException, ClassNotFoundException
     {
-        Socket MainServer = new Socket("localhost", 9090);
+        
                     
         ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
         ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());

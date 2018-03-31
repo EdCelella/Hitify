@@ -22,7 +22,7 @@ public class Database {
     private Connection connect() {
         Connection con = null;
         try {
-            String url = "jdbc:sqlite:DataBase/Shitify.db";
+            String url = "jdbc:sqlite:DataBase/Hitify.db";
             con = DriverManager.getConnection(url);
             System.out.println("Connection to Database is established");
         } catch (SQLException ex) {

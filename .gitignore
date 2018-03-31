@@ -1,8 +1,7 @@
-/Eds Work/Music_Program/nbproject/private/
-/Eds Work/Music_Program/build/
-/Sams Work/TestingCoursework/dist/
-/Sams Work/TestingCoursework/build/
-/Sams Work/TestingCoursework/nbproject/private/
-/Sams Work/MusicServer/dist/
-/Sams Work/ChatServer/nbproject/private/
-/Sams Work/ChatServer/build/
+sqlite-jdbc-3.21.0.jar
+Shitify.db
+build-impl.xml
+project.xml
+private.xml
+playSong.wav
+jl1.0.1.jar

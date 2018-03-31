@@ -21,7 +21,8 @@ public class MusicServer {
         private static final int Port = 9090;
         public static void main(String[] args) {
         
-        
+        MServerGUI GUI = new MServerGUI();
+        GUI.setVisible(true);
         try
         {
             ServerSocket server = new ServerSocket(Port);
@@ -35,6 +36,7 @@ public class MusicServer {
                         //New Thread
                         MusicServerExtended C = new MusicServerExtended();  
                         C.SetSocket(server.accept());
+                        C.SetGUI(GUI);
                         Thread t1 = new Thread(C);
                         t1.start();                       
                     }            

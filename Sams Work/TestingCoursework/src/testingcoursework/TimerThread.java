@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 public class TimerThread extends Thread{
     
     private MainScreen form;
+    private boolean Request;
     
     public TimerThread SetForm(MainScreen screen)
     {
@@ -26,10 +27,15 @@ public class TimerThread extends Thread{
         return PassBack;
     }
     
+    public void SetRequest (boolean request)
+    {
+        this.Request = request;
+    }
+    
     @Override
     public void run() 
     {
-        while(true)
+        while(Request == true)
         {
             try {
                   form.RefreshActiveFriendsList();

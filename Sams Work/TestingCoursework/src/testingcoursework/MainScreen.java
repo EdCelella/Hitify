@@ -36,6 +36,7 @@ public class MainScreen extends javax.swing.JFrame {
      */
     private String Username;
     
+    
     // Sets colours to be used in design
     Color foreground = Color.decode("#FDFFFC");
     Color background = Color.decode("#2E2F2F");
@@ -50,6 +51,9 @@ public class MainScreen extends javax.swing.JFrame {
     boolean musicPlaying = false;
     String previousSongChoice = "";
     AudioStream audioStream = null;
+    public TimerThread C = new TimerThread();
+    TimerThread2 D = new TimerThread2(); 
+    
     
     public MainScreen() {
         initComponents();
@@ -194,13 +198,15 @@ public class MainScreen extends javax.swing.JFrame {
         RefreshPosts();
         RefreshActiveFriendsList();
         //Thread timer to refresh
-        TimerThread C = new TimerThread();  
+          
         C.SetForm(this);
+        C.SetRequest(true);
         Thread t1 = new Thread(C);
         t1.start(); 
         //Thread timer to refresh Posts and All Friends every 60 seconds
-        TimerThread2 D = new TimerThread2();  
+         
         D.SetForm(this);
+        D.SetRequest(true);
         Thread t2 = new Thread(D);
         t2.start();
         
@@ -210,7 +216,7 @@ public class MainScreen extends javax.swing.JFrame {
     
      public void RefreshAllFriendsList() throws IOException, ClassNotFoundException
     {
-        Socket MainServer = new Socket("localhost", 9090);
+        
                     
         ObjectOutputStream OutToServer = new ObjectOutputStream(MainServer.getOutputStream());
         ObjectInputStream FromServerStream = new ObjectInputStream(MainServer.getInputStream());
@@ -372,7 +378,7 @@ public class MainScreen extends javax.swing.JFrame {
                 PostFormat = FriendsPosts.get(i).get(0) + " - " + FriendsPosts.get(i).get(1) + " uploaded a new song: " + FriendsPosts.get(i).get(2) +"\n";
             }
             txtPostArea.append(PostFormat);
-
+            txtPostArea.setCaretPosition(txtPostArea.getDocument().getLength());
         }
         OutToServer.close();
         FromServerStream.close();
@@ -981,6 +987,9 @@ public class MainScreen extends javax.swing.JFrame {
         if(musicPlaying == true){
             AudioPlayer.player.stop(audioStream);
         }
+        C.SetRequest(false);
+        D.SetRequest(false);
+        
         
         //message to server to say disconnected user
         InfoPacket LoggingOff = new InfoPacket();

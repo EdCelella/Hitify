@@ -4,7 +4,6 @@ package chatserver;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
-import infopacket.InfoPacket;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,17 +34,20 @@ public class ServerRecieveHandler implements Runnable{
         
         while(runServer){
             try{
-
+                
+                // Reads and splits message
                 String newMessage = inFromClient.readUTF();
-
                 List<String> lineBreakdown = Arrays.asList(newMessage.split("§"));
-
+                
+                // Closes thread if chat window is closed
                 if(lineBreakdown.get(0).equals("E")){
                         runServer = false;
                 }
-
+                
+                // Runs if message or file is sent
                 if (lineBreakdown.get(0).equals("T") || lineBreakdown.get(0).equals("F")){
-
+                    
+                    // Writes new message to text file
                     FileWriter fileOut = new FileWriter(chatFile.getAbsolutePath(), true);
                     BufferedWriter bufferOut = new BufferedWriter(fileOut); 
                     bufferOut.write(newMessage);
@@ -53,48 +55,20 @@ public class ServerRecieveHandler implements Runnable{
                     bufferOut.close();
                     fileOut.close();
                     
+                    // Runs if file is sent
                     if (lineBreakdown.get(0).equals("F")){
-                        /*
-                        DatagramSocket server = new DatagramSocket(9092);
                         
-                        byte[] data = new byte[length];
-                        DatagramPacket receivedPacket = new DatagramPacket(data, length);
-                        server.receive(receivedPacket);
-                        data = receivedPacket.getData();
-                        */
-                        /*
-                        int length = Integer.parseInt(inFromClient.readUTF());
-                        int count;
-                        byte[] data = new byte[length]; // or 4096, or more
-                        int co;
-                        while ((co = in.read(data)) > 0)
-                        {
-                            inFromClient.read(data, 0, co);
-                        }
-                        */
+                        // Creates new buffer for file
+                        byte[] fileBtyes = new byte[Integer.parseInt(lineBreakdown.get(3))];
                         
-                        //String saveSentFile = new File("Chats/" + lineBreakdown.get(3)).getAbsolutePath();
-                        //FileOutputStream newFile = new FileOutputStream(saveSentFile);
-                        //newFile.write(data);
+                        // Reads byte array in from client
+                        inFromClient.readFully(fileBtyes, 0, fileBtyes.length);
                         
-                        //server.close();
-                        
-                        /*
-                        inFromClient.close();
-
-                        ObjectInputStream objectInFromClient = new ObjectInputStream(client.getInputStream());
-                        InfoPacket fileIn = (InfoPacket) objectInFromClient.readObject();
-                        objectInFromClient.close();
-
-                        byte [] fileData = (byte []) fileIn.GetByteData();
-
-                        String saveSentFile = new File("res/Chats/" + lineBreakdown.get(3)).getAbsolutePath();
-                        FileOutputStream newFile = new FileOutputStream(saveSentFile);
-                        newFile.write(fileData);
-
-                        inFromClient = new DataInputStream(client.getInputStream());
-                        */
-                        
+                        // Saves file
+                        File fileSavePath = new File("Chats/Files/" + lineBreakdown.get(4));
+                        FileOutputStream FileOut = new FileOutputStream(fileSavePath);
+                        FileOut.write(fileBtyes);
+                        FileOut.close();
 
                     }
                 }

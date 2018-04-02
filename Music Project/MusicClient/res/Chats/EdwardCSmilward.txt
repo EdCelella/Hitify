@@ -29,18 +29,7 @@ Smilward§Hi
 EdwardC§test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test
 EdwardC§test 2
 EdwardC§test
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
-EdwardC§File sent
+EdwardC§text message check
+EdwardC§test 2
+EdwardC§hello world
 EdwardC§File sent

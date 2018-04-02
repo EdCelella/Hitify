@@ -29,18 +29,7 @@ T§Smilward§Hi
 T§EdwardC§test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test
 T§EdwardC§test 2
 T§EdwardC§test
-F§EdwardC§File sent§151§EdwardCSmilward1522550594000
-F§EdwardC§File sent§151§EdwardCSmilward1522550656000
-F§EdwardC§File sent§151§EdwardCSmilward1522551093000
-F§EdwardC§File sent§62§EdwardCSmilward1522551309000
-F§EdwardC§File sent§1649§EdwardCSmilward1522551475000
-F§EdwardC§File sent§62§EdwardCSmilward1522551522000
-F§EdwardC§File sent§151§EdwardCSmilward1522551560000
-F§EdwardC§File sent§151§EdwardCSmilward1522551626000
-F§EdwardC§File sent§151§EdwardCSmilward1522551759000
-F§EdwardC§File sent§151§EdwardCSmilward1522551915000
-F§EdwardC§File sent§151§EdwardCSmilward1522552304000
-F§EdwardC§File sent§151§EdwardCSmilward1522552339000
-F§EdwardC§File sent§151§EdwardCSmilward1522552801000
-F§EdwardC§File sent§2162§EdwardCSmilward1522553273000
-F§EdwardC§File sent§703465§EdwardCSmilward1522554103000.jpg
+T§EdwardC§text message check
+T§EdwardC§test 2
+T§EdwardC§hello world
+F§EdwardC§File sent§236983§EdwardCSmilward1522687296000.jpg

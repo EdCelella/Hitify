@@ -20,9 +20,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import static java.lang.System.in;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Arrays;
@@ -325,8 +322,23 @@ public class ChatWindow extends javax.swing.JFrame {
                 
                 rowNum += 1;
                 
-                if(lineBreakdown.get(0) == "F"){
+                if(lineBreakdown.get(0).equals("F")){
                     
+                    // Creates new buffer for file
+                    byte[] fileBtyes = new byte[Integer.parseInt(lineBreakdown.get(3))];
+
+                    // Reads byte array in from client
+                    inFromMsgServer.readFully(fileBtyes, 0, fileBtyes.length);
+                    
+                    // File path to home 
+                    String homeLocation = System.getProperty("user.home");
+                    
+                    System.out.println(homeLocation);
+                    // Saves file
+                    File fileSavePath = new File(homeLocation + "/Downloads/" + lineBreakdown.get(4));
+                    FileOutputStream FileOut = new FileOutputStream(fileSavePath);
+                    FileOut.write(fileBtyes);
+                    FileOut.close();
                 }
                 
             }
@@ -605,6 +617,8 @@ public class ChatWindow extends javax.swing.JFrame {
                 
                 // Sends file byte array
                 outToMsgServer.write(fileBytes, 0, fileBytes.length);
+                
+                sendFile.close();
 
             }
        

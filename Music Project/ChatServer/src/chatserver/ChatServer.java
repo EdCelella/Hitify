@@ -17,7 +17,7 @@ public class ChatServer {
                 Socket client = server.accept();
                 System.out.println("Connected to: " + client.getInetAddress());
                 // Creates and runs new thread
-                Thread th = new Thread(new ServerHandler(client));
+                Thread th = new Thread(new ServerSendHandler(client));
                 th.start();
             }	
         }

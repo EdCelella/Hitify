@@ -8,6 +8,7 @@ package musicClient;
 import infopacket.InfoPacket;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,6 +29,13 @@ import sun.audio.AudioStream;
 import java.util.concurrent.TimeUnit;
 import javazoom.jl.converter.Converter;
 import javazoom.jl.decoder.JavaLayerException;
+
+import java.awt.EventQueue;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+import javax.swing.UIManager;
 
 public class MainScreen extends javax.swing.JFrame {
 
@@ -51,6 +59,12 @@ public class MainScreen extends javax.swing.JFrame {
     boolean musicPlaying = false;
     String previousSongChoice = "";
     AudioStream audioStream = null;
+    
+    Timer songTimer;
+    int songLength;
+    int incrementProgress;
+    int currentProgress;
+    
     public TimerThread C = new TimerThread();
     TimerThread2 D = new TimerThread2(); 
     
@@ -178,9 +192,8 @@ public class MainScreen extends javax.swing.JFrame {
         txtNewFriendRequest.setBorder(new LineBorder(foreground, 4));
         
         // Styles progress bar
-        songProgress.setBackground(foreground);
-        songProgress.setForeground(highlight);
         songProgress.setBorder(null);
+        songProgress.setUI(new CustomProgressBarUI());
         
         // Turns vertical scroll bars on permenatly and sets the style
         txtPosts.getVerticalScrollBar().setUI(new CustomScrollBarUI());
@@ -985,6 +998,7 @@ public class MainScreen extends javax.swing.JFrame {
         // Stops playing music on logout
         if(musicPlaying == true){
             AudioPlayer.player.stop(audioStream);
+            songTimer.stop();
         }
         C.SetRequest(false);
         D.SetRequest(false);
@@ -1510,12 +1524,45 @@ public class MainScreen extends javax.swing.JFrame {
             playSong();
             previousSongChoice = songChoice;
             musicPlaying = true;
+            
+            
+            
+            // Calculates length of song using the formula:
+            // Runtime = FileLength / (Sample Rate * Channels * Bits per sample /8)
+            songLength = (audioStream.getLength() / ((44100 * 2 * 16) / 8));
+            
+            // Resets progress bar and timer counter
+            songProgress.setValue(0);
+            songProgress.setMaximum(songLength);
+            currentProgress = 0;
+            
+            // Creates timer which runs action every second
+            songTimer = new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Increases by 1 the current progress until it reaches the song length
+                    currentProgress += 1;
+                    if (currentProgress >= songLength) {
+                        // When song length is reached timer is stopped
+                        currentProgress = songLength;
+                        ((Timer)e.getSource()).stop();
+                    }
+                    // Value of progress bar updated
+                    songProgress.setValue(currentProgress);
+                }
+            });
+            songTimer.start();
+            
         }else{
             if(musicPlaying == true){
+                // Pause
                 AudioPlayer.player.stop(audioStream);
+                songTimer.stop();
                 musicPlaying = false;
             }else{
+                // Play
                 AudioPlayer.player.start(audioStream);
+                songTimer.start();
                 musicPlaying = true;
             }
         }
@@ -1547,6 +1594,7 @@ public class MainScreen extends javax.swing.JFrame {
             InputStream in = new FileInputStream("./res/Music/Conv/playSong.wav");
             // create an audiostream from the inputstream
             audioStream = new AudioStream(in);
+            
             // play the audio clip with the audioplayer class
             AudioPlayer.player.start(audioStream);
             
@@ -1555,13 +1603,11 @@ public class MainScreen extends javax.swing.JFrame {
     public void convertFile(String songName){
         
         String songPath = "./res/Music/" + songName + ".mp3";
-        //String songPath = "./res/Music/James Bay,Wild Love.mp3";
         System.out.println(songPath);
         Converter converter = new Converter();
         try {
             converter.convert(songPath, "./res/Music/Conv/playSong.wav");
         } catch (JavaLayerException ex) {}
-        //new File("./src/res/Music/Conv/playSong.wav");
        
     }
     

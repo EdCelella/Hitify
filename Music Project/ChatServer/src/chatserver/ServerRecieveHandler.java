@@ -54,17 +54,6 @@ public class ServerRecieveHandler implements Runnable{
                 // Runs if message or file is sent
                 if (lineBreakdown.get(0).equals("T") || lineBreakdown.get(0).equals("F")){
                     
-                    // Writes new message to text file
-                    FileWriter fileOut = new FileWriter(chatFile.getAbsolutePath(), true);
-                    BufferedWriter bufferOut = new BufferedWriter(fileOut); 
-                    bufferOut.write(newMessage);
-                    bufferOut.newLine();
-                    bufferOut.close();
-                    fileOut.close();
-                    
-                    logTextArea.setText(logTextArea.getText() + lineBreakdown.get(1) + " sent message to chat: " + chatName + "\n");
-                    logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
-                    
                     // Runs if file is sent
                     if (lineBreakdown.get(0).equals("F")){
                         
@@ -84,6 +73,19 @@ public class ServerRecieveHandler implements Runnable{
                         logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
 
                     }
+                    
+                    // Writes new message to text file
+                    FileWriter fileOut = new FileWriter(chatFile.getAbsolutePath(), true);
+                    BufferedWriter bufferOut = new BufferedWriter(fileOut); 
+                    bufferOut.write(newMessage);
+                    bufferOut.newLine();
+                    bufferOut.close();
+                    fileOut.close();
+                    
+                    logTextArea.setText(logTextArea.getText() + lineBreakdown.get(1) + " sent message to chat: " + chatName + "\n");
+                    logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
+                    
+                    
                 }
             }catch(IOException e){
                 System.out.println(e.getMessage());

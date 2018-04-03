@@ -82,10 +82,10 @@ public class ServerSendHandler implements Runnable{
 
             while(th2.getState()!=Thread.State.TERMINATED){
                 if(fileModTime != chatFile.lastModified()){
-
-                    clientLineCount = sendMessages(clientLineCount, chatFile);
+                    
                     fileModTime = chatFile.lastModified();
-
+                    clientLineCount = sendMessages(clientLineCount, chatFile);
+                    
                 }
             }
         }

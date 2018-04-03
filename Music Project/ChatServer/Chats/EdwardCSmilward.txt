@@ -42,3 +42,8 @@ T§EdwardC§server gui test 2
 F§EdwardC§File 'EdwardCSmilward1522717719000.pdf' sent to download folder§222461§EdwardCSmilward1522717719000.pdf
 F§EdwardC§File 'EdwardCSmilward1522717815000.png' sent to download folder§1177288§EdwardCSmilward1522717815000.png
 F§EdwardC§File 'EdwardCSmilward1522717976000.jpg' sent to download folder§236983§EdwardCSmilward1522717976000.jpg
+F§EdwardC§File 'EdwardCSmilward1522718084000.pdf' sent to download folder§222461§EdwardCSmilward1522718084000.pdf
+T§EdwardC§test both at same time
+F§EdwardC§File 'EdwardCSmilward1522718519000.jpg' sent to download folder§236983§EdwardCSmilward1522718519000.jpg
+T§EdwardC§test both 2
+F§EdwardC§File 'EdwardCSmilward1522718559000.jpg' sent to download folder§236983§EdwardCSmilward1522718559000.jpg

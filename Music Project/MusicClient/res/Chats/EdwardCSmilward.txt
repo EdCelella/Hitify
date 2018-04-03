@@ -42,3 +42,8 @@ EdwardC§server gui test 2
 EdwardC§File 'EdwardCSmilward1522717719000.pdf' sent to download folder
 EdwardC§File 'EdwardCSmilward1522717815000.png' sent to download folder
 EdwardC§File 'EdwardCSmilward1522717976000.jpg' sent to download folder
+EdwardC§File 'EdwardCSmilward1522718084000.pdf' sent to download folder
+EdwardC§test both at same time
+EdwardC§File 'EdwardCSmilward1522718519000.jpg' sent to download folder
+EdwardC§test both 2
+EdwardC§File 'EdwardCSmilward1522718559000.jpg' sent to download folder

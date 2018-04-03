@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class ServerRecieveHandler implements Runnable{
 
@@ -17,12 +19,21 @@ public class ServerRecieveHandler implements Runnable{
     DataInputStream inFromClient;
     File chatFile;
     boolean runServer = true;
+    
+    JTextArea logTextArea;
+    JScrollPane logScrollPane;
+    String chatName;
 
-    public ServerRecieveHandler(DataInputStream _inFromClient, File _chatFile, Socket _client){
+    public ServerRecieveHandler(DataInputStream _inFromClient, File _chatFile, Socket _client, JTextArea _logTextArea, JScrollPane _logScrollPane, String _chatName){
 
         client = _client;
         inFromClient = _inFromClient;
         chatFile = _chatFile;
+        
+        // Passes text area and scroll pane for text append
+        logTextArea = _logTextArea;
+        logScrollPane = _logScrollPane;
+        chatName = _chatName;
 
     }
 
@@ -37,7 +48,7 @@ public class ServerRecieveHandler implements Runnable{
                 
                 // Closes thread if chat window is closed
                 if(lineBreakdown.get(0).equals("E")){
-                        runServer = false;
+                    runServer = false;
                 }
                 
                 // Runs if message or file is sent
@@ -50,6 +61,9 @@ public class ServerRecieveHandler implements Runnable{
                     bufferOut.newLine();
                     bufferOut.close();
                     fileOut.close();
+                    
+                    logTextArea.setText(logTextArea.getText() + lineBreakdown.get(1) + " sent message to chat: " + chatName + "\n");
+                    logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
                     
                     // Runs if file is sent
                     if (lineBreakdown.get(0).equals("F")){
@@ -65,6 +79,9 @@ public class ServerRecieveHandler implements Runnable{
                         FileOutputStream FileOut = new FileOutputStream(fileSavePath);
                         FileOut.write(fileBtyes);
                         FileOut.close();
+                        
+                        logTextArea.setText(logTextArea.getText() + lineBreakdown.get(1) + " sent file '" + lineBreakdown.get(4) + "' to chat: " + chatName + "\n");
+                        logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
 
                     }
                 }

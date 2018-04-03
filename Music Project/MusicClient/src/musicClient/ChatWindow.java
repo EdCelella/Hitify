@@ -257,6 +257,9 @@ public class ChatWindow extends javax.swing.JFrame {
                     // Adds username and message to tabel
                     Object[] row = {lineBreakdown.get(0), line};
                     tabelModel.addRow(row);
+                    
+                    // Scrolls to bottom of scroll pane
+                    spMessages.getVerticalScrollBar().setValue(spMessages.getVerticalScrollBar().getMaximum());
 
                     // Calculates requires row height to display message
                     height = tabelMessages.getRowHeight(rowNum);
@@ -301,6 +304,9 @@ public class ChatWindow extends javax.swing.JFrame {
                 Object[] rowData = {lineBreakdown.get(1), recieveLine};
                 tabelModel.addRow(rowData);
                 
+                // Scrolls to bottom of scroll pane
+                spMessages.getVerticalScrollBar().setValue(spMessages.getVerticalScrollBar().getMaximum());
+
                 // Calculates requires row height to display message
                 height = tabelMessages.getRowHeight(rowNum);
                 newHeight = tabelMessages.prepareRenderer(tabelMessages.getCellRenderer(rowNum, 1), rowNum, 1).getPreferredSize().height;
@@ -612,7 +618,8 @@ public class ChatWindow extends javax.swing.JFrame {
                 int extensionPos = filePath.lastIndexOf(".");
                 
                 // Sends string for text file
-                String message = "F§" + username + "§File sent§" + fileBytes.length + "§" + chatName + chatFile.lastModified() + filePath.substring(extensionPos);
+                String fileName = chatName + chatFile.lastModified() + filePath.substring(extensionPos);
+                String message = "F§" + username + "§File '" + fileName + "' sent to download folder§" + fileBytes.length + "§" + fileName;
                 outToMsgServer.writeUTF(message);
                 
                 // Sends file byte array

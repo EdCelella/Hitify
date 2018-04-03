@@ -33,3 +33,12 @@ T§EdwardC§text message check
 T§EdwardC§test 2
 T§EdwardC§hello world
 F§EdwardC§File sent§236983§EdwardCSmilward1522687296000.jpg
+T§EdwardC§test
+T§EdwardC§Server GUI test
+T§EdwardC§Text and file test
+F§EdwardC§File sent§236983§EdwardCSmilward1522716879000.jpg
+T§EdwardC§test for server gui
+T§EdwardC§server gui test 2
+F§EdwardC§File 'EdwardCSmilward1522717719000.pdf' sent to download folder§222461§EdwardCSmilward1522717719000.pdf
+F§EdwardC§File 'EdwardCSmilward1522717815000.png' sent to download folder§1177288§EdwardCSmilward1522717815000.png
+F§EdwardC§File 'EdwardCSmilward1522717976000.jpg' sent to download folder§236983§EdwardCSmilward1522717976000.jpg

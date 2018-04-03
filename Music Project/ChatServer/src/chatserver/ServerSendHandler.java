@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class ServerSendHandler implements Runnable{
 
@@ -17,11 +19,15 @@ public class ServerSendHandler implements Runnable{
     Socket client;
     DataOutputStream outToClient;
     DataInputStream inFromClient;
-
+    
+    String chatName;
     String chatFilePath;
     File chatFile;
+    
+    JTextArea logTextArea;
+    JScrollPane logScrollPane;
 
-    public ServerSendHandler(Socket _client){
+    public ServerSendHandler(Socket _client, JTextArea _logTextArea, JScrollPane _logScrollPane){
 
         try{
             // Creates output and input stream to the client
@@ -32,6 +38,10 @@ public class ServerSendHandler implements Runnable{
         catch(IOException e){
             System.out.println(e.getMessage());
         }
+        
+        // Passes text area and scroll pane for text append
+        logTextArea = _logTextArea;
+        logScrollPane = _logScrollPane;
     }
 
     public void run(){
@@ -39,8 +49,11 @@ public class ServerSendHandler implements Runnable{
         try{
 
             // Gets chat file name and size of file from client
-            String chatName = inFromClient.readUTF();
+            chatName = inFromClient.readUTF();
             int clientLineCount = Integer.parseInt(inFromClient.readUTF());
+            
+            logTextArea.setText(logTextArea.getText() + "Chat accessed: " + chatName + "\n");
+            logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
 
             // Opens file
             chatFilePath = new File("Chats/" + chatName + ".txt").getAbsolutePath();
@@ -50,6 +63,8 @@ public class ServerSendHandler implements Runnable{
             if(!(chatFile.exists())){
                     // Creates new file if it doesn't exist
                     chatFile.createNewFile();
+                    logTextArea.setText(logTextArea.getText() + "New chat file created for " + chatName + "\n");
+                    logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
             }
 
             //Stores the date of the last modification to the file
@@ -58,10 +73,11 @@ public class ServerSendHandler implements Runnable{
 
             // Outputs new lines to the client 
             clientLineCount = sendMessages(clientLineCount, chatFile);
-
+            logTextArea.setText(logTextArea.getText() + chatName + " file synced with user \n");
+            logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
 
             // Runs thread which continuously updates message table
-            Thread th2 = new Thread(new ServerRecieveHandler(inFromClient, chatFile, client));
+            Thread th2 = new Thread(new ServerRecieveHandler(inFromClient, chatFile, client, logTextArea, logScrollPane, chatName));
             th2.start();
 
             while(th2.getState()!=Thread.State.TERMINATED){
@@ -76,6 +92,10 @@ public class ServerSendHandler implements Runnable{
         catch(IOException e){
                 System.out.println(e.getMessage());
         }
+        
+        // Disconnect message
+        logTextArea.setText(logTextArea.getText() + "Disconnect from chat: " + chatName + "\n");
+        logScrollPane.getVerticalScrollBar().setValue(logScrollPane.getVerticalScrollBar().getMaximum());
 }
 
 

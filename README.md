@@ -1,8 +1,6 @@
 # Hitify
 
-## Introduction
-
-Hitify is a java music application built to allow the easy sharing of music files between friends. Features include being able to chat with friends, as well as listen to their uploaded music aswell as yours. Please consult the system requirements before trying to run.
+Hitify is a java music application built to allow the easy sharing of music files between friends. Features include being able to chat with friends, as well as listen to their uploaded music aswell as yours. Please consult the system requirements before trying to run. The documentation provided gives a brief overview of how the system works.
 
 ## How To Use
 

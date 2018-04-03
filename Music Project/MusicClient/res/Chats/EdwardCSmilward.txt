@@ -47,3 +47,8 @@ EdwardC§test both at same time
 EdwardC§File 'EdwardCSmilward1522718519000.jpg' sent to download folder
 EdwardC§test both 2
 EdwardC§File 'EdwardCSmilward1522718559000.jpg' sent to download folder
+EdwardC§last test
+EdwardC§File 'EdwardCSmilward1522780751000.jpg' sent to download folder
+EdwardC§File 'EdwardCSmilward1522780803000.png' sent to download folder
+EdwardC§test both
+EdwardC§File 'EdwardCSmilward1522780814000.png' sent to download folder

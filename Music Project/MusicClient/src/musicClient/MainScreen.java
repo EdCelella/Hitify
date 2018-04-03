@@ -8,7 +8,6 @@ package musicClient;
 import infopacket.InfoPacket;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,13 +28,9 @@ import sun.audio.AudioStream;
 import java.util.concurrent.TimeUnit;
 import javazoom.jl.converter.Converter;
 import javazoom.jl.decoder.JavaLayerException;
-
-import java.awt.EventQueue;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 
 public class MainScreen extends javax.swing.JFrame {
 

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="MusicServer">
+  <ClassDiagramComponents>
+    <Class name="Database" package="database" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="connect" returnType="Connection" visibility="private"/>
+        <Method name="SelectLogInDetails" returnType="String" visibility="public">
+          <Argument type="String" name="UserName"/>
+        </Method>
+        <Method name="GetFriendsPosts" returnType="ArrayList&lt;ArrayList&lt;String&gt;&gt;" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="Friends"/>
+        </Method>
+        <Method name="InsertNewRegUser" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="UserDetails"/>
+        </Method>
+        <Method name="GetUsersDetails" returnType="ArrayList&lt;String&gt;" visibility="public">
+          <Argument type="String" name="Username"/>
+        </Method>
+        <Method name="InsertPost" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="PostDetails"/>
+        </Method>
+        <Method name="InsertSong" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="SongDetails"/>
+        </Method>
+        <Method name="InsertActiveMember" returnType="void" visibility="public">
+          <Argument type="String" name="Username"/>
+          <Argument type="String" name="IP"/>
+        </Method>
+        <Method name="RemoveActiveMember" returnType="void" visibility="public">
+          <Argument type="String" name="Username"/>
+        </Method>
+        <Method name="DeleteFriend" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="Users"/>
+        </Method>
+        <Method name="GetUserSongFileName" returnType="ArrayList&lt;String&gt;" visibility="public">
+          <Argument type="String" name="Username"/>
+        </Method>
+        <Method name="GetUsersFriends" returnType="ArrayList&lt;String&gt;" visibility="public">
+          <Argument type="String" name="Username"/>
+        </Method>
+        <Method name="GetActiveFriends" returnType="ArrayList&lt;String&gt;" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="Friends"/>
+        </Method>
+        <Method name="GetUsersFriendRequests" returnType="ArrayList&lt;String&gt;" visibility="public">
+          <Argument type="String" name="Username"/>
+        </Method>
+        <Method name="NewFriendRequest" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="Users"/>
+        </Method>
+        <Method name="AcceptFriendRequest" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="Users"/>
+        </Method>
+        <Method name="DeclineFriendRequest" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="Users"/>
+        </Method>
+        <Method name="GetUsernamesOnPreferences" returnType="ArrayList&lt;String&gt;" visibility="public">
+          <Argument type="String" name="MusicPref"/>
+        </Method>
+        <Method name="DoesUsernameExist" returnType="boolean" visibility="public">
+          <Argument type="String" name="Username"/>
+        </Method>
+        <Method name="AlreadyFriends" returnType="boolean" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="Users"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MusicServer" package="musicserver" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="Port" type="int" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MServerGUI" package="musicserver" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="Port" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="txtLog" type="javax.swing.JTextArea" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="AddToLog" returnType="void" visibility="public">
+          <Argument type="String" name="Infomation"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MusicServerExtended" package="musicserver" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="client" type="Socket" visibility="private"/>
+        <Field name="GUI" type="MServerGUI" visibility="private"/>
+        <Field name="InFromClient" type="InfoPacket" visibility="public"/>
+        <Field name="ToClient" type="InfoPacket" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="SetSocket" returnType="MusicServerExtended" visibility="public">
+          <Argument type="Socket" name="client"/>
+        </Method>
+        <Method name="SetGUI" returnType="void" visibility="public">
+          <Argument type="MServerGUI" name="GUI"/>
+        </Method>
+        <Method name="run" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="InfoPacket" package="infopacket" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="Service" type="String" visibility="private"/>
+        <Field name="SingleData" type="String" visibility="private"/>
+        <Field name="MultipleData" type="ArrayList" visibility="private"/>
+        <Field name="MultipleArrayData" type="ArrayList&lt;ArrayList&lt;String&gt;&gt;" visibility="private"/>
+        <Field name="FirstByteArray" type="byte[]" visibility="private"/>
+        <Field name="SecondByteArray" type="byte[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="SetService" returnType="void" visibility="public">
+          <Argument type="String" name="Command"/>
+        </Method>
+        <Method name="SetSingleData" returnType="void" visibility="public">
+          <Argument type="String" name="Data"/>
+        </Method>
+        <Method name="SetArray" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="MultiData"/>
+        </Method>
+        <Method name="SetMultipleArray" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;ArrayList&lt;String&gt;&gt;" name="MultipleArrayData"/>
+        </Method>
+        <Method name="SetFirstByte" returnType="void" visibility="public">
+          <Argument type="byte[]" name="FirstByte"/>
+        </Method>
+        <Method name="SetSecondByte" returnType="void" visibility="public">
+          <Argument type="byte[]" name="SecondByte"/>
+        </Method>
+        <Method name="GetService" returnType="String" visibility="public"/>
+        <Method name="GetData" returnType="String" visibility="public"/>
+        <Method name="GetArray" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+        <Method name="GetMultipleArray" returnType="ArrayList&lt;ArrayList&lt;String&gt;&gt;" visibility="public"/>
+        <Method name="GetByteData" returnType="byte[]" visibility="public"/>
+        <Method name="GetSecondData" returnType="byte[]" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="GUI" source="musicserver.MusicServerExtended" target="musicserver.MServerGUI" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ToClient" source="musicserver.MusicServerExtended" target="infopacket.InfoPacket" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="musicserver.MusicServerExtended" target="musicserver.MusicServerExtended" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="InFromClient" source="musicserver.MusicServerExtended" target="infopacket.InfoPacket" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="musicserver.MusicServerExtended" target="musicserver.MServerGUI" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

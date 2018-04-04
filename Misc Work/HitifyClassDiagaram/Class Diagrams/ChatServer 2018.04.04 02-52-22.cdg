@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ChatServer">
+  <ClassDiagramComponents>
+    <Class name="ServerRecieveHandler" package="chatserver" visibility="public" xPosition="769.0" yPosition="14.0">
+      <Fields>
+        <Field name="client" type="Socket" visibility="package"/>
+        <Field name="inFromClient" type="DataInputStream" visibility="package"/>
+        <Field name="chatFile" type="File" visibility="package"/>
+        <Field name="runServer" type="boolean" visibility="package"/>
+        <Field name="logTextArea" type="JTextArea" visibility="package"/>
+        <Field name="logScrollPane" type="JScrollPane" visibility="package"/>
+        <Field name="chatName" type="String" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="DataInputStream" name="_inFromClient"/>
+          <Argument type="File" name="_chatFile"/>
+          <Argument type="Socket" name="_client"/>
+          <Argument type="JTextArea" name="_logTextArea"/>
+          <Argument type="JScrollPane" name="_logScrollPane"/>
+          <Argument type="String" name="_chatName"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="run" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CustomScrollBarUI" package="chatserver" visibility="public" xPosition="8.0" yPosition="477.0">
+      <Fields>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="warning" type="Color" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="createDecreaseButton" returnType="JButton" visibility="protected">
+          <Argument type="int" name="orientation"/>
+        </Method>
+        <Method name="createIncreaseButton" returnType="JButton" visibility="protected">
+          <Argument type="int" name="orientation"/>
+        </Method>
+        <Method name="configureScrollBarColors" returnType="void" visibility="protected"/>
+      </Methods>
+    </Class>
+    <Class name="ServerSendHandler" package="chatserver" visibility="public" xPosition="769.0" yPosition="275.0">
+      <Fields>
+        <Field name="client" type="Socket" visibility="package"/>
+        <Field name="outToClient" type="DataOutputStream" visibility="package"/>
+        <Field name="inFromClient" type="DataInputStream" visibility="package"/>
+        <Field name="chatName" type="String" visibility="package"/>
+        <Field name="chatFilePath" type="String" visibility="package"/>
+        <Field name="chatFile" type="File" visibility="package"/>
+        <Field name="logTextArea" type="JTextArea" visibility="package"/>
+        <Field name="logScrollPane" type="JScrollPane" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Socket" name="_client"/>
+          <Argument type="JTextArea" name="_logTextArea"/>
+          <Argument type="JScrollPane" name="_logScrollPane"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="run" returnType="void" visibility="public"/>
+        <Method name="sendMessages" returnType="int" visibility="public">
+          <Argument type="int" name="clientLineCount"/>
+          <Argument type="File" name="chatFile"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ChatServerMain" package="chatserver" visibility="public" xPosition="8.0" yPosition="1.0">
+      <Fields>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="warning" type="Color" visibility="package"/>
+        <Field name="borderThickness" type="int" visibility="package"/>
+        <Field name="cmdClear" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdClose" type="javax.swing.JButton" visibility="private"/>
+        <Field name="logScrollPane" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="logTextArea" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="title" type="javax.swing.JLabel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="runChatServer" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="cmdCloseActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdCloseMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdCloseMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdCloseMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

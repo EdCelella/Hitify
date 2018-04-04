@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="MusicClient">
+  <ClassDiagramComponents>
+    <Class name="UploadSong" package="musicClient" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="MusicFilePath" type="String" visibility="private"/>
+        <Field name="PhotoFilePath" type="String" visibility="private"/>
+        <Field name="UserName" type="String" visibility="private"/>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="warning" type="Color" visibility="package"/>
+        <Field name="cbGenre" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="cmdClear" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdHome" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdSelectFile" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdUploadCoverPhoto" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdUploadSong" type="javax.swing.JButton" visibility="private"/>
+        <Field name="lblArtistName" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblChosen" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblCoverPhoto" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblPhoto" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblSongName" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblSongName1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblTitle" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="taFilePath" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="txtArtistName" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtSongName" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="Username"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="cmdSelectFileActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadSongActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadCoverPhotoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdHomeActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdSelectFileMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdSelectFileMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadCoverPhotoMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadCoverPhotoMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdHomeMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdHomeMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadSongMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadSongMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="ResizeImage" returnType="ImageIcon" visibility="public">
+          <Argument type="String" name="ImagePath"/>
+        </Method>
+        <Method name="ClearForm" returnType="void" visibility="public"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CustomProgressBarUI" package="musicClient" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="highlight" type="Color" visibility="package" isStatic="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="MainScreen" package="musicClient" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="Username" type="String" visibility="private"/>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="warning" type="Color" visibility="package"/>
+        <Field name="buttonBorder" type="int" visibility="package"/>
+        <Field name="listBorder" type="int" visibility="package"/>
+        <Field name="musicPlaying" type="boolean" visibility="package"/>
+        <Field name="previousSongChoice" type="String" visibility="package"/>
+        <Field name="audioStream" type="AudioStream" visibility="package"/>
+        <Field name="songTimer" type="Timer" visibility="package"/>
+        <Field name="songLength" type="int" visibility="package"/>
+        <Field name="incrementProgress" type="int" visibility="package"/>
+        <Field name="currentProgress" type="int" visibility="package"/>
+        <Field name="C" type="TimerThread" visibility="public"/>
+        <Field name="D" type="TimerThread2" visibility="package"/>
+        <Field name="ListActiveFriends" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="ListAllFriends" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="ListFriendRequests" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="ListMySongs" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="cbUserMood" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="cmdAcceptFriendRequest" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdChat" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdClearPost" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdDeclineFriendRequest" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdDeleteFriend" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdFindOtherUsers" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdFindUser" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdLogOut" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdPlayPause" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdPost" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdSendFreindRequest" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdUploadSong" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel10" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel11" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel12" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel13" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel4" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel5" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel6" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel7" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel8" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabel9" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane2" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane3" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane5" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="jScrollPane6" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="lblCoverPhoto" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblEmail" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblFirstName" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblOwnSongs" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblPreferences" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblProfilePicture" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblSecondName" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblTitle" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblUsername" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="listSelectedUsersSongs" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="songNamelbl" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="songProgress" type="javax.swing.JProgressBar" visibility="private"/>
+        <Field name="txtNewFriendRequest" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtNewPost" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtPostArea" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="txtPosts" type="javax.swing.JScrollPane" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="UserName"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="RefreshAllFriendsList" returnType="void" visibility="public"/>
+        <Method name="RefreshActiveFriendsList" returnType="void" visibility="public"/>
+        <Method name="RefreshFriendsRequestList" returnType="void" visibility="public"/>
+        <Method name="RefreshMySongs" returnType="void" visibility="public"/>
+        <Method name="RefreshPosts" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="cmdLogOutActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadSongActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdSendFreindRequestActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAcceptFriendRequestActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdDeclineFriendRequestActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearPostActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPostActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindUserActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdChatActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdDeleteFriendActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="txtNewPostActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadSongMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdUploadSongMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdLogOutMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdLogOutMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPostMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPostMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearPostMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearPostMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdChatMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdChatMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindUserMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindUserMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdDeleteFriendMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdDeleteFriendMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAcceptFriendRequestMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAcceptFriendRequestMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdDeclineFriendRequestMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdDeclineFriendRequestMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdSendFreindRequestMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdSendFreindRequestMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="ListMySongsMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="ListActiveFriendsMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="ListAllFriendsMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="listSelectedUsersSongsMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="ListFriendRequestsMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdChatMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPlayPauseActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPlayPauseMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPlayPauseMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPlayPauseMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindOtherUsersActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindOtherUsersMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindOtherUsersMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="playSong" returnType="void" visibility="public"/>
+        <Method name="convertFile" returnType="void" visibility="public">
+          <Argument type="String" name="songName"/>
+        </Method>
+        <Method name="downloadSong" returnType="void" visibility="public">
+          <Argument type="String" name="FileName"/>
+        </Method>
+        <Method name="RefreshUserSongs" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="Songs"/>
+        </Method>
+        <Method name="ClearPost" returnType="void" visibility="public"/>
+        <Method name="ResizeImage" returnType="ImageIcon" visibility="public">
+          <Argument type="String" name="ImagePath"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="RegisterUser" package="musicClient" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="Filepath" type="String" visibility="private"/>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="warning" type="Color" visibility="package"/>
+        <Field name="PFPassword" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="PFPassword2" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="buttonGroup1" type="javax.swing.ButtonGroup" visibility="private"/>
+        <Field name="buttonGroup2" type="javax.swing.ButtonGroup" visibility="private"/>
+        <Field name="buttonGroup3" type="javax.swing.ButtonGroup" visibility="private"/>
+        <Field name="buttonGroup4" type="javax.swing.ButtonGroup" visibility="private"/>
+        <Field name="cmdClear" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdCreate" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdLogIn" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdPhoto" type="javax.swing.JButton" visibility="private"/>
+        <Field name="lblEmail" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblFirstName" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblMusicChoice" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblMusicChoice1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblPassword" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblPassword2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblPhoto" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblRegisterNewUser" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblSecondName" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblUploadPicture" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblUserName" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="rbBlues" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbClassical" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbEDM" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbFolk" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbIndie" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbJazz" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbPop" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbRapping" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbReggae" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbRock" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbSoul" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="rbTechno" type="javax.swing.JRadioButton" visibility="private"/>
+        <Field name="txtEmail" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtFirstName" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtSecondName" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="txtUserName" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="SetPhoto" returnType="void" visibility="package" isStatic="true">
+          <Argument type="ImageIcon" name="ResizeImage"/>
+        </Method>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="cmdLogInActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPhotoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdCreateActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="rbJazzActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="rbRockActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPhotoMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdPhotoMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdLogInMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdLogInMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdCreateMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdCreateMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="ValidChecks" returnType="Boolean" visibility="private"/>
+        <Method name="ResizeImage" returnType="ImageIcon" visibility="public">
+          <Argument type="String" name="ImagePath"/>
+        </Method>
+        <Method name="ClearForm" returnType="void" visibility="public"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ChatWindow" package="musicClient" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="username" type="String" visibility="public"/>
+        <Field name="recieveUsername" type="String" visibility="public"/>
+        <Field name="filePath" type="String" visibility="private"/>
+        <Field name="fileAttached" type="boolean" visibility="private"/>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="warning" type="Color" visibility="package"/>
+        <Field name="buttonBorder" type="int" visibility="package"/>
+        <Field name="address" type="InetAddress" visibility="package"/>
+        <Field name="msgServer" type="Socket" visibility="package"/>
+        <Field name="outToMsgServer" type="DataOutputStream" visibility="package"/>
+        <Field name="inFromMsgServer" type="DataInputStream" visibility="package"/>
+        <Field name="fileToMsgServer" type="ByteArrayOutputStream" visibility="package"/>
+        <Field name="fileFromMsgServer" type="ByteArrayInputStream" visibility="package"/>
+        <Field name="chatName" type="String" visibility="package"/>
+        <Field name="chatFile" type="File" visibility="package"/>
+        <Field name="cont" type="boolean" visibility="package"/>
+        <Field name="cmdAttach" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdClear" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdSend" type="javax.swing.JButton" visibility="private"/>
+        <Field name="lblBottomLine" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblProfilePicture" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblTitle" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblTopLine" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblUsername" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="spMessages" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="spNewMessage" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="taFilePath" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="taNewMessage" type="javax.swing.JTextArea" visibility="private"/>
+        <Field name="tabelMessages" type="javax.swing.JTable" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="_username"/>
+          <Argument type="String" name="_recieveUsername"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="closeWindow" returnType="void" visibility="public"/>
+        <Method name="SyncChatMessages" returnType="void" visibility="public"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="cmdSendMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdSendMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAttachMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAttachMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdClearMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAttachMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdSendMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+        <Method name="ResizeImage" returnType="ImageIcon" visibility="public">
+          <Argument type="String" name="ImagePath"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CustomComboBoxUI" package="musicClient" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="createPopup" returnType="ComboPopup" visibility="protected"/>
+        <Method name="createArrowButton" returnType="JButton" visibility="protected"/>
+      </Methods>
+    </Class>
+    <Class name="CustomScrollBarUI" package="musicClient" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="warning" type="Color" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="createDecreaseButton" returnType="JButton" visibility="protected">
+          <Argument type="int" name="orientation"/>
+        </Method>
+        <Method name="createIncreaseButton" returnType="JButton" visibility="protected">
+          <Argument type="int" name="orientation"/>
+        </Method>
+        <Method name="configureScrollBarColors" returnType="void" visibility="protected"/>
+      </Methods>
+    </Class>
+    <Class name="TimerThread2" package="musicClient" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="form" type="MainScreen" visibility="private"/>
+        <Field name="Request" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="SetForm" returnType="TimerThread" visibility="public">
+          <Argument type="MainScreen" name="screen"/>
+        </Method>
+        <Method name="SetRequest" returnType="void" visibility="public">
+          <Argument type="boolean" name="request"/>
+        </Method>
+        <Method name="run" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TimerThread" package="musicClient" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="form" type="MainScreen" visibility="private"/>
+        <Field name="Request" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="SetForm" returnType="TimerThread" visibility="public">
+          <Argument type="MainScreen" name="screen"/>
+        </Method>
+        <Method name="SetRequest" returnType="void" visibility="public">
+          <Argument type="boolean" name="request"/>
+        </Method>
+        <Method name="run" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FindUsers" package="musicClient" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="Username" type="String" visibility="private"/>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="warning" type="Color" visibility="package"/>
+        <Field name="buttonBorder" type="int" visibility="package"/>
+        <Field name="ListUsers" type="javax.swing.JList&lt;String&gt;" visibility="private"/>
+        <Field name="cbPreference" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="cmdAddFriend" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdBackToMain" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdFind" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="lblTitle" type="javax.swing.JLabel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="User"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="cmdBackToMainActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAddFriendActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdFindMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAddFriendMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdAddFriendMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdBackToMainMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdBackToMainMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="FindUsers" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+        <Method name="UpdateList" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="UserNames"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="LogInScreen" package="musicClient" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Fields>
+        <Field name="foreground" type="Color" visibility="package"/>
+        <Field name="background" type="Color" visibility="package"/>
+        <Field name="highlight" type="Color" visibility="package"/>
+        <Field name="PFPassword" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="cmdLogIn" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cmdNewUser" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jButton1" type="javax.swing.JButton" visibility="private"/>
+        <Field name="lblLogInForm" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblPassword" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblUserName" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="txtUserName" type="javax.swing.JTextField" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+void" visibility="private"/>
+        <Method name="cmdLogInActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdNewUserActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="cmdNewUserMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdNewUserMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdLogInMouseEntered" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="cmdLogInMouseExited" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="InfoPacket" package="infopacket" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Fields>
+        <Field name="Service" type="String" visibility="private"/>
+        <Field name="SingleData" type="String" visibility="private"/>
+        <Field name="MultipleData" type="ArrayList" visibility="private"/>
+        <Field name="MultipleArrayData" type="ArrayList&lt;ArrayList&lt;String&gt;&gt;" visibility="private"/>
+        <Field name="FirstByteArray" type="byte[]" visibility="private"/>
+        <Field name="SecondByteArray" type="byte[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="SetService" returnType="void" visibility="public">
+          <Argument type="String" name="Command"/>
+        </Method>
+        <Method name="SetSingleData" returnType="void" visibility="public">
+          <Argument type="String" name="Data"/>
+        </Method>
+        <Method name="SetArray" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;String&gt;" name="MultiData"/>
+        </Method>
+        <Method name="SetMultipleArray" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;ArrayList&lt;String&gt;&gt;" name="MultipleArrayData"/>
+        </Method>
+        <Method name="SetFirstByte" returnType="void" visibility="public">
+          <Argument type="byte[]" name="FirstByte"/>
+        </Method>
+        <Method name="SetSecondByte" returnType="void" visibility="public">
+          <Argument type="byte[]" name="SecondByte"/>
+        </Method>
+        <Method name="GetService" returnType="String" visibility="public"/>
+        <Method name="GetData" returnType="String" visibility="public"/>
+        <Method name="GetArray" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+        <Method name="GetMultipleArray" returnType="ArrayList&lt;ArrayList&lt;String&gt;&gt;" visibility="public"/>
+        <Method name="GetByteData" returnType="byte[]" visibility="public"/>
+        <Method name="GetSecondData" returnType="byte[]" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="D" source="musicClient.MainScreen" target="musicClient.TimerThread2" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="musicClient.TimerThread" target="musicClient.TimerThread" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="form" source="musicClient.TimerThread2" target="musicClient.MainScreen" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="C" source="musicClient.MainScreen" target="musicClient.TimerThread" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="musicClient.TimerThread2" target="musicClient.TimerThread" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="form" source="musicClient.TimerThread" target="musicClient.MainScreen" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

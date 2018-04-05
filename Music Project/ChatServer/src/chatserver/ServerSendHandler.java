@@ -20,6 +20,7 @@ public class ServerSendHandler implements Runnable{
     DataOutputStream outToClient;
     DataInputStream inFromClient;
     
+    String username;
     String chatName;
     String chatFilePath;
     File chatFile;
@@ -50,6 +51,7 @@ public class ServerSendHandler implements Runnable{
 
             // Gets chat file name and size of file from client
             chatName = inFromClient.readUTF();
+            username = inFromClient.readUTF();
             int clientLineCount = Integer.parseInt(inFromClient.readUTF());
             
             logTextArea.setText(logTextArea.getText() + "Chat accessed: " + chatName + "\n");
@@ -119,7 +121,7 @@ public int sendMessages(int clientLineCount, File chatFile){
                 outToClient.writeUTF(line);
                 
                 List<String> lineBreakdown = Arrays.asList(line.split("§"));
-                if(lineBreakdown.get(0).equals("F")){
+                if(lineBreakdown.get(0).equals("F") && !(lineBreakdown.get(1).equals(username))){
                     String filePath = "Chats/Files/" + lineBreakdown.get(4);
                     FileInputStream sendFile;
                     sendFile = new FileInputStream(filePath);
@@ -127,8 +129,8 @@ public int sendMessages(int clientLineCount, File chatFile){
                     sendFile.read(fileBytes);
                     outToClient.write(fileBytes, 0, fileBytes.length);
                     sendFile.close();
-                    File deleteFile = new File(filePath);
-                    deleteFile.delete();
+                    //File deleteFile = new File(filePath);
+                    //deleteFile.delete();
                 }
                 
             }

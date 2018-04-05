@@ -283,6 +283,7 @@ public class ChatWindow extends javax.swing.JFrame {
             
             //Sends chatname and amount of lines saved on the client file to the server
             outToMsgServer.writeUTF(chatName);
+            outToMsgServer.writeUTF(username);
             outToMsgServer.writeUTF(Integer.toString(lineCount));
             
             // Loop to catch all incoming messages 

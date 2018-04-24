@@ -5,8 +5,10 @@
  */
 package musicserver;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.net.ServerSocket;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -14,11 +16,32 @@ import java.net.ServerSocket;
  */
 public class MServerGUI extends javax.swing.JFrame {
     private static final int Port = 9090;
+    
+    // Sets colours to be used in design
+    Color foreground = Color.decode("#FDFFFC");
+    Color background = Color.decode("#2E2F2F");
+    Color highlight = Color.decode("#5DFDCB");
+    Color warning = Color.decode("#FF3366");
+    
+    int borderThickness = 4;
+    
     /**
      * Creates new form MServerGUI
      */
     public MServerGUI() {
-        initComponents();        
+        initComponents(); 
+        
+         // Sets background
+        getContentPane().setBackground(background);
+        
+        // Styles Scroll pane
+        jScrollPane1.getViewport().setBackground(background);
+        jScrollPane1.setForeground(foreground);
+        jScrollPane1.setBorder(new LineBorder(foreground, borderThickness));
+        
+        // Styles text area
+        txtLog.setBackground(background);
+        txtLog.setForeground(foreground);
     }
 
     /**
@@ -33,11 +56,11 @@ public class MServerGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLog = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Futura", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(93, 253, 203));
         jLabel1.setText("Music Server");
 
         txtLog.setEditable(false);
@@ -45,34 +68,27 @@ public class MServerGUI extends javax.swing.JFrame {
         txtLog.setRows(5);
         jScrollPane1.setViewportView(txtLog);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Log");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel2)
-                .addGap(428, 428, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(0, 133, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -124,7 +140,6 @@ public class MServerGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables

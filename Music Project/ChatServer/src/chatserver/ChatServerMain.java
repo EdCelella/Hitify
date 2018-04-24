@@ -38,7 +38,7 @@ public class ChatServerMain extends javax.swing.JFrame {
         // Styles Scroll pane
         logScrollPane.getViewport().setBackground(background);
         logScrollPane.setForeground(foreground);
-        logScrollPane.setBorder(null);
+        logScrollPane.setBorder(new LineBorder(foreground, borderThickness));
         logScrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI());
         
         // Styles buttons
@@ -55,7 +55,6 @@ public class ChatServerMain extends javax.swing.JFrame {
         // Styles text area
         logTextArea.setBackground(background);
         logTextArea.setForeground(foreground);
-        logTextArea.setBorder(new LineBorder(foreground, borderThickness));
         
         // Runs thread which runs server backend code
         Thread th = new Thread(new Runnable()
